@@ -1,17 +1,17 @@
-package pais;
-import java.util.List;
+package model;
+import java.util.ArrayList;
 
-public class Pais {
+public class Territorio {
 	private String nome;
-	private String pertenceContinente;
+	private Continente continente;
 	private int numTropas;
 	private int numTropasPodeMover;
 	private int corDominando;
-	private List<Pais> paisesLigados;
+	private ArrayList<Territorio> paisesLigados;
 	
-	public Pais(String nome, String pertenceContinente, int numTropas, List<Pais> paisesLigados, int numTropasPodeMover) {
+	public Territorio(String nome, Continente continente, int numTropas, ArrayList<Territorio> paisesLigados, int numTropasPodeMover) {
 		this.nome = nome;
-		this.pertenceContinente = pertenceContinente;
+		this.continente = continente;
 		this.numTropas = numTropas;
 		this.paisesLigados = paisesLigados;
 		this.numTropasPodeMover = numTropasPodeMover;
@@ -21,8 +21,8 @@ public class Pais {
 		return nome;
 	}
 
-	public String getPertenceContinente() {
-		return pertenceContinente;
+	public Continente getContinente() {
+		return continente;
 	}
 
 	public int getNumTropas() {
@@ -41,11 +41,11 @@ public class Pais {
 		this.corDominando = corDominando;
 	}
 	
-	public List<Pais> getPaisesLigados() {
+	public ArrayList<Territorio> getPaisesLigados() {
 		return paisesLigados;
 	}
 	
-	public void setPaisesLigados(List<Pais> paisesLigados) {
+	public void setPaisesLigados(ArrayList<Territorio> paisesLigados) {
 		this.paisesLigados = paisesLigados;
 	}
 	

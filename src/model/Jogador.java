@@ -1,17 +1,16 @@
-package jogador;
-import pais.Pais;
-import java.util.List;
+package model;
+import java.util.ArrayList;
 
-public class Jogador {
+class Jogador {
 	private int cor;
-	private List<Pais> paisesDominados;
+	private ArrayList<Territorio> paisesDominados;
 	
-	public Jogador(int cor, List<Pais> paisesDominados) {
+	public Jogador(int cor, ArrayList<Territorio> paisesDominados) {
 		this.cor = cor;
 		this.paisesDominados = paisesDominados;
 	}
 	
-	public boolean moverTropas(Pais paisOrigem, Pais paisDestino, int qtd) {
+	public boolean moverTropas(Territorio paisOrigem, Territorio paisDestino, int qtd) {
 		if (paisOrigem.getCorDominando() != cor) {
 			System.out.println("O paisOrigem não pertence ao Jogador");
 			return false;
@@ -49,11 +48,11 @@ public class Jogador {
 		this.cor = cor;
 	}
 
-	public List<Pais> getPaisesDominados() {
+	public ArrayList<Territorio> getPaisesDominados() {
 		return paisesDominados;
 	}
 
-	public void setPaisesDominados(List<Pais> paisesDominados) {
+	public void setPaisesDominados(ArrayList<Territorio> paisesDominados) {
 		this.paisesDominados = paisesDominados;
 	}
 
