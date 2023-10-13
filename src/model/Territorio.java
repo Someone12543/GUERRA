@@ -1,7 +1,7 @@
 package model;
 import java.util.ArrayList;
 
-public class Territorio {
+class Territorio {
 	String nome;
 	Continente continente;
 	int numTropas;
