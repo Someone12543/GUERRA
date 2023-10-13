@@ -2,24 +2,25 @@ package model;
 import java.util.ArrayList;
 
 class Jogador {
-	int cor;
+	Cores cor;
 	Objetivo obj;
 	ArrayList<Troca> mao;
 	ArrayList<Territorio> paisesDominados;
 	
-	public Jogador(int cor, ArrayList<Territorio> paisesDominados) {
+	public Jogador(Cores cor, Objetivo obj, ArrayList<Territorio> paisesDominados) {
 		this.cor = cor;
+		this.obj = obj;
 		this.mao = new ArrayList<Troca>();
 		this.paisesDominados = paisesDominados;
 	}
 	
 	public boolean moverTropas(Territorio paisOrigem, Territorio paisDestino, int qtd) {
-		if (paisOrigem.corDominando != cor) {
+		if (paisOrigem.corDominando != cor.ordinal()) {
 			System.out.println("O paisOrigem não pertence ao Jogador");
 			return false;
 		}
 		
-		if (paisDestino.corDominando != cor) {
+		if (paisDestino.corDominando != cor.ordinal()) {
 			System.out.println("O paisDestino não pertence ao Jogador");
 			return false;
 		}
@@ -40,5 +41,10 @@ class Jogador {
 		paisDestino.numTropas = paisDestino.numTropas+qtd;
 		
 		return true;
+	}
+	
+	enum Cores
+	{
+		Amarelo, Azul, Branco, Verde, Vermelho, Preto;
 	}
 }

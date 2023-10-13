@@ -1,22 +1,70 @@
 package model;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class ModelAPI {
 	
 	public static ArrayList<Continente> listaContinente = new ArrayList<Continente>();
 	public static ArrayList<Jogador> listaJogadores = new ArrayList<Jogador>();
+	public static ArrayList<Objetivo> deckObjetivos = new ArrayList<Objetivo>();
+	public static ArrayList<Troca> deckTroca = new ArrayList<Troca>();
 	
 	public static boolean setupGame()
 	{
 		setupContinents(listaContinente);
+		setupCards();
 		
 		return true;
 	}
 	
+	public static boolean drawObjectives()
+	{
+		Objetivo obj;
+		
+		for (Jogador j : listaJogadores)
+		{
+			obj = deckObjetivos.get(deckObjetivos.size() - 1);
+			deckObjetivos.remove(obj);
+			
+			if (obj.id >= 8) // se destruir exercito especifico
+			{
+				if (obj.id - 8 == j.cor.ordinal() || !existPlayerColor(obj.id - 8)) // se voce mesmo ou se nao existe
+				{
+					obj = new Objetivo(0, null); // entao troca objetivo
+				}
+			}
+			
+			j.obj = obj;
+		}
+		
+		return true;
+	}
+	
+	public static Troca drawTrade()
+	{
+		Troca obj = deckTroca.get(deckTroca.size() - 1);
+		deckTroca.remove(obj);
+		return obj;
+	}
+	
+	private static boolean existPlayerColor(int cor) 
+	{
+		for (Jogador k : listaJogadores) // checa cada jogador existente
+		{
+			if(k.cor.ordinal() == cor) // se existe a cor
+			{
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
 	public static boolean addPlayer(int cor)
 	{
-		listaJogadores.add(new Jogador(cor, new ArrayList<Territorio>()));
+		Jogador newPlayer = new Jogador(Jogador.Cores.values()[cor], null, new ArrayList<Territorio>());
+		listaJogadores.add(newPlayer);
 		return true;
 	}
 	
@@ -25,25 +73,100 @@ public class ModelAPI {
 		return listaContinente.get(0).nome;
 	}
 	
+	private static boolean setupCards()
+	{
+		//remover loop para adicionar as imagens de cada
+		for (int i = 0; i <= 13; i++)
+			deckObjetivos.add(new Objetivo(i, null));
+		
+		Collections.shuffle(deckObjetivos);
+		
+		for(Continente c : listaContinente)
+			for(Territorio p : c.paises)
+				deckTroca.add(new Troca(p, 0, null));
+		
+		//africa
+		deckTroca.get(0).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(1).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(2).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(3).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(4).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(5).simbolo = Troca.Simbolo.Quadrado;
+		
+		//america do norte
+		deckTroca.get(6).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(7).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(8).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(9).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(10).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(11).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(12).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(13).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(14).simbolo = Troca.Simbolo.Triangulo;
+		
+		//america do sul
+		deckTroca.get(15).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(16).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(17).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(18).simbolo = Troca.Simbolo.Triangulo;
+		
+		//asia
+		deckTroca.get(19).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(20).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(21).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(22).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(23).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(24).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(25).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(26).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(27).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(28).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(29).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(30).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(31).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(32).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(33).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(34).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(35).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(36).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(37).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(38).simbolo = Troca.Simbolo.Triangulo;
+		
+		//europa
+		deckTroca.get(39).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(40).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(41).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(42).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(43).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(44).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(45).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(46).simbolo = Troca.Simbolo.Circulo;
+		
+		//oceania
+		deckTroca.get(47).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(48).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(49).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(50).simbolo = Troca.Simbolo.Circulo;
+		
+		//coringas
+		deckTroca.add(new Troca(null, Troca.Simbolo.Coringa.ordinal(), null));
+		deckTroca.add(new Troca(null, Troca.Simbolo.Coringa.ordinal(), null));
+		
+		Collections.shuffle(deckTroca);
+		return true;
+	}
+	
 	private static boolean setupContinents(ArrayList<Continente> listCont) 
 	{
 		listCont.add(new Continente("África", Continente.Continentes.AFRICA, new ArrayList<Territorio>()));
-		setupPaises(listCont.get(0));
-		
 		listCont.add(new Continente("América do Norte", Continente.Continentes.AMNORTE, new ArrayList<Territorio>()));
-		setupPaises(listCont.get(1));
-		
 		listCont.add(new Continente("América do Sul", Continente.Continentes.AMSUL, new ArrayList<Territorio>()));
-		setupPaises(listCont.get(2));
-		
 		listCont.add(new Continente("Ásia", Continente.Continentes.ASIA, new ArrayList<Territorio>()));
-		setupPaises(listCont.get(3));
-		
 		listCont.add(new Continente("Europa", Continente.Continentes.EUROPA, new ArrayList<Territorio>()));
-		setupPaises(listCont.get(4));
-		
 		listCont.add(new Continente("Oceania", Continente.Continentes.OCEANIA, new ArrayList<Territorio>()));
-		setupPaises(listCont.get(5));
+		
+		for (Continente c : listCont)
+			setupPaises(c);
 		
 		return true;
 	}
@@ -119,5 +242,4 @@ public class ModelAPI {
 			return false;
 		}
 	}
-
 }

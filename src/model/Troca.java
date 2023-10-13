@@ -14,6 +14,6 @@ class Troca extends Carta {
 	
 	enum Simbolo
 	{
-		Triangulo, Quadrado, Circulo;
+		Triangulo, Quadrado, Circulo, Coringa;
 	}
 }
