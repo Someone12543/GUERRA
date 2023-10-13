@@ -3,10 +3,13 @@ import java.util.ArrayList;
 
 class Jogador {
 	int cor;
+	Objetivo obj;
+	ArrayList<Troca> mao;
 	ArrayList<Territorio> paisesDominados;
 	
 	public Jogador(int cor, ArrayList<Territorio> paisesDominados) {
 		this.cor = cor;
+		this.mao = new ArrayList<Troca>();
 		this.paisesDominados = paisesDominados;
 	}
 	
