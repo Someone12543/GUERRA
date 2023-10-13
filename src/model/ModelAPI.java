@@ -2,14 +2,21 @@ package model;
 
 import java.util.ArrayList;
 
-public class Model {
+public class ModelAPI {
 	
 	public static ArrayList<Continente> listaContinente = new ArrayList<Continente>();
+	public static ArrayList<Jogador> listaJogadores = new ArrayList<Jogador>();
 	
 	public static boolean setupGame()
 	{
 		setupContinents(listaContinente);
 		
+		return true;
+	}
+	
+	public static boolean addPlayer(int cor)
+	{
+		listaJogadores.add(new Jogador(cor, new ArrayList<Territorio>()));
 		return true;
 	}
 	
