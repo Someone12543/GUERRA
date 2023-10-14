@@ -2,9 +2,10 @@ package model;
 
 import java.awt.Image;
 
-class Objetivo extends Carta{
+class Objetivo {
 	String descricao;
 	int id;
+	Image toDisplay;
 	
 	public Objetivo(int id, Image _ref)
 	{

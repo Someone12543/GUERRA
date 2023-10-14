@@ -14,6 +14,6 @@ class Continente {
 	
 	public enum Continentes
 	{
-		AFRICA, AMNORTE, AMSUL, ASIA,EUROPA, OCEANIA;
+		AFRICA, AMNORTE, AMSUL, ASIA, EUROPA, OCEANIA;
 	}
 }

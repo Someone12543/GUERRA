@@ -25,7 +25,7 @@ class Jogador {
 			return false;
 		}
 		
-		if (paisOrigem.numTropasPodeMover-qtd < 1 || paisOrigem.numTropasPodeMover-qtd < 0) {
+		if (paisOrigem.numTropas - 1 - qtd < 1 || paisOrigem.numTropas - 1 - qtd < 0) {
 			System.out.println("O paisOrigem não possui tantas tropas para mover");
 			return false;
 		}
@@ -36,7 +36,6 @@ class Jogador {
 		}
 		
 		paisOrigem.numTropas = paisOrigem.numTropas - qtd;
-		paisOrigem.numTropasPodeMover = paisOrigem.numTropasPodeMover-qtd;
 		
 		paisDestino.numTropas = paisDestino.numTropas+qtd;
 		

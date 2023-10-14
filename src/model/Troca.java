@@ -2,14 +2,16 @@ package model;
 
 import java.awt.Image;
 
-class Troca extends Carta {
+class Troca {
 	Territorio representa;
 	Simbolo simbolo;
+	Image toDisplay;
 	
-	public Troca(Territorio representa, int simbolo, Image a)
+	public Troca(Territorio representa, int simbolo, Image _ref)
 	{
 		this.representa = representa;
 		this.simbolo = Simbolo.values()[simbolo];
+		this.toDisplay = _ref;
 	}
 	
 	enum Simbolo
