@@ -5,6 +5,7 @@ class Territorio {
 	String nome;
 	Continente continente;
 	int numTropas;
+	int numTropasPodeMover;
 	int corDominando;
 	ArrayList<Territorio> paisesLigados;
 	
@@ -12,6 +13,7 @@ class Territorio {
 		this.nome = nome;
 		this.continente = continente;
 		this.numTropas = numTropas;
+		this.numTropasPodeMover = numTropas;
 		this.paisesLigados = paisesLigados;
 	}
 }
