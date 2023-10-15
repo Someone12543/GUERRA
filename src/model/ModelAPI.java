@@ -158,12 +158,12 @@ public class ModelAPI {
 	
 	private static boolean setupContinents(ArrayList<Continente> listCont) 
 	{
-		listCont.add(new Continente("África", Continente.Continentes.AFRICA, new ArrayList<Territorio>()));
-		listCont.add(new Continente("América do Norte", Continente.Continentes.AMNORTE, new ArrayList<Territorio>()));
-		listCont.add(new Continente("América do Sul", Continente.Continentes.AMSUL, new ArrayList<Territorio>()));
-		listCont.add(new Continente("Ásia", Continente.Continentes.ASIA, new ArrayList<Territorio>()));
-		listCont.add(new Continente("Europa", Continente.Continentes.EUROPA, new ArrayList<Territorio>()));
-		listCont.add(new Continente("Oceania", Continente.Continentes.OCEANIA, new ArrayList<Territorio>()));
+		listCont.add(new Continente("África", Continente.Continentes.AFRICA, new ArrayList<Territorio>(), 3));
+		listCont.add(new Continente("América do Norte", Continente.Continentes.AMNORTE, new ArrayList<Territorio>(), 5));
+		listCont.add(new Continente("América do Sul", Continente.Continentes.AMSUL, new ArrayList<Territorio>(), 2));
+		listCont.add(new Continente("Ásia", Continente.Continentes.ASIA, new ArrayList<Territorio>(), 7));
+		listCont.add(new Continente("Europa", Continente.Continentes.EUROPA, new ArrayList<Territorio>(), 5));
+		listCont.add(new Continente("Oceania", Continente.Continentes.OCEANIA, new ArrayList<Territorio>(), 2));
 		
 		for (Continente c : listCont)
 			setupPaises(c);
