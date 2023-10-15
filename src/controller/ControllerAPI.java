@@ -4,7 +4,7 @@ import model.ModelAPI;
 
 public class ControllerAPI {
 	
-	public boolean startGame()
+	public static boolean startGame()
 	{
 		ModelAPI.addPlayer("Augur Bolas", 0);
 		ModelAPI.addPlayer("Junior", 3);
