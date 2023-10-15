@@ -65,20 +65,6 @@ class Jogador {
 		
 		return true;
 	}
-
-	public int pecasBonus(){
-		int numPecas = this.paisesDominados.size()/2;
-		return numPecas;
-	}
-
-	public int pecasBonus(Continente continente){
-		for (territorio t : continente.paises){
-			if (!(this.paisesDominados.contains(t))){
-				return 0;
-			}
-		}
-		return continente.bonus;
-	}
 	
 	enum Cores
 	{
