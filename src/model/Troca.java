@@ -7,10 +7,10 @@ class Troca {
 	Simbolo simbolo;
 	Image toDisplay;
 	
-	public Troca(Territorio representa, int simbolo, Image _ref)
+	public Troca(Territorio representa, Simbolo simbolo, Image _ref)
 	{
 		this.representa = representa;
-		this.simbolo = Simbolo.values()[simbolo];
+		this.simbolo = simbolo;
 		this.toDisplay = _ref;
 	}
 }

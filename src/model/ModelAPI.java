@@ -5,20 +5,19 @@ import java.util.Collections;
 
 public class ModelAPI {
 	
-	public static ArrayList<Continente> listaContinente = new ArrayList<Continente>();
-	public static ArrayList<Jogador> listaJogadores = new ArrayList<Jogador>();
-	public static ArrayList<Objetivo> deckObjetivos = new ArrayList<Objetivo>();
-	public static ArrayList<Troca> deckTroca = new ArrayList<Troca>();
+	static ArrayList<Continente> listaContinente = new ArrayList<Continente>();
+	static ArrayList<Jogador> listaJogadores = new ArrayList<Jogador>();
+	static ArrayList<Objetivo> deckObjetivos = new ArrayList<Objetivo>();
+	static ArrayList<Troca> deckTroca = new ArrayList<Troca>();
 	
-	public static boolean setupGame()
+	public static boolean addPlayer(String nome, int cor)
 	{
-		setupContinents(listaContinente);
-		setupCards();
-		
+		Jogador newPlayer = new Jogador(nome, Cores.values()[cor]);
+		listaJogadores.add(newPlayer);
 		return true;
 	}
 	
-	public static boolean drawObjectives()
+	public static void drawObjectives()
 	{
 		Objetivo obj;
 		
@@ -37,8 +36,6 @@ public class ModelAPI {
 			
 			j.obj = obj;
 		}
-		
-		return true;
 	}
 	
 	public static Troca drawTrade()
@@ -46,6 +43,46 @@ public class ModelAPI {
 		Troca obj = deckTroca.get(deckTroca.size() - 1);
 		deckTroca.remove(obj);
 		return obj;
+	}
+	
+	public static int bonusPiece(Jogador j){
+		int numPecas = j.paisesDominados.size()/2;
+		if (numPecas < 3){
+			numPecas = 3;
+		}
+		return numPecas;
+	}
+
+	public static int bonusPiece(Jogador j, Continente continente){
+		for (Territorio t : continente.paises){
+			if (!(j.paisesDominados.contains(t))){
+				return 0;
+			}
+		}
+		return continente.bonus;
+	}
+	
+	public static void setupGame()
+	{
+		setupContinents(listaContinente);
+		setupCards();
+		
+		rafflePlayers();
+	}
+	
+	public static boolean validateTrade(Troca carta1, Troca carta2, Troca carta3)
+	{
+		if (carta1.simbolo == Simbolo.Coringa || carta2.simbolo == Simbolo.Coringa || carta3.simbolo == Simbolo.Coringa)
+			return true;
+		
+		if (carta1.simbolo == carta2.simbolo) {
+			if (carta2.simbolo == carta3.simbolo)
+				return true;
+		}
+		else if (carta2.simbolo != carta3.simbolo && carta1.simbolo != carta3.simbolo)
+			return true;
+			
+		return false;
 	}
 	
 	private static boolean existPlayerColor(int cor) 
@@ -61,16 +98,9 @@ public class ModelAPI {
 		return false;
 	}
 	
-	public static boolean addPlayer(String nome, int cor)
+	private static void rafflePlayers()
 	{
-		Jogador newPlayer = new Jogador(nome, Cores.values()[cor]);
-		listaJogadores.add(newPlayer);
-		return true;
-	}
-	
-	public static String mock()
-	{
-		return listaContinente.get(0).nome;
+		Collections.shuffle(listaJogadores);
 	}
 	
 	private static boolean setupCards()
@@ -83,7 +113,7 @@ public class ModelAPI {
 		
 		for(Continente c : listaContinente)
 			for(Territorio p : c.paises)
-				deckTroca.add(new Troca(p, 0, null));
+				deckTroca.add(new Troca(p, null, null));
 		
 		//africa
 		deckTroca.get(0).simbolo = Simbolo.Triangulo;
@@ -149,8 +179,8 @@ public class ModelAPI {
 		deckTroca.get(50).simbolo = Simbolo.Circulo;
 		
 		//coringas
-		deckTroca.add(new Troca(null, Simbolo.Coringa.ordinal(), null));
-		deckTroca.add(new Troca(null, Simbolo.Coringa.ordinal(), null));
+		deckTroca.add(new Troca(null, Simbolo.Coringa, null));
+		deckTroca.add(new Troca(null, Simbolo.Coringa, null));
 		
 		Collections.shuffle(deckTroca);
 		return true;
@@ -158,12 +188,12 @@ public class ModelAPI {
 	
 	private static boolean setupContinents(ArrayList<Continente> listCont) 
 	{
-		listCont.add(new Continente("África", Continentes.AFRICA, new ArrayList<Territorio>(), 3));
-		listCont.add(new Continente("América do Norte", Continentes.AMNORTE, new ArrayList<Territorio>(), 5));
-		listCont.add(new Continente("América do Sul", Continentes.AMSUL, new ArrayList<Territorio>(), 2));
-		listCont.add(new Continente("Ásia", Continentes.ASIA, new ArrayList<Territorio>(), 7));
-		listCont.add(new Continente("Europa", Continentes.EUROPA, new ArrayList<Territorio>(), 5));
-		listCont.add(new Continente("Oceania", Continentes.OCEANIA, new ArrayList<Territorio>(), 2));
+		listCont.add(new Continente("África", Continentes.AFRICA, 3));
+		listCont.add(new Continente("América do Norte", Continentes.AMNORTE, 5));
+		listCont.add(new Continente("América do Sul", Continentes.AMSUL, 2));
+		listCont.add(new Continente("Ásia", Continentes.ASIA, 7));
+		listCont.add(new Continente("Europa", Continentes.EUROPA, 5));
+		listCont.add(new Continente("Oceania", Continentes.OCEANIA, 2));
 		
 		for (Continente c : listCont)
 			setupPaises(c);
@@ -243,20 +273,4 @@ public class ModelAPI {
 		}
 	}
 
-	public int pecasBonus(Jogador j){
-		int numPecas = j.paisesDominados.size()/2;
-		if (numPecas < 3){
-			numPecas = 3;
-		}
-		return numPecas;
-	}
-
-	public int pecasBonus(Jogador j, Continente continente){
-		for (Territorio t : continente.paises){
-			if (!(j.paisesDominados.contains(t))){
-				return 0;
-			}
-		}
-		return continente.bonus;
-	}
 }

@@ -6,8 +6,9 @@ public class ControllerAPI {
 	
 	public boolean startGame()
 	{
-		ModelAPI.setupGame();
 		ModelAPI.addPlayer("Augur Bolas", 0);
+		ModelAPI.addPlayer("Junior", 3);
+		ModelAPI.setupGame();
 		ModelAPI.drawObjectives();
 		return true;
 	}

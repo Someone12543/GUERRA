@@ -65,10 +65,5 @@ class Jogador {
 		
 		return true;
 	}
-	
-	public boolean trocaCarta(Troca carta1, Troca carta2, Troca carta3)
-	{
-		
-		return true;
-	}
+
 }

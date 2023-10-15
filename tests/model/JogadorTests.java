@@ -94,9 +94,5 @@ class JogadorTests {
 		assertTrue(p1.posicionarTropas(t1, 4));
 		assertEquals(expectedNumTropas, t1.numTropas);
 	}
-	
-	@Test
-	void trocarCarta() {
-		
-	}
+
 }
