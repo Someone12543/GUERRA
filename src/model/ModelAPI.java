@@ -203,9 +203,9 @@ public class ModelAPI {
 	
 	private static boolean setupPaises(Continente c)
 	{
-		switch(c.tipo.ordinal())
+		switch(c.tipo)
 		{
-		case 0:
+		case AFRICA:
 			c.paises.add(new Territorio("África do Sul", c));
 			c.paises.add(new Territorio("Angola", c));
 			c.paises.add(new Territorio("Argélia", c));
@@ -213,7 +213,7 @@ public class ModelAPI {
 			c.paises.add(new Territorio("Nigéria", c));
 			c.paises.add(new Territorio("Somália", c));
 			return true;
-		case 1:
+		case AMNORTE:
 			c.paises.add(new Territorio("Alasca", c));
 			c.paises.add(new Territorio("Calgary", c));
 			c.paises.add(new Territorio("Califórnia", c));
@@ -224,13 +224,13 @@ public class ModelAPI {
 			c.paises.add(new Territorio("Texas", c));
 			c.paises.add(new Territorio("Vancouver", c));
 			return true;
-		case 2:
+		case AMSUL:
 			c.paises.add(new Territorio("Argentina", c));
 			c.paises.add(new Territorio("Brasil", c));
 			c.paises.add(new Territorio("Peru", c));
 			c.paises.add(new Territorio("Venezuela", c));
 			return true;
-		case 3:
+		case ASIA:
 			c.paises.add(new Territorio("Arábia Saudita", c));
 			c.paises.add(new Territorio("Bangladesh", c));
 			c.paises.add(new Territorio("Cazaquistão", c));
@@ -252,7 +252,7 @@ public class ModelAPI {
 			c.paises.add(new Territorio("Tailândia", c));
 			c.paises.add(new Territorio("Turquia", c));
 			return true;
-		case 4:
+		case EUROPA:
 			c.paises.add(new Territorio("Espanha", c));
 			c.paises.add(new Territorio("França", c));
 			c.paises.add(new Territorio("Itália", c));
@@ -262,7 +262,7 @@ public class ModelAPI {
 			c.paises.add(new Territorio("Suécia", c));
 			c.paises.add(new Territorio("Ucrânia", c));
 			return true;
-		case 5:
+		case OCEANIA:
 			c.paises.add(new Territorio("Austrália", c));
 			c.paises.add(new Territorio("Indonésia", c));
 			c.paises.add(new Territorio("Nova Zelândia", c));
