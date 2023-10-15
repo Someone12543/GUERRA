@@ -13,9 +13,4 @@ class Troca {
 		this.simbolo = Simbolo.values()[simbolo];
 		this.toDisplay = _ref;
 	}
-	
-	enum Simbolo
-	{
-		Triangulo, Quadrado, Circulo, Coringa;
-	}
 }

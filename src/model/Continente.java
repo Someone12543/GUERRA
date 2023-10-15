@@ -13,9 +13,4 @@ class Continente {
 		this.paises = paises;
 		this.bonus = bonus;
 	}
-	
-	public enum Continentes
-	{
-		AFRICA, AMNORTE, AMSUL, ASIA, EUROPA, OCEANIA;
-	}
 }

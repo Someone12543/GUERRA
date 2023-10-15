@@ -17,17 +17,17 @@ class Jogador {
 	}
 	
 	public boolean moverTropas(Territorio paisOrigem, Territorio paisDestino, int qtd) {
-		if (paisOrigem.corDominando != cor.ordinal()) {
+		if (paisOrigem.corDominando != cor) {
 			System.out.println("O paisOrigem não pertence ao Jogador");
 			return false;
 		}
 		
-		if (paisDestino.corDominando != cor.ordinal()) {
+		if (paisDestino.corDominando != cor) {
 			System.out.println("O paisDestino não pertence ao Jogador");
 			return false;
 		}
 		
-		if (paisOrigem.numTropasPodeMover - qtd < 1 || paisOrigem.numTropas - qtd < 1) {
+		if (paisOrigem.numTropasPodeMover - qtd < 0 || paisOrigem.numTropas - qtd < 1) {
 			System.out.println("O paisOrigem não possui tantas tropas para mover");
 			return false;
 		}
@@ -46,13 +46,13 @@ class Jogador {
 	}
 	
 	public boolean posicionarTropas(Territorio pais, int qtd) {
-		if (pais.corDominando != cor.ordinal()) {
+		if (pais.corDominando != cor) {
 			System.out.println("O pais não pertence ao Jogador");
 			return false;
 		}
 		
-		if (qtd == 0) {
-			System.out.println("Não se pode posicionar 0 tropas");
+		if (qtd <= 0) {
+			System.out.println("Não se pode posicionar menos que 1 tropa");
 			return false;
 		}
 		
@@ -66,8 +66,9 @@ class Jogador {
 		return true;
 	}
 	
-	enum Cores
+	public boolean trocaCarta(Troca carta1, Troca carta2, Troca carta3)
 	{
-		Amarelo, Azul, Branco, Verde, Vermelho, Preto;
+		
+		return true;
 	}
 }

@@ -63,7 +63,7 @@ public class ModelAPI {
 	
 	public static boolean addPlayer(String nome, int cor)
 	{
-		Jogador newPlayer = new Jogador(nome, Jogador.Cores.values()[cor]);
+		Jogador newPlayer = new Jogador(nome, Cores.values()[cor]);
 		listaJogadores.add(newPlayer);
 		return true;
 	}
@@ -86,71 +86,71 @@ public class ModelAPI {
 				deckTroca.add(new Troca(p, 0, null));
 		
 		//africa
-		deckTroca.get(0).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(1).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(2).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(3).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(4).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(5).simbolo = Troca.Simbolo.Quadrado;
+		deckTroca.get(0).simbolo = Simbolo.Triangulo;
+		deckTroca.get(1).simbolo = Simbolo.Quadrado;
+		deckTroca.get(2).simbolo = Simbolo.Circulo;
+		deckTroca.get(3).simbolo = Simbolo.Triangulo;
+		deckTroca.get(4).simbolo = Simbolo.Circulo;
+		deckTroca.get(5).simbolo = Simbolo.Quadrado;
 		
 		//america do norte
-		deckTroca.get(6).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(7).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(8).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(9).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(10).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(11).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(12).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(13).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(14).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(6).simbolo = Simbolo.Triangulo;
+		deckTroca.get(7).simbolo = Simbolo.Circulo;
+		deckTroca.get(8).simbolo = Simbolo.Quadrado;
+		deckTroca.get(9).simbolo = Simbolo.Circulo;
+		deckTroca.get(10).simbolo = Simbolo.Quadrado;
+		deckTroca.get(11).simbolo = Simbolo.Quadrado;
+		deckTroca.get(12).simbolo = Simbolo.Circulo;
+		deckTroca.get(13).simbolo = Simbolo.Triangulo;
+		deckTroca.get(14).simbolo = Simbolo.Triangulo;
 		
 		//america do sul
-		deckTroca.get(15).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(16).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(17).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(18).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(15).simbolo = Simbolo.Quadrado;
+		deckTroca.get(16).simbolo = Simbolo.Circulo;
+		deckTroca.get(17).simbolo = Simbolo.Triangulo;
+		deckTroca.get(18).simbolo = Simbolo.Triangulo;
 		
 		//asia
-		deckTroca.get(19).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(20).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(21).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(22).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(23).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(24).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(25).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(26).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(27).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(28).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(29).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(30).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(31).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(32).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(33).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(34).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(35).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(36).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(37).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(38).simbolo = Troca.Simbolo.Triangulo;
+		deckTroca.get(19).simbolo = Simbolo.Circulo;
+		deckTroca.get(20).simbolo = Simbolo.Circulo;
+		deckTroca.get(21).simbolo = Simbolo.Circulo;
+		deckTroca.get(22).simbolo = Simbolo.Quadrado;
+		deckTroca.get(23).simbolo = Simbolo.Quadrado;
+		deckTroca.get(24).simbolo = Simbolo.Triangulo;
+		deckTroca.get(25).simbolo = Simbolo.Circulo;
+		deckTroca.get(26).simbolo = Simbolo.Triangulo;
+		deckTroca.get(27).simbolo = Simbolo.Quadrado;
+		deckTroca.get(28).simbolo = Simbolo.Triangulo;
+		deckTroca.get(29).simbolo = Simbolo.Circulo;
+		deckTroca.get(30).simbolo = Simbolo.Quadrado;
+		deckTroca.get(31).simbolo = Simbolo.Quadrado;
+		deckTroca.get(32).simbolo = Simbolo.Triangulo;
+		deckTroca.get(33).simbolo = Simbolo.Circulo;
+		deckTroca.get(34).simbolo = Simbolo.Triangulo;
+		deckTroca.get(35).simbolo = Simbolo.Quadrado;
+		deckTroca.get(36).simbolo = Simbolo.Quadrado;
+		deckTroca.get(37).simbolo = Simbolo.Triangulo;
+		deckTroca.get(38).simbolo = Simbolo.Triangulo;
 		
 		//europa
-		deckTroca.get(39).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(40).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(41).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(42).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(43).simbolo = Troca.Simbolo.Circulo;
-		deckTroca.get(44).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(45).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(46).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(39).simbolo = Simbolo.Circulo;
+		deckTroca.get(40).simbolo = Simbolo.Triangulo;
+		deckTroca.get(41).simbolo = Simbolo.Quadrado;
+		deckTroca.get(42).simbolo = Simbolo.Triangulo;
+		deckTroca.get(43).simbolo = Simbolo.Circulo;
+		deckTroca.get(44).simbolo = Simbolo.Triangulo;
+		deckTroca.get(45).simbolo = Simbolo.Quadrado;
+		deckTroca.get(46).simbolo = Simbolo.Circulo;
 		
 		//oceania
-		deckTroca.get(47).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(48).simbolo = Troca.Simbolo.Triangulo;
-		deckTroca.get(49).simbolo = Troca.Simbolo.Quadrado;
-		deckTroca.get(50).simbolo = Troca.Simbolo.Circulo;
+		deckTroca.get(47).simbolo = Simbolo.Triangulo;
+		deckTroca.get(48).simbolo = Simbolo.Triangulo;
+		deckTroca.get(49).simbolo = Simbolo.Quadrado;
+		deckTroca.get(50).simbolo = Simbolo.Circulo;
 		
 		//coringas
-		deckTroca.add(new Troca(null, Troca.Simbolo.Coringa.ordinal(), null));
-		deckTroca.add(new Troca(null, Troca.Simbolo.Coringa.ordinal(), null));
+		deckTroca.add(new Troca(null, Simbolo.Coringa.ordinal(), null));
+		deckTroca.add(new Troca(null, Simbolo.Coringa.ordinal(), null));
 		
 		Collections.shuffle(deckTroca);
 		return true;
@@ -158,12 +158,12 @@ public class ModelAPI {
 	
 	private static boolean setupContinents(ArrayList<Continente> listCont) 
 	{
-		listCont.add(new Continente("África", Continente.Continentes.AFRICA, new ArrayList<Territorio>(), 3));
-		listCont.add(new Continente("América do Norte", Continente.Continentes.AMNORTE, new ArrayList<Territorio>(), 5));
-		listCont.add(new Continente("América do Sul", Continente.Continentes.AMSUL, new ArrayList<Territorio>(), 2));
-		listCont.add(new Continente("Ásia", Continente.Continentes.ASIA, new ArrayList<Territorio>(), 7));
-		listCont.add(new Continente("Europa", Continente.Continentes.EUROPA, new ArrayList<Territorio>(), 5));
-		listCont.add(new Continente("Oceania", Continente.Continentes.OCEANIA, new ArrayList<Territorio>(), 2));
+		listCont.add(new Continente("África", Continentes.AFRICA, new ArrayList<Territorio>(), 3));
+		listCont.add(new Continente("América do Norte", Continentes.AMNORTE, new ArrayList<Territorio>(), 5));
+		listCont.add(new Continente("América do Sul", Continentes.AMSUL, new ArrayList<Territorio>(), 2));
+		listCont.add(new Continente("Ásia", Continentes.ASIA, new ArrayList<Territorio>(), 7));
+		listCont.add(new Continente("Europa", Continentes.EUROPA, new ArrayList<Territorio>(), 5));
+		listCont.add(new Continente("Oceania", Continentes.OCEANIA, new ArrayList<Territorio>(), 2));
 		
 		for (Continente c : listCont)
 			setupPaises(c);
@@ -176,67 +176,67 @@ public class ModelAPI {
 		switch(c.tipo.ordinal())
 		{
 		case 0:
-			c.paises.add(new Territorio("África do Sul", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Angola", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Argélia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Egito", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Nigéria", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Somália", c, 0, new ArrayList<Territorio>()));
+			c.paises.add(new Territorio("África do Sul", c));
+			c.paises.add(new Territorio("Angola", c));
+			c.paises.add(new Territorio("Argélia", c));
+			c.paises.add(new Territorio("Egito", c));
+			c.paises.add(new Territorio("Nigéria", c));
+			c.paises.add(new Territorio("Somália", c));
 			return true;
 		case 1:
-			c.paises.add(new Territorio("Alasca", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Calgary", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Califórnia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Groelândia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("México", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Nova York", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Quebec", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Texas", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Vancouver", c, 0, new ArrayList<Territorio>()));
+			c.paises.add(new Territorio("Alasca", c));
+			c.paises.add(new Territorio("Calgary", c));
+			c.paises.add(new Territorio("Califórnia", c));
+			c.paises.add(new Territorio("Groelândia", c));
+			c.paises.add(new Territorio("México", c));
+			c.paises.add(new Territorio("Nova York", c));
+			c.paises.add(new Territorio("Quebec", c));
+			c.paises.add(new Territorio("Texas", c));
+			c.paises.add(new Territorio("Vancouver", c));
 			return true;
 		case 2:
-			c.paises.add(new Territorio("Argentina", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Brasil", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Peru", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Venezuela", c, 0, new ArrayList<Territorio>()));
+			c.paises.add(new Territorio("Argentina", c));
+			c.paises.add(new Territorio("Brasil", c));
+			c.paises.add(new Territorio("Peru", c));
+			c.paises.add(new Territorio("Venezuela", c));
 			return true;
 		case 3:
-			c.paises.add(new Territorio("Arábia Saudita", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Bangladesh", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Cazaquistão", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("China", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Coréia do Norte", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Coréia do Sul", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Estônia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Índia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Irã", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Iraque", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Japão", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Jordânia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Letônia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Mongólia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Paquistão", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Russía", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Sibéria", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Síria", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Tailândia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Turquia", c, 0, new ArrayList<Territorio>()));
+			c.paises.add(new Territorio("Arábia Saudita", c));
+			c.paises.add(new Territorio("Bangladesh", c));
+			c.paises.add(new Territorio("Cazaquistão", c));
+			c.paises.add(new Territorio("China", c));
+			c.paises.add(new Territorio("Coréia do Norte", c));
+			c.paises.add(new Territorio("Coréia do Sul", c));
+			c.paises.add(new Territorio("Estônia", c));
+			c.paises.add(new Territorio("Índia", c));
+			c.paises.add(new Territorio("Irã", c));
+			c.paises.add(new Territorio("Iraque", c));
+			c.paises.add(new Territorio("Japão", c));
+			c.paises.add(new Territorio("Jordânia", c));
+			c.paises.add(new Territorio("Letônia", c));
+			c.paises.add(new Territorio("Mongólia", c));
+			c.paises.add(new Territorio("Paquistão", c));
+			c.paises.add(new Territorio("Russía", c));
+			c.paises.add(new Territorio("Sibéria", c));
+			c.paises.add(new Territorio("Síria", c));
+			c.paises.add(new Territorio("Tailândia", c));
+			c.paises.add(new Territorio("Turquia", c));
 			return true;
 		case 4:
-			c.paises.add(new Territorio("Espanha", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("França", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Itália", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Polônia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Reino Unido", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Romênia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Suécia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Ucrânia", c, 0, new ArrayList<Territorio>()));
+			c.paises.add(new Territorio("Espanha", c));
+			c.paises.add(new Territorio("França", c));
+			c.paises.add(new Territorio("Itália", c));
+			c.paises.add(new Territorio("Polônia", c));
+			c.paises.add(new Territorio("Reino Unido", c));
+			c.paises.add(new Territorio("Romênia", c));
+			c.paises.add(new Territorio("Suécia", c));
+			c.paises.add(new Territorio("Ucrânia", c));
 			return true;
 		case 5:
-			c.paises.add(new Territorio("Austrália", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Indonésia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Nova Zelândia", c, 0, new ArrayList<Territorio>()));
-			c.paises.add(new Territorio("Perth", c, 0, new ArrayList<Territorio>()));
+			c.paises.add(new Territorio("Austrália", c));
+			c.paises.add(new Territorio("Indonésia", c));
+			c.paises.add(new Territorio("Nova Zelândia", c));
+			c.paises.add(new Territorio("Perth", c));
 			return true;
 		default:
 			return false;
@@ -252,7 +252,7 @@ public class ModelAPI {
 	}
 
 	public int pecasBonus(Jogador j, Continente continente){
-		for (territorio t : continente.paises){
+		for (Territorio t : continente.paises){
 			if (!(j.paisesDominados.contains(t))){
 				return 0;
 			}
