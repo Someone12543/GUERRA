@@ -61,9 +61,9 @@ public class ModelAPI {
 		return false;
 	}
 	
-	public static boolean addPlayer(int cor)
+	public static boolean addPlayer(String nome, int cor)
 	{
-		Jogador newPlayer = new Jogador(Jogador.Cores.values()[cor], null, new ArrayList<Territorio>());
+		Jogador newPlayer = new Jogador(nome, Jogador.Cores.values()[cor]);
 		listaJogadores.add(newPlayer);
 		return true;
 	}

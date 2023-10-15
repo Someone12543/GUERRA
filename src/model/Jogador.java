@@ -2,16 +2,18 @@ package model;
 import java.util.ArrayList;
 
 class Jogador {
+	String nome;
 	Cores cor;
 	Objetivo obj;
 	ArrayList<Troca> mao;
 	ArrayList<Territorio> paisesDominados;
+	int numTropasPosicionar;
 	
-	public Jogador(Cores cor, Objetivo obj, ArrayList<Territorio> paisesDominados) {
+	public Jogador(String nome, Cores cor) {
+		this.nome = nome;
 		this.cor = cor;
-		this.obj = obj;
 		this.mao = new ArrayList<Troca>();
-		this.paisesDominados = paisesDominados;
+		this.paisesDominados = new ArrayList<Territorio>();
 	}
 	
 	public boolean moverTropas(Territorio paisOrigem, Territorio paisDestino, int qtd) {
@@ -39,6 +41,27 @@ class Jogador {
 		paisOrigem.numTropasPodeMover = paisOrigem.numTropasPodeMover - qtd;
 		
 		paisDestino.numTropas = paisDestino.numTropas+qtd;
+		
+		return true;
+	}
+	
+	public boolean posicionarTropas(Territorio pais, int qtd) {
+		if (pais.corDominando != cor.ordinal()) {
+			System.out.println("O pais não pertence ao Jogador");
+			return false;
+		}
+		
+		if (qtd == 0) {
+			System.out.println("Não se pode posicionar 0 tropas");
+			return false;
+		}
+		
+		if (qtd > numTropasPosicionar) {
+			System.out.println("Tropas insuficientes");
+			return false;
+		}
+		
+		pais.numTropas += qtd;
 		
 		return true;
 	}
