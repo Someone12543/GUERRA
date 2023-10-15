@@ -242,4 +242,21 @@ public class ModelAPI {
 			return false;
 		}
 	}
+
+	public int pecasBonus(Jogador j){
+		int numPecas = j.paisesDominados.size()/2;
+		if (numPecas < 3){
+			numPecas = 3;
+		}
+		return numPecas;
+	}
+
+	public int pecasBonus(Jogador j, Continente continente){
+		for (territorio t : continente.paises){
+			if (!(j.paisesDominados.contains(t))){
+				return 0;
+			}
+		}
+		return continente.bonus;
+	}
 }
