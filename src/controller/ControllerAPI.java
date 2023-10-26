@@ -4,12 +4,13 @@ import model.ModelAPI;
 
 public class ControllerAPI {
 	
-	public static boolean startGame()
+	public boolean startGame()
 	{
-		ModelAPI.addPlayer("Augur Bolas", 0);
-		ModelAPI.addPlayer("Junior", 3);
-		ModelAPI.setupGame();
-		ModelAPI.drawObjectives();
+		ModelAPI game = ModelAPI.getModelAPI();
+		game.addPlayer("Augur Bolas", 0);
+		game.addPlayer("Junior", 3);
+		game.setupGame();
+		game.drawObjectives();
 		return true;
 	}
 }

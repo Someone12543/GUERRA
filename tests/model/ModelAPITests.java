@@ -7,13 +7,15 @@ import org.junit.jupiter.api.Test;
 
 class ModelAPITests {
 	static Troca card1, card2, card3, card4, card5, cardCoringa;
+	static ModelAPI game;
 	
 	@BeforeAll
 	static void setup() 
 	{
-		ModelAPI.addPlayer("Jorge", Cores.Amarelo.ordinal());
-		ModelAPI.addPlayer("Jefferson", Cores.Azul.ordinal());
-		ModelAPI.setupGame();
+		game = ModelAPI.getModelAPI();
+		game.addPlayer("Jorge", Cores.Amarelo.ordinal());
+		game.addPlayer("Jefferson", Cores.Azul.ordinal());
+		game.setupGame();
 		
 		card1 = new Troca(null, Simbolo.Circulo, null);
 		card2 = new Troca(null, Simbolo.Circulo, null);
@@ -25,21 +27,21 @@ class ModelAPITests {
 	
 	@Test
 	void testDrawObjectives() {
-		ModelAPI.drawObjectives();
-		for(Jogador j : ModelAPI.listaJogadores)
+		game.drawObjectives();
+		for(Jogador j : game.listaJogadores)
 			assertNotNull(j.obj);
 	}
 	
 	@Test
 	void testDrawTrade() {
-		assertNotNull(ModelAPI.drawTrade());
+		assertNotNull(game.drawTrade());
 	}
 	
 	@Test
 	void testBonusPieceLessThan3() {
 		Jogador p1 = new Jogador("Jorge", Cores.Amarelo);
 		int expected = 3;
-		assertEquals(expected, ModelAPI.bonusPiece(p1));
+		assertEquals(expected, game.bonusPiece(p1));
 	}
 	
 	@Test
@@ -56,7 +58,7 @@ class ModelAPITests {
 		p1.paisesDominados.add(null);
 		p1.paisesDominados.add(null);
 		
-		assertEquals(expected, ModelAPI.bonusPiece(p1));
+		assertEquals(expected, game.bonusPiece(p1));
 	}
 	
 	@Test
@@ -67,7 +69,7 @@ class ModelAPITests {
 		Territorio t1 = new Territorio("A", c);
 		c.paises.add(t1);
 		
-		assertEquals(expected, ModelAPI.bonusPiece(p1, c));
+		assertEquals(expected, game.bonusPiece(p1, c));
 	}
 	
 	@Test
@@ -79,26 +81,26 @@ class ModelAPITests {
 		c.paises.add(t1);
 		p1.paisesDominados.add(t1);
 		
-		assertEquals(expected, ModelAPI.bonusPiece(p1, c));
+		assertEquals(expected, game.bonusPiece(p1, c));
 	}
 	
 	@Test
 	void testValidateTradeSameSimbolo() {
-		assertTrue(ModelAPI.validateTrade(card3, card2, card1));
+		assertTrue(game.validateTrade(card3, card2, card1));
 	}
 	
 	@Test
 	void testValidateTradeDiffSimbolo() {
-		assertTrue(ModelAPI.validateTrade(card1, card4, card5));
+		assertTrue(game.validateTrade(card1, card4, card5));
 	}
 	
 	@Test
 	void testValidateTradeCoringa() {
-		assertTrue(ModelAPI.validateTrade(card4, card2, cardCoringa));
+		assertTrue(game.validateTrade(card4, card2, cardCoringa));
 	}
 	
 	@Test
 	void testValidateTradeNotOK() {
-		assertFalse(ModelAPI.validateTrade(card1, card2, card4));
+		assertFalse(game.validateTrade(card1, card2, card4));
 	}
 }
