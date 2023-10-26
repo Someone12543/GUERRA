@@ -57,6 +57,8 @@ public class ModelAPI {
 	
 	public Troca drawTrade()
 	{
+		if (deckTroca.size() == 0)
+			return null;
 		Troca obj = deckTroca.get(deckTroca.size() - 1);
 		deckTroca.remove(obj);
 		return obj;
@@ -123,10 +125,31 @@ public class ModelAPI {
 	
 	void raffleTerritory()
 	{
+		Troca card;
+		int id = 0;
 		
+		while((card = drawTrade()) != null)
+		{
+			card.representa.numTropas = 1;
+			card.representa.corDominando = listaJogadores.get(id).cor;
+			listaJogadores.get(id).mao.add(card);
+			listaJogadores.get(id).paisesDominados.add(card.representa);
+			id++;
+			if (id >= listaJogadores.size())
+				id = 0;
+ 		}
+		
+		for(Jogador j : listaJogadores)
+			for(Troca t : j.mao)
+			{
+				deckTroca.add(t);
+				j.mao.remove(t);
+			}
+		
+		Collections.shuffle(deckTroca);
 	}
 	
-	private boolean setupCards()
+	boolean setupCards()
 	{
 		//remover loop para adicionar as imagens de cada
 		for (int i = 0; i <= 13; i++)
@@ -209,7 +232,7 @@ public class ModelAPI {
 		return true;
 	}
 	
-	private boolean setupContinents(ArrayList<Continente> listCont) 
+	boolean setupContinents(ArrayList<Continente> listCont) 
 	{
 		listCont.add(new Continente("África", Continentes.AFRICA, 3));
 		listCont.add(new Continente("América do Norte", Continentes.AMNORTE, 5));
@@ -224,7 +247,7 @@ public class ModelAPI {
 		return true;
 	}
 	
-	private boolean setupPaises(ArrayList<Continente> listCont)
+	boolean setupPaises(ArrayList<Continente> listCont)
 	{
 		Territorio AfSul = null, Ang = null, Argel = null, Egi = null, Nig = null, Som = null,
 		Ala = null, Calg = null, Cali = null, Gro = null, Mex = null, NY = null, Que = null,

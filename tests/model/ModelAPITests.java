@@ -10,8 +10,7 @@ class ModelAPITests {
 	static ModelAPI game;
 	
 	@BeforeAll
-	static void setup() 
-	{
+	static void setup() {
 		game = ModelAPI.getModelAPI();
 		game.addPlayer("Jorge", Cores.Amarelo.ordinal());
 		game.addPlayer("Jefferson", Cores.Azul.ordinal());
