@@ -26,9 +26,12 @@ public class ControllerAPI {
 		ModelAPI game = ModelAPI.getModelAPI();
 		ViewAPI view = ViewAPI.getViewAPI();
 		
-		game.addPlayer("Augur Bolas", 0);
-		game.addPlayer("Junior", 3);
 		game.setupGame();
 		return true;
+	}
+	
+	public void AddPlayer(String name, int color) {
+		ModelAPI game = ModelAPI.getModelAPI();
+		game.addPlayer(name, color);
 	}
 }

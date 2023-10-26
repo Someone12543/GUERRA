@@ -21,9 +21,9 @@ class TelaPrincipal extends JFrame {
 		p.add(b1);
 		b1.addActionListener(new ActionListener() {
 									public void actionPerformed(ActionEvent e) {
-										TelaTabuleiro tt = new TelaTabuleiro();
-										tt.setTitle("WAR");
-										tt.setVisible(true);
+										TelaCriacaoJogo tcj = new TelaCriacaoJogo();
+										tcj.setTitle("WAR");
+										tcj.setVisible(true);
 									}
 							});
 		
