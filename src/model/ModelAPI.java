@@ -281,266 +281,262 @@ public class ModelAPI {
 			default:
 				return false;
 			}
-			
-			if (c.tipo == Continentes.OCEANIA) {
-				// AMNORTE
-				
-				Ala.paisesLigados.add(Calg);
-				Ala.paisesLigados.add(Van);
-				Ala.paisesLigados.add(Sib);
-				
-				Calg.paisesLigados.add(Ala);
-				Calg.paisesLigados.add(Van);
-				Calg.paisesLigados.add(Gro);
-				
-				Gro.paisesLigados.add(Calg);
-				Gro.paisesLigados.add(Que);
-				Gro.paisesLigados.add(ReiUni);
-				
-				Van.paisesLigados.add(Ala);
-				Van.paisesLigados.add(Calg);
-				Van.paisesLigados.add(Que);
-				Van.paisesLigados.add(Cali);
-				Van.paisesLigados.add(Tex);
-				
-				Que.paisesLigados.add(Gro);
-				Que.paisesLigados.add(Van);
-				Que.paisesLigados.add(Tex);
-				Que.paisesLigados.add(NY);
-				
-				Cali.paisesLigados.add(Van);
-				Cali.paisesLigados.add(Tex);
-				Cali.paisesLigados.add(Mex);
-				
-				Tex.paisesLigados.add(Van);
-				Tex.paisesLigados.add(Que);
-				Tex.paisesLigados.add(Cali);
-				Tex.paisesLigados.add(NY);
-				Tex.paisesLigados.add(Mex);
-				
-				NY.paisesLigados.add(Que);
-				NY.paisesLigados.add(Tex);
-				
-				Mex.paisesLigados.add(Cali);
-				Mex.paisesLigados.add(Tex);
-				Mex.paisesLigados.add(Ven);
-				
-				// AMSUL
-				
-				Ven.paisesLigados.add(Mex);
-				Ven.paisesLigados.add(Bra);
-				Ven.paisesLigados.add(Peru);
-				
-				Bra.paisesLigados.add(Ven);
-				Bra.paisesLigados.add(Peru);
-				Bra.paisesLigados.add(Argen);
-				Bra.paisesLigados.add(Nig);
-				
-				Peru.paisesLigados.add(Ven);
-				Peru.paisesLigados.add(Bra);
-				Peru.paisesLigados.add(Argen);
-				
-				Argen.paisesLigados.add(Bra);
-				Argen.paisesLigados.add(Peru);
-				
-				// EUROPA
-				
-				ReiUni.paisesLigados.add(Gro);
-				ReiUni.paisesLigados.add(Fra);
-				
-				Sue.paisesLigados.add(Fra);
-				Sue.paisesLigados.add(Ita);
-				Sue.paisesLigados.add(Est);
-				Sue.paisesLigados.add(Let);
-				
-				Esp.paisesLigados.add(Fra);
-				Esp.paisesLigados.add(Argel);
-				
-				Fra.paisesLigados.add(ReiUni);
-				Fra.paisesLigados.add(Sue);
-				Fra.paisesLigados.add(Esp);
-				Fra.paisesLigados.add(Ita);
-				
-				Ita.paisesLigados.add(Sue);
-				Ita.paisesLigados.add(Fra);
-				Ita.paisesLigados.add(Pol);
-				Ita.paisesLigados.add(Rom);
-				Ita.paisesLigados.add(Argel);
-				
-				Pol.paisesLigados.add(Ita);
-				Pol.paisesLigados.add(Rom);
-				Pol.paisesLigados.add(Ucr);
-				Pol.paisesLigados.add(Let);
-				
-				Ucr.paisesLigados.add(Pol);
-				Ucr.paisesLigados.add(Rom);
-				Ucr.paisesLigados.add(Let);
-				Ucr.paisesLigados.add(Tur);
-				
-				Rom.paisesLigados.add(Ita);
-				Rom.paisesLigados.add(Pol);
-				Rom.paisesLigados.add(Ucr);
-				Rom.paisesLigados.add(Egi);
-				
-				// AFRICA
-	
-				Argel.paisesLigados.add(Egi);
-				Argel.paisesLigados.add(Nig);
-				Argel.paisesLigados.add(Esp);
-				Argel.paisesLigados.add(Ita);
-				
-				Egi.paisesLigados.add(Argel);
-				Egi.paisesLigados.add(Nig);
-				Egi.paisesLigados.add(Som);
-				Egi.paisesLigados.add(Rom);
-				Egi.paisesLigados.add(Jor);
-				
-				Nig.paisesLigados.add(Argel);
-				Nig.paisesLigados.add(Egi);
-				Nig.paisesLigados.add(Som);
-				Nig.paisesLigados.add(Ang);
-				Nig.paisesLigados.add(Bra);
-				
-				Som.paisesLigados.add(Egi);
-				Som.paisesLigados.add(Nig);
-				Som.paisesLigados.add(Ang);
-				Som.paisesLigados.add(AfSul);
-				Som.paisesLigados.add(ArSau);
-				
-				Ang.paisesLigados.add(Nig);
-				Ang.paisesLigados.add(Som);
-				Ang.paisesLigados.add(AfSul);
-				
-				AfSul.paisesLigados.add(Ang);
-				AfSul.paisesLigados.add(Som);
-				
-				// ASIA
-				
-				Est.paisesLigados.add(Sue);
-				Est.paisesLigados.add(Let);
-				Est.paisesLigados.add(Rus);
-				
-				Rus.paisesLigados.add(Est);
-				Rus.paisesLigados.add(Let);
-				Rus.paisesLigados.add(Caz);
-				Rus.paisesLigados.add(Sib);
-				
-				Sib.paisesLigados.add(Rus);
-				Sib.paisesLigados.add(Caz);
-				Sib.paisesLigados.add(Ala);
-				
-				Let.paisesLigados.add(Est);
-				Let.paisesLigados.add(Rus);
-				Let.paisesLigados.add(Caz);
-				Let.paisesLigados.add(Tur);
-				Let.paisesLigados.add(Sue);
-				Let.paisesLigados.add(Pol);
-				Let.paisesLigados.add(Ucr);
-				
-				Caz.paisesLigados.add(Rus);
-				Caz.paisesLigados.add(Sib);
-				Caz.paisesLigados.add(Let);
-				Caz.paisesLigados.add(Tur);
-				Caz.paisesLigados.add(Chi);
-				Caz.paisesLigados.add(Mon);
-				Caz.paisesLigados.add(Jap);
-				
-				Tur.paisesLigados.add(Let);
-				Tur.paisesLigados.add(Caz);
-				Tur.paisesLigados.add(Chi);
-				Tur.paisesLigados.add(Sir);
-				Tur.paisesLigados.add(Paq);
-				Tur.paisesLigados.add(Ucr);
-				
-				Chi.paisesLigados.add(Caz);
-				Chi.paisesLigados.add(Tur);
-				Chi.paisesLigados.add(Mon);
-				Chi.paisesLigados.add(Paq);
-				Chi.paisesLigados.add(CorNor);
-				Chi.paisesLigados.add(CorSul);
-				Chi.paisesLigados.add(Indi);
-				
-				Mon.paisesLigados.add(Caz);
-				Mon.paisesLigados.add(Chi);
-				Mon.paisesLigados.add(Jap);
-				
-				Jap.paisesLigados.add(Caz);
-				Jap.paisesLigados.add(Mon);
-				Jap.paisesLigados.add(CorNor);
-	
-				Sir.paisesLigados.add(Tur);
-				Sir.paisesLigados.add(Paq);
-				Sir.paisesLigados.add(Jor);
-				Sir.paisesLigados.add(Iraq);
-				Sir.paisesLigados.add(Ira);
-				
-				Paq.paisesLigados.add(Tur);
-				Paq.paisesLigados.add(Chi);
-				Paq.paisesLigados.add(Sir);
-				Paq.paisesLigados.add(Ira);
-				Paq.paisesLigados.add(Indi);
-				
-				CorNor.paisesLigados.add(Chi);
-				CorNor.paisesLigados.add(Jap);
-				CorNor.paisesLigados.add(CorSul);
-				
-				CorSul.paisesLigados.add(Chi);
-				CorSul.paisesLigados.add(CorNor);
-				CorSul.paisesLigados.add(Indi);
-				CorSul.paisesLigados.add(Ban);
-				CorSul.paisesLigados.add(Tai);
-				
-				Jor.paisesLigados.add(Sir);
-				Jor.paisesLigados.add(Iraq);
-				Jor.paisesLigados.add(ArSau);
-				Jor.paisesLigados.add(Egi);
-				
-				Iraq.paisesLigados.add(Sir);
-				Iraq.paisesLigados.add(Jor);
-				Iraq.paisesLigados.add(Ira);
-				Iraq.paisesLigados.add(ArSau);
-				
-				Ira.paisesLigados.add(Sir);
-				Ira.paisesLigados.add(Paq);
-				Ira.paisesLigados.add(Iraq);
-	
-				ArSau.paisesLigados.add(Jor);
-				ArSau.paisesLigados.add(Iraq);
-				ArSau.paisesLigados.add(Som);
-				
-				Indi.paisesLigados.add(Paq);
-				Indi.paisesLigados.add(Chi);
-				Indi.paisesLigados.add(CorSul);
-				Indi.paisesLigados.add(Ban);
-				Indi.paisesLigados.add(Indo);
-				
-				Ban.paisesLigados.add(CorSul);
-				Ban.paisesLigados.add(Indi);
-				Ban.paisesLigados.add(Tai);
-				Ban.paisesLigados.add(Indo);
-				
-				Tai.paisesLigados.add(CorSul);
-				Tai.paisesLigados.add(Ban);
-				
-				// OCEANIA
-				
-				Indo.paisesLigados.add(Indi);
-				Indo.paisesLigados.add(Ban);
-				Indo.paisesLigados.add(Aus);
-				Indo.paisesLigados.add(NZ);
-				
-				Per.paisesLigados.add(Aus);
-				
-				Aus.paisesLigados.add(Indo);
-				Aus.paisesLigados.add(Per);
-				Aus.paisesLigados.add(NZ);
-				
-				NZ.paisesLigados.add(Indo);
-				NZ.paisesLigados.add(Aus);
-				
-			}
-		
 		}
+			
+		// AMNORTE
+		
+		Ala.paisesLigados.add(Calg);
+		Ala.paisesLigados.add(Van);
+		Ala.paisesLigados.add(Sib);
+		
+		Calg.paisesLigados.add(Ala);
+		Calg.paisesLigados.add(Van);
+		Calg.paisesLigados.add(Gro);
+		
+		Gro.paisesLigados.add(Calg);
+		Gro.paisesLigados.add(Que);
+		Gro.paisesLigados.add(ReiUni);
+		
+		Van.paisesLigados.add(Ala);
+		Van.paisesLigados.add(Calg);
+		Van.paisesLigados.add(Que);
+		Van.paisesLigados.add(Cali);
+		Van.paisesLigados.add(Tex);
+		
+		Que.paisesLigados.add(Gro);
+		Que.paisesLigados.add(Van);
+		Que.paisesLigados.add(Tex);
+		Que.paisesLigados.add(NY);
+		
+		Cali.paisesLigados.add(Van);
+		Cali.paisesLigados.add(Tex);
+		Cali.paisesLigados.add(Mex);
+		
+		Tex.paisesLigados.add(Van);
+		Tex.paisesLigados.add(Que);
+		Tex.paisesLigados.add(Cali);
+		Tex.paisesLigados.add(NY);
+		Tex.paisesLigados.add(Mex);
+		
+		NY.paisesLigados.add(Que);
+		NY.paisesLigados.add(Tex);
+		
+		Mex.paisesLigados.add(Cali);
+		Mex.paisesLigados.add(Tex);
+		Mex.paisesLigados.add(Ven);
+		
+		// AMSUL
+		
+		Ven.paisesLigados.add(Mex);
+		Ven.paisesLigados.add(Bra);
+		Ven.paisesLigados.add(Peru);
+		
+		Bra.paisesLigados.add(Ven);
+		Bra.paisesLigados.add(Peru);
+		Bra.paisesLigados.add(Argen);
+		Bra.paisesLigados.add(Nig);
+		
+		Peru.paisesLigados.add(Ven);
+		Peru.paisesLigados.add(Bra);
+		Peru.paisesLigados.add(Argen);
+		
+		Argen.paisesLigados.add(Bra);
+		Argen.paisesLigados.add(Peru);
+		
+		// EUROPA
+		
+		ReiUni.paisesLigados.add(Gro);
+		ReiUni.paisesLigados.add(Fra);
+		
+		Sue.paisesLigados.add(Fra);
+		Sue.paisesLigados.add(Ita);
+		Sue.paisesLigados.add(Est);
+		Sue.paisesLigados.add(Let);
+		
+		Esp.paisesLigados.add(Fra);
+		Esp.paisesLigados.add(Argel);
+		
+		Fra.paisesLigados.add(ReiUni);
+		Fra.paisesLigados.add(Sue);
+		Fra.paisesLigados.add(Esp);
+		Fra.paisesLigados.add(Ita);
+		
+		Ita.paisesLigados.add(Sue);
+		Ita.paisesLigados.add(Fra);
+		Ita.paisesLigados.add(Pol);
+		Ita.paisesLigados.add(Rom);
+		Ita.paisesLigados.add(Argel);
+		
+		Pol.paisesLigados.add(Ita);
+		Pol.paisesLigados.add(Rom);
+		Pol.paisesLigados.add(Ucr);
+		Pol.paisesLigados.add(Let);
+		
+		Ucr.paisesLigados.add(Pol);
+		Ucr.paisesLigados.add(Rom);
+		Ucr.paisesLigados.add(Let);
+		Ucr.paisesLigados.add(Tur);
+		
+		Rom.paisesLigados.add(Ita);
+		Rom.paisesLigados.add(Pol);
+		Rom.paisesLigados.add(Ucr);
+		Rom.paisesLigados.add(Egi);
+		
+		// AFRICA
+
+		Argel.paisesLigados.add(Egi);
+		Argel.paisesLigados.add(Nig);
+		Argel.paisesLigados.add(Esp);
+		Argel.paisesLigados.add(Ita);
+		
+		Egi.paisesLigados.add(Argel);
+		Egi.paisesLigados.add(Nig);
+		Egi.paisesLigados.add(Som);
+		Egi.paisesLigados.add(Rom);
+		Egi.paisesLigados.add(Jor);
+		
+		Nig.paisesLigados.add(Argel);
+		Nig.paisesLigados.add(Egi);
+		Nig.paisesLigados.add(Som);
+		Nig.paisesLigados.add(Ang);
+		Nig.paisesLigados.add(Bra);
+		
+		Som.paisesLigados.add(Egi);
+		Som.paisesLigados.add(Nig);
+		Som.paisesLigados.add(Ang);
+		Som.paisesLigados.add(AfSul);
+		Som.paisesLigados.add(ArSau);
+		
+		Ang.paisesLigados.add(Nig);
+		Ang.paisesLigados.add(Som);
+		Ang.paisesLigados.add(AfSul);
+		
+		AfSul.paisesLigados.add(Ang);
+		AfSul.paisesLigados.add(Som);
+		
+		// ASIA
+		
+		Est.paisesLigados.add(Sue);
+		Est.paisesLigados.add(Let);
+		Est.paisesLigados.add(Rus);
+		
+		Rus.paisesLigados.add(Est);
+		Rus.paisesLigados.add(Let);
+		Rus.paisesLigados.add(Caz);
+		Rus.paisesLigados.add(Sib);
+		
+		Sib.paisesLigados.add(Rus);
+		Sib.paisesLigados.add(Caz);
+		Sib.paisesLigados.add(Ala);
+		
+		Let.paisesLigados.add(Est);
+		Let.paisesLigados.add(Rus);
+		Let.paisesLigados.add(Caz);
+		Let.paisesLigados.add(Tur);
+		Let.paisesLigados.add(Sue);
+		Let.paisesLigados.add(Pol);
+		Let.paisesLigados.add(Ucr);
+		
+		Caz.paisesLigados.add(Rus);
+		Caz.paisesLigados.add(Sib);
+		Caz.paisesLigados.add(Let);
+		Caz.paisesLigados.add(Tur);
+		Caz.paisesLigados.add(Chi);
+		Caz.paisesLigados.add(Mon);
+		Caz.paisesLigados.add(Jap);
+		
+		Tur.paisesLigados.add(Let);
+		Tur.paisesLigados.add(Caz);
+		Tur.paisesLigados.add(Chi);
+		Tur.paisesLigados.add(Sir);
+		Tur.paisesLigados.add(Paq);
+		Tur.paisesLigados.add(Ucr);
+		
+		Chi.paisesLigados.add(Caz);
+		Chi.paisesLigados.add(Tur);
+		Chi.paisesLigados.add(Mon);
+		Chi.paisesLigados.add(Paq);
+		Chi.paisesLigados.add(CorNor);
+		Chi.paisesLigados.add(CorSul);
+		Chi.paisesLigados.add(Indi);
+		
+		Mon.paisesLigados.add(Caz);
+		Mon.paisesLigados.add(Chi);
+		Mon.paisesLigados.add(Jap);
+		
+		Jap.paisesLigados.add(Caz);
+		Jap.paisesLigados.add(Mon);
+		Jap.paisesLigados.add(CorNor);
+
+		Sir.paisesLigados.add(Tur);
+		Sir.paisesLigados.add(Paq);
+		Sir.paisesLigados.add(Jor);
+		Sir.paisesLigados.add(Iraq);
+		Sir.paisesLigados.add(Ira);
+		
+		Paq.paisesLigados.add(Tur);
+		Paq.paisesLigados.add(Chi);
+		Paq.paisesLigados.add(Sir);
+		Paq.paisesLigados.add(Ira);
+		Paq.paisesLigados.add(Indi);
+		
+		CorNor.paisesLigados.add(Chi);
+		CorNor.paisesLigados.add(Jap);
+		CorNor.paisesLigados.add(CorSul);
+		
+		CorSul.paisesLigados.add(Chi);
+		CorSul.paisesLigados.add(CorNor);
+		CorSul.paisesLigados.add(Indi);
+		CorSul.paisesLigados.add(Ban);
+		CorSul.paisesLigados.add(Tai);
+		
+		Jor.paisesLigados.add(Sir);
+		Jor.paisesLigados.add(Iraq);
+		Jor.paisesLigados.add(ArSau);
+		Jor.paisesLigados.add(Egi);
+		
+		Iraq.paisesLigados.add(Sir);
+		Iraq.paisesLigados.add(Jor);
+		Iraq.paisesLigados.add(Ira);
+		Iraq.paisesLigados.add(ArSau);
+		
+		Ira.paisesLigados.add(Sir);
+		Ira.paisesLigados.add(Paq);
+		Ira.paisesLigados.add(Iraq);
+
+		ArSau.paisesLigados.add(Jor);
+		ArSau.paisesLigados.add(Iraq);
+		ArSau.paisesLigados.add(Som);
+		
+		Indi.paisesLigados.add(Paq);
+		Indi.paisesLigados.add(Chi);
+		Indi.paisesLigados.add(CorSul);
+		Indi.paisesLigados.add(Ban);
+		Indi.paisesLigados.add(Indo);
+		
+		Ban.paisesLigados.add(CorSul);
+		Ban.paisesLigados.add(Indi);
+		Ban.paisesLigados.add(Tai);
+		Ban.paisesLigados.add(Indo);
+		
+		Tai.paisesLigados.add(CorSul);
+		Tai.paisesLigados.add(Ban);
+		
+		// OCEANIA
+		
+		Indo.paisesLigados.add(Indi);
+		Indo.paisesLigados.add(Ban);
+		Indo.paisesLigados.add(Aus);
+		Indo.paisesLigados.add(NZ);
+		
+		Per.paisesLigados.add(Aus);
+		
+		Aus.paisesLigados.add(Indo);
+		Aus.paisesLigados.add(Per);
+		Aus.paisesLigados.add(NZ);
+		
+		NZ.paisesLigados.add(Indo);
+		NZ.paisesLigados.add(Aus);
 		
 		return true;
 		
