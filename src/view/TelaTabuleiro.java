@@ -18,4 +18,9 @@ class TelaTabuleiro extends JFrame {
 		getContentPane().add(t);
 	}
 
+	@Override
+	public void dispose() {
+		// implementar save
+		super.dispose();
+	}
 }

@@ -33,28 +33,7 @@ public class ModelAPI {
 		listaJogadores.add(newPlayer);
 		return true;
 	}
-	
-	public void drawObjectives()
-	{
-		Objetivo obj;
-		
-		for (Jogador j : listaJogadores)
-		{
-			obj = deckObjetivos.get(deckObjetivos.size() - 1);
-			deckObjetivos.remove(obj);
-			
-			if (obj.id >= 8) // se destruir exercito especifico
-			{
-				if (obj.id - 8 == j.cor.ordinal() || !existPlayerColor(obj.id - 8)) // se voce mesmo ou se nao existe
-				{
-					obj = new Objetivo(0, null); // entao troca objetivo
-				}
-			}
-			
-			j.obj = obj;
-		}
-	}
-	
+
 	public Troca drawTrade()
 	{
 		if (deckTroca.size() == 0)
@@ -86,6 +65,7 @@ public class ModelAPI {
 		setupContinents(listaContinente);
 		setupCards();
 		
+		drawObjectives();
 		rafflePlayers();
 		raffleTerritory();
 	}
@@ -103,6 +83,27 @@ public class ModelAPI {
 			return true;
 			
 		return false;
+	}
+
+	void drawObjectives()
+	{
+		Objetivo obj;
+		
+		for (Jogador j : listaJogadores)
+		{
+			obj = deckObjetivos.get(deckObjetivos.size() - 1);
+			deckObjetivos.remove(obj);
+			
+			if (obj.id >= 8) // se destruir exercito especifico
+			{
+				if (obj.id - 8 == j.cor.ordinal() || !existPlayerColor(obj.id - 8)) // se voce mesmo ou se nao existe
+				{
+					obj = new Objetivo(0, null); // entao troca objetivo
+				}
+			}
+			
+			j.obj = obj;
+		}
 	}
 	
 	boolean existPlayerColor(int cor) 
@@ -130,10 +131,12 @@ public class ModelAPI {
 		
 		while((card = drawTrade()) != null)
 		{
-			card.representa.numTropas = 1;
-			card.representa.corDominando = listaJogadores.get(id).cor;
+			if (card.simbolo != Simbolo.Coringa) {
+				card.representa.numTropas = 1;
+				card.representa.corDominando = listaJogadores.get(id).cor;
+				listaJogadores.get(id).paisesDominados.add(card.representa);
+			}
 			listaJogadores.get(id).mao.add(card);
-			listaJogadores.get(id).paisesDominados.add(card.representa);
 			id++;
 			if (id >= listaJogadores.size())
 				id = 0;

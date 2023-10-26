@@ -26,7 +26,10 @@ class TelaPrincipal extends JFrame {
 										tt.setVisible(true);
 									}
 							});
+		
 		p.add(b2);
+		// adicionar listener de carregar jogo (depois de implementar save)
+		
 		getContentPane().add(p);
 	}
 	

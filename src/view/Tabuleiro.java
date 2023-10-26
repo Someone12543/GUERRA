@@ -26,6 +26,7 @@ class Tabuleiro extends JPanel {
 		}
 		
 		this.listaExercitos = new ArrayList<Exercito>();
+		listaExercitos.add(new Exercito(600, 350, 0));
 	}
 	
 	
@@ -34,6 +35,8 @@ class Tabuleiro extends JPanel {
 		Graphics2D g2d = (Graphics2D) g;
 		g2d.drawImage(bg, 0, 0, 1185, 660, null);
 		g2d.drawImage(source, 0, 0, 1185, 660,null);
+		
+		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		
 		for (Exercito e : listaExercitos) {
 			switch(e.color) {
@@ -58,12 +61,17 @@ class Tabuleiro extends JPanel {
 			default:
 				g2d.setPaint(Color.GRAY);
 			}
-			g2d.draw(e.inner);			
+			g2d.fill(e.inner);			
 			
 			g2d.setPaint(Color.DARK_GRAY);
 			g2d.draw(e.outter);
 			
-			g2d.drawString(Integer.toString(e.number), e.x, e.y);
+			if (e.color != 5)
+				g2d.setPaint(Color.BLACK);
+			else
+				g2d.setPaint(Color.WHITE);
+			
+			g2d.drawString(Integer.toString(e.number), e.x + e.w/2 - 5, e.y + e.h/2 + 8); //esse -5 e + 8 foi no olhômetro
 		}
 	}
 	
