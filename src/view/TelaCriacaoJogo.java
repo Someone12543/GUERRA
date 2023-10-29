@@ -18,7 +18,7 @@ class TelaCriacaoJogo extends JFrame {
 	JButton b1 = new JButton("Adicionar novo jogador");
 	JButton b2 = new JButton("Iniciar Jogo");
 	JTextField nomeJogador = new JTextField();
-	String[] cores = {"Amarelo","Azul", "Branco", "Verde", "Vermelho", "Preto"};
+	String[] cores = {"Amarelo", "Azul", "Branco", "Verde", "Vermelho", "Preto"};
 	JComboBox<String> cb = new JComboBox<String>(cores);
 	CriacaoJogo p = new CriacaoJogo();
 	
