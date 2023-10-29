@@ -1,5 +1,6 @@
 package model;
 
+import controller.ControllerAPI;
 import java.util.ArrayList;
 import java.util.Collections;
 
@@ -150,6 +151,39 @@ public class ModelAPI {
 			}
 		
 		Collections.shuffle(deckTroca);
+	}
+	
+	boolean trade(Jogador id, Troca c1, Troca c2, Troca c3, char n_troca) {
+		if (validateTrade(c1, c2, c3)) {
+			ArrayList<Troca> temp = new ArrayList<Troca>();
+			
+			id.mao.remove(c1);
+			id.mao.remove(c2);
+			id.mao.remove(c3);
+			
+			temp.add(c1);
+			temp.add(c2);
+			temp.add(c3);
+			
+			Collections.shuffle(temp);
+			
+			deckTroca.add(0, c1);
+			deckTroca.add(0, c2);
+			deckTroca.add(0, c3);
+			
+			int x;
+			
+			if (n_troca < 6) x = 2 + n_troca;
+			else x = 5 * (n_troca - 3);
+			
+			x += ControllerAPI.getControllerAPI().troca_atual++;
+			
+			id.numTropasPosicionar += x;
+			
+			return true;
+		}
+		
+		return false;
 	}
 	
 	boolean setupCards()

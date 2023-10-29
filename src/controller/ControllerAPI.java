@@ -5,7 +5,7 @@ import view.ViewAPI;
 
 public class ControllerAPI {
 	
-	public char n_troca = 1;
+	public char troca_atual = 1;
 	
 	public static void main(String[] args) {
 		ViewAPI view = ViewAPI.getViewAPI();
@@ -17,7 +17,7 @@ public class ControllerAPI {
 		
 	}
 	
-	public ControllerAPI getControllerAPI() {
+	public static ControllerAPI getControllerAPI() {
 		if(instance == null)
 			instance = new ControllerAPI();
 		return instance;
