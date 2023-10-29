@@ -153,7 +153,7 @@ public class ModelAPI {
 		Collections.shuffle(deckTroca);
 	}
 	
-	boolean trade(Jogador id, Troca c1, Troca c2, Troca c3, char n_troca) {
+	boolean trade(Jogador id, Troca c1, Troca c2, Troca c3) {
 		if (validateTrade(c1, c2, c3)) {
 			ArrayList<Troca> temp = new ArrayList<Troca>();
 			
@@ -172,11 +172,11 @@ public class ModelAPI {
 			deckTroca.add(0, c3);
 			
 			int x;
+			char n = ControllerAPI.getControllerAPI().troca_atual++;
 			
-			if (n_troca < 6) x = 2 + n_troca;
-			else x = 5 * (n_troca - 3);
+			if (n < 6) x = 2 + n;
+			else x = 5 * (n - 3);
 			
-			x += ControllerAPI.getControllerAPI().troca_atual++;
 			
 			id.numTropasPosicionar += x;
 			
