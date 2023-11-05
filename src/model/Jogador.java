@@ -45,6 +45,26 @@ class Jogador {
 		return true;
 	}
 	
+	public boolean atacarTerritorio(Territorio aliado, Territorio inimigo, int qtd) {
+		if (aliado.corDominando != this.cor)
+			return false;
+		
+		if (aliado.numTropas - qtd < 1)
+			return false;
+		
+		if (inimigo.corDominando == this.cor)
+			return false;
+		
+		if (qtd <= 0 || qtd > 3)
+			return false;
+		
+		//call dados(qtd);
+		//check results;
+		//aplica resultado;
+		
+		return true;
+	}
+	
 	public boolean posicionarTropas(Territorio pais, int qtd) {
 		if (pais.corDominando != cor) {
 			System.out.println("O pais não pertence ao Jogador");
