@@ -1,12 +1,18 @@
 package view;
 
+import java.awt.TrayIcon.MessageType;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+
+import controller.ControllerAPI;
 
 class TelaCriacaoJogo extends JFrame {
 	/**
@@ -30,6 +36,14 @@ class TelaCriacaoJogo extends JFrame {
 		p.add(cb);
 		
 		p.add(b1);
+		b1.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerAPI ctrl = ControllerAPI.getControllerAPI();
+				if (ctrl.AddPlayer(nomeJogador.getText(), cb.getSelectedIndex()) == false)
+					JOptionPane.showMessageDialog(p, "Já existe um jogador dessa cor.", getTitle(), JOptionPane.ERROR_MESSAGE);
+				nomeJogador.setText("");
+			}
+		});
 		
 		
 		p.add(b2);

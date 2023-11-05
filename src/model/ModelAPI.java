@@ -30,8 +30,12 @@ public class ModelAPI {
 	
 	public boolean addPlayer(String nome, int cor)
 	{
+		if (existPlayerColor(cor) == true) 
+			return false;
+		
 		Jogador newPlayer = new Jogador(nome, Cores.values()[cor]);
 		listaJogadores.add(newPlayer);
+		
 		return true;
 	}
 
@@ -113,10 +117,11 @@ public class ModelAPI {
 		{
 			if(k.cor.ordinal() == cor) // se existe a cor
 			{
+				
 				return true;
 			}
 		}
-		
+
 		return false;
 	}
 	

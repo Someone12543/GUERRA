@@ -32,8 +32,8 @@ public class ControllerAPI {
 		return true;
 	}
 	
-	public void AddPlayer(String name, int color) {
+	public boolean AddPlayer(String name, int color) {
 		ModelAPI game = ModelAPI.getModelAPI();
-		game.addPlayer(name, color);
+		return game.addPlayer(name, color);
 	}
 }
