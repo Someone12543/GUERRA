@@ -93,6 +93,10 @@ public class ModelAPI {
 			
 		return false;
 	}
+	
+	public boolean verifiesObjective(Jogador j) {
+		return j.obj.verificaObj(j, listaContinente);
+	}
 
 	void drawObjectives()
 	{
@@ -103,17 +107,18 @@ public class ModelAPI {
 			obj = deckObjetivos.get(deckObjetivos.size() - 1);
 			deckObjetivos.remove(obj);
 			
-			if (obj.id >= 8) // se destruir exercito especifico
+			if (obj.id >= 8 && obj.id != 14) // se destruir exercito especifico
 			{
 				if (obj.id - 8 == j.cor.ordinal() || !existPlayerColor(obj.id - 8)) // se voce mesmo ou se nao existe
 				{
-					obj = new Objetivo(0, null); // entao troca objetivo
+					obj = new Objetivo14(null); // entao troca objetivo
 				}
 			}
 			
 			j.obj = obj;
 		}
 	}
+	
 	
 	boolean existPlayerColor(int cor) 
 	{
@@ -310,8 +315,23 @@ public class ModelAPI {
 	boolean setupCards()
 	{
 		//remover loop para adicionar as imagens de cada
-		for (int i = 0; i <= 13; i++)
-			deckObjetivos.add(new Objetivo(i, null));
+//		for (int i = 0; i <= 13; i++)
+//			deckObjetivos.add(new Objetivo(i, null));
+		
+		deckObjetivos.add(new Objetivo1(null));
+		deckObjetivos.add(new Objetivo2(null));
+		deckObjetivos.add(new Objetivo3(null));
+		deckObjetivos.add(new Objetivo4(null));
+		deckObjetivos.add(new Objetivo5(null));
+		deckObjetivos.add(new Objetivo6(null));
+		deckObjetivos.add(new Objetivo7(null));
+		deckObjetivos.add(new Objetivo8(null));
+		deckObjetivos.add(new Objetivo9(null));
+		deckObjetivos.add(new Objetivo10(null));
+		deckObjetivos.add(new Objetivo11(null));
+		deckObjetivos.add(new Objetivo12(null));
+		deckObjetivos.add(new Objetivo13(null));
+		deckObjetivos.add(new Objetivo14(null));
 		
 		Collections.shuffle(deckObjetivos);
 		
