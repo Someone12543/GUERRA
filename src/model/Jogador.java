@@ -7,6 +7,7 @@ class Jogador {
 	Objetivo obj;
 	ArrayList<Troca> mao;
 	ArrayList<Territorio> paisesDominados;
+	ArrayList<Jogador> jogadoresEliminados;
 	int numTropasPosicionar;
 	
 	public Jogador(String nome, Cores cor) {
