@@ -101,7 +101,11 @@ public class ModelAPI {
 	void drawObjectives()
 	{
 		Objetivo obj;
-		
+		for (Objetivo o : deckObjetivos){
+			if (o.id >= 8 && !existPlayerColor(o.id - 8)){
+				deckObjetivos.remove(o);
+			}
+		}
 		for (Jogador j : listaJogadores)
 		{
 			obj = deckObjetivos.get(deckObjetivos.size() - 1);
@@ -109,7 +113,7 @@ public class ModelAPI {
 			
 			if (obj.id >= 8 && obj.id != 14) // se destruir exercito especifico
 			{
-				if (obj.id - 8 == j.cor.ordinal() || !existPlayerColor(obj.id - 8)) // se voce mesmo ou se nao existe
+				if (obj.id - 8 == j.cor.ordinal()) // se voce mesmo
 				{
 					obj = new Objetivo14(null); // entao troca objetivo
 				}
