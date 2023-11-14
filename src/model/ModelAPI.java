@@ -14,7 +14,6 @@ public class ModelAPI {
 	ArrayList<Objetivo> deckObjetivos;
 	ArrayList<Troca> deckTroca;
 	
-	
 	private ModelAPI()
 	{
 		this.listaContinente = new ArrayList<Continente>();
@@ -32,41 +31,12 @@ public class ModelAPI {
 	
 	public boolean addPlayer(String nome, int cor)
 	{
-		if (existPlayerColor(cor) == true) 
-			return false;
-		
 		Jogador newPlayer = new Jogador(nome, Cores.values()[cor]);
 		listaJogadores.add(newPlayer);
 		
 		return true;
 	}
 
-	public Troca drawTrade()
-	{
-		if (deckTroca.size() == 0)
-			return null;
-		Troca obj = deckTroca.get(deckTroca.size() - 1);
-		deckTroca.remove(obj);
-		return obj;
-	}
-	
-	public int bonusPiece(Jogador j){
-		int numPecas = j.paisesDominados.size()/2;
-		if (numPecas < 3){
-			numPecas = 3;
-		}
-		return numPecas;
-	}
-
-	public int bonusPiece(Jogador j, Continente continente){
-		for (Territorio t : continente.paises){
-			if (!(j.paisesDominados.contains(t))){
-				return 0;
-			}
-		}
-		return continente.bonus;
-	}
-	
 	public void setupGame()
 	{
 		setupContinents(listaContinente);
@@ -77,22 +47,45 @@ public class ModelAPI {
 		raffleTerritory();
 	}
 	
-	public boolean validateTrade(Troca carta1, Troca carta2, Troca carta3)
+	public boolean existPlayerColor(int cor) 
 	{
-		if (carta1.simbolo == Simbolo.Coringa || carta2.simbolo == Simbolo.Coringa || carta3.simbolo == Simbolo.Coringa)
+		for (Jogador k : listaJogadores) // checa cada jogador existente
+		{
+			if(k.cor.ordinal() == cor) // se existe a cor
+			{
+				
+				return true;
+			}
+		}
+
+		return false;
+	}
+	
+	Troca drawTrade()
+	{
+		if (deckTroca.size() == 0)
+			return null;
+		Troca obj = deckTroca.get(deckTroca.size() - 1);
+		deckTroca.remove(obj);
+		return obj;
+	}
+	
+	boolean validateTrade(Troca c1, Troca c2, Troca c3)
+	{
+		if (c1.simbolo == Simbolo.Coringa || c2.simbolo == Simbolo.Coringa || c3.simbolo == Simbolo.Coringa)
 			return true;
 		
-		if (carta1.simbolo == carta2.simbolo) {
-			if (carta2.simbolo == carta3.simbolo)
+		if (c1.simbolo == c2.simbolo) {
+			if (c2.simbolo == c3.simbolo)
 				return true;
 		}
-		else if (carta2.simbolo != carta3.simbolo && carta1.simbolo != carta3.simbolo)
+		else if (c2.simbolo != c3.simbolo && c1.simbolo != c3.simbolo)
 			return true;
 			
 		return false;
 	}
 	
-	public boolean verifiesObjective(Jogador j) {
+	boolean verifiesObjective(Jogador j) {
 		return j.obj.verificaObj(j, listaContinente);
 	}
 
@@ -120,22 +113,7 @@ public class ModelAPI {
 			j.obj = obj;
 		}
 	}
-	
-	
-	boolean existPlayerColor(int cor) 
-	{
-		for (Jogador k : listaJogadores) // checa cada jogador existente
-		{
-			if(k.cor.ordinal() == cor) // se existe a cor
-			{
-				
-				return true;
-			}
-		}
 
-		return false;
-	}
-	
 	void rafflePlayers()
 	{
 		Collections.shuffle(listaJogadores);
@@ -183,9 +161,9 @@ public class ModelAPI {
 			
 			Collections.shuffle(temp);
 			
-			deckTroca.add(0, c1);
-			deckTroca.add(0, c2);
-			deckTroca.add(0, c3);
+			deckTroca.add(0, temp.get(0));
+			deckTroca.add(0, temp.get(1));
+			deckTroca.add(0, temp.get(2));
 			
 			int x;
 			char n = ControllerAPI.getControllerAPI().troca_atual++;
@@ -201,8 +179,7 @@ public class ModelAPI {
 		
 		return false;
 	}
-	
-	
+		
 	boolean setupCards()
 	{
 		//remover loop para adicionar as imagens de cada

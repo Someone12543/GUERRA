@@ -12,7 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
-import controller.ControllerAPI;
+import model.*;
 
 class TelaCriacaoJogo extends JFrame {
 	/**
@@ -38,9 +38,11 @@ class TelaCriacaoJogo extends JFrame {
 		p.add(b1);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ControllerAPI ctrl = ControllerAPI.getControllerAPI();
-				if (ctrl.AddPlayer(nomeJogador.getText(), cb.getSelectedIndex()) == false)
+				ModelAPI mod = ModelAPI.getModelAPI();
+				if (mod.existPlayerColor(cb.getSelectedIndex()))
 					JOptionPane.showMessageDialog(p, "Já existe um jogador dessa cor.", getTitle(), JOptionPane.ERROR_MESSAGE);
+				else
+					mod.addPlayer(nomeJogador.getText(), cb.getSelectedIndex());
 				nomeJogador.setText("");
 			}
 		});

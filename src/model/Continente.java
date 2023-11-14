@@ -13,4 +13,13 @@ class Continente {
 		this.paises = new ArrayList<Territorio>();
 		this.bonus = bonus;
 	}
+	
+	int bonusPiece(Jogador j){
+		for (Territorio t : this.paises){
+			if (!(j.paisesDominados.contains(t))){
+				return 0;
+			}
+		}
+		return this.bonus;
+	}
 }

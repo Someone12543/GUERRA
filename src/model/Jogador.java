@@ -133,4 +133,11 @@ class Jogador {
 		return true;
 	}
 	
+	int bonusPiece(){
+		int numPecas = this.paisesDominados.size()/2;
+		if (numPecas < 3){
+			numPecas = 3;
+		}
+		return numPecas;
+	}
 }

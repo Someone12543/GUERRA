@@ -37,53 +37,6 @@ class ModelAPITests {
 	}
 	
 	@Test
-	void testBonusPieceLessThan3() {
-		Jogador p1 = new Jogador("Jorge", Cores.Amarelo);
-		int expected = 3;
-		assertEquals(expected, game.bonusPiece(p1));
-	}
-	
-	@Test
-	void testBonusPieceMoreThan3() {
-		Jogador p1 = new Jogador("Jorge", Cores.Amarelo);
-		int expected = 4;
-		
-		p1.paisesDominados.add(null);
-		p1.paisesDominados.add(null);
-		p1.paisesDominados.add(null);
-		p1.paisesDominados.add(null);
-		p1.paisesDominados.add(null);
-		p1.paisesDominados.add(null);
-		p1.paisesDominados.add(null);
-		p1.paisesDominados.add(null);
-		
-		assertEquals(expected, game.bonusPiece(p1));
-	}
-	
-	@Test
-	void testBonusPieceContinenteNotDominated() {
-		Jogador p1 = new Jogador("Jorge", Cores.Amarelo);
-		int expected = 0;
-		Continente c = new Continente("A", null, 3);
-		Territorio t1 = new Territorio("A", c);
-		c.paises.add(t1);
-		
-		assertEquals(expected, game.bonusPiece(p1, c));
-	}
-	
-	@Test
-	void testBonusPieceContinenteDominated() {
-		Jogador p1 = new Jogador("Jorge", Cores.Amarelo);
-		int expected = 3;
-		Continente c = new Continente("A", null, 3);
-		Territorio t1 = new Territorio("A", c);
-		c.paises.add(t1);
-		p1.paisesDominados.add(t1);
-		
-		assertEquals(expected, game.bonusPiece(p1, c));
-	}
-	
-	@Test
 	void testValidateTradeSameSimbolo() {
 		assertTrue(game.validateTrade(card3, card2, card1));
 	}

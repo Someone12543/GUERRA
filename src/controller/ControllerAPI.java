@@ -31,9 +31,4 @@ public class ControllerAPI {
 		game.setupGame();
 		return true;
 	}
-	
-	public boolean AddPlayer(String name, int color) {
-		ModelAPI game = ModelAPI.getModelAPI();
-		return game.addPlayer(name, color);
-	}
 }

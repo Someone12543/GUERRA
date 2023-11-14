@@ -21,9 +21,16 @@ class JogadorTests {
 		p1.numTropasPosicionar = 5;
 		
 		t1.corDominando = p1.cor;
+		p1.paisesDominados.add(t1);
+		
 		t2.corDominando = p1.cor;
+		p1.paisesDominados.add(t2);
+		
 		t3.corDominando = p1.cor;
+		p1.paisesDominados.add(t3);
+		
 		t4.corDominando = p2.cor;
+		p2.paisesDominados.add(t4);
 		
 		t1.numTropas = 3; t1.numTropasPodeMover = 1;
 		t2.numTropas = 3; t2.numTropasPodeMover = 1;
@@ -93,6 +100,24 @@ class JogadorTests {
 		int expectedNumTropas = t1.numTropas + 4;
 		assertTrue(p1.posicionarTropas(t1, 4));
 		assertEquals(expectedNumTropas, t1.numTropas);
+	}
+	
+	@Test
+	void testBonusPieceLessThan3() {
+		int expected = 3;
+		assertEquals(expected, p2.bonusPiece());
+	}
+	
+	@Test
+	void testBonusPieceMoreThan3() {
+		int expected = 4;
+		p1.paisesDominados.add(null);
+		p1.paisesDominados.add(null);
+		p1.paisesDominados.add(null);
+		p1.paisesDominados.add(null);
+		p1.paisesDominados.add(null);
+
+		assertEquals(expected, p1.bonusPiece());
 	}
 
 }
