@@ -57,14 +57,19 @@ public class ControllerAPI {
 	}
 	
 	void startAction() {
+		game.printPlayingPlayer();
 		switch(acao_atual) {
 			case PosTropa:
 				game.giveBonuses();
+				System.out.print(" posicionar!\n");
 				break;
 			case Ataque:
 				//faz nada
+				System.out.print(" atacar!\n");
+				break;
 			case MovTropa:
 				//nada tambem
+				System.out.print(" mover!\n");
 				break;
 		}
 	}

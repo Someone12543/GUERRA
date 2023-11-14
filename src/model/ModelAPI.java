@@ -94,6 +94,11 @@ public class ModelAPI {
 		instance = null;
 	}
 	
+	//Debug
+	public void printPlayingPlayer() {
+		System.out.print(listaJogadores.get(0).nome);
+	}
+	
  	Troca drawTrade()
 	{
 		if (deckTroca.size() == 0)

@@ -1,26 +1,35 @@
 package view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 
 import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+
+import controller.ControllerAPI;
+import model.ModelAPI;
 
 class Tabuleiro extends JPanel {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Image source, bg, nextAction, cards;
+	Image source, bg;
+	ImageIcon nextAction, rollDices;
 	ArrayList<Exercito> listaExercitos;
 	
 	public Tabuleiro() {
 		try {
 			bg = ImageIO.read(new File("assets/tabuleiro/war_tabuleiro_fundo.png"));
 			source = ImageIO.read(new File("assets/tabuleiro/war_tabuleiro_mapa copy.png"));
-			nextAction = ImageIO.read(new File("assets/botoes/war_btnProxJogada.png"));
-			cards = ImageIO.read(new File("assets/botoes/war_btnJogarDados.png"));
+			nextAction = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnProxJogada.png")));
+			rollDices = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnJogarDados.png")));
 		}
 		catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -30,6 +39,30 @@ class Tabuleiro extends JPanel {
 		this.listaExercitos = new ArrayList<Exercito>();
 		
 		listaExercitos.add(new Exercito(600, 350, 0));
+		
+		JButton proxJog = new JButton(nextAction);
+		JButton jogaDad = new JButton(rollDices);
+		
+		proxJog.setMargin(new Insets(0,0,0,0));
+		proxJog.setContentAreaFilled(false);
+		proxJog.setBorder(null);
+		proxJog.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerAPI.getControllerAPI().nextAction();
+			}
+		});
+		
+		jogaDad.setMargin(new Insets(0,0,0,0));
+		jogaDad.setContentAreaFilled(false);
+		jogaDad.setBorder(null);
+		jogaDad.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				//ControllerAPI.getControllerAPI().attack();
+			}
+		});
+		
+		add(jogaDad);
+		add(proxJog);
 	}
 	
 	
@@ -76,9 +109,6 @@ class Tabuleiro extends JPanel {
 			
 			g2d.drawString(Integer.toString(e.number), e.x + e.w/2 - 5, e.y + e.h/2 + 8); //esse -5 e + 8 foi no olhômetro
 		}
-		
-		g2d.drawImage(nextAction, 720, 580, null);
-		g2d.drawImage(cards, 410, 585, null);
 	}
 	
 }
