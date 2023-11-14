@@ -53,11 +53,12 @@ class TelaCriacaoJogo extends JFrame {
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				ControllerAPI ctrl = ControllerAPI.getControllerAPI();
-				ctrl.startGame();
-				TelaTabuleiro tt = new TelaTabuleiro();
-				tt.setTitle("WAR");
-				tt.setVisible(true);
-				dispose();
+				if(ctrl.startGame()) {
+					TelaTabuleiro tt = new TelaTabuleiro();
+					tt.setTitle("WAR");
+					tt.setVisible(true);
+					dispose();
+				}
 			}
 		});
 		

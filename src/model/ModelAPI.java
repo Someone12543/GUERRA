@@ -37,14 +37,19 @@ public class ModelAPI {
 		return true;
 	}
 
-	public void setupGame()
+	public boolean setupGame()
 	{
+		if (listaJogadores.size() < 2)
+			return false;
+		
 		setupContinents(listaContinente);
 		setupCards();
 		
 		drawObjectives();
 		rafflePlayers();
 		raffleTerritory();
+		
+		return true;
 	}
 	
 	public boolean existPlayerColor(int cor) 

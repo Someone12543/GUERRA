@@ -27,11 +27,16 @@ public class ControllerAPI {
 		return instance;
 	}
 	
-	public void startGame()
+	public boolean startGame()
 	{
 		this.game = ModelAPI.getModelAPI();
-		this.game.setupGame();
-		startAction();
+		if(this.game.setupGame()) {
+			startAction();
+			return true;
+		}
+		
+		view.showErrorInsufficientPlayers();
+		return false;
 	}
 	
 	public void endGame() {
