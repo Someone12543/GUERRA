@@ -12,13 +12,15 @@ class Tabuleiro extends JPanel {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	Image source, bg;
+	Image source, bg, nextAction, cards;
 	ArrayList<Exercito> listaExercitos;
 	
 	public Tabuleiro() {
 		try {
 			bg = ImageIO.read(new File("assets/tabuleiro/war_tabuleiro_fundo.png"));
 			source = ImageIO.read(new File("assets/tabuleiro/war_tabuleiro_mapa copy.png"));
+			nextAction = ImageIO.read(new File("assets/botoes/war_btnProxJogada.png"));
+			cards = ImageIO.read(new File("assets/botoes/war_btnJogarDados.png"));
 		}
 		catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -26,6 +28,7 @@ class Tabuleiro extends JPanel {
 		}
 		
 		this.listaExercitos = new ArrayList<Exercito>();
+		
 		listaExercitos.add(new Exercito(600, 350, 0));
 	}
 	
@@ -61,10 +64,10 @@ class Tabuleiro extends JPanel {
 			default:
 				g2d.setPaint(Color.GRAY);
 			}
-			g2d.fill(e.inner);			
+			g2d.fill(e.elip);			
 			
 			g2d.setPaint(Color.DARK_GRAY);
-			g2d.draw(e.outter);
+			g2d.draw(e.elip);
 			
 			if (e.color != 5)
 				g2d.setPaint(Color.BLACK);
@@ -73,6 +76,9 @@ class Tabuleiro extends JPanel {
 			
 			g2d.drawString(Integer.toString(e.number), e.x + e.w/2 - 5, e.y + e.h/2 + 8); //esse -5 e + 8 foi no olhômetro
 		}
+		
+		g2d.drawImage(nextAction, 720, 580, null);
+		g2d.drawImage(cards, 410, 585, null);
 	}
 	
 }
