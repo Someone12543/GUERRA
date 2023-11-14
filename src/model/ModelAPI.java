@@ -1,6 +1,8 @@
 package model;
 
 import controller.ControllerAPI;
+import view.ViewAPI;
+
 import java.util.ArrayList;
 import java.util.Collections;
 import java.awt.Image;
@@ -88,6 +90,47 @@ public class ModelAPI {
 		}
 		
 		j.numTropasPosicionar += j.bonusPiece();
+	}
+
+	public void attackTerritory(/*param ainda n decididos*/) {
+		//orig = origemDoAtq
+		//dest = destDoAtq
+		Jogador player = listaJogadores.get(0);
+		//if(!player.atacarTerritorio(orig, dest))
+		//	return;
+		
+		Jogador morto = null;
+		
+		for (Jogador j : listaJogadores) {
+			if (j.paisesDominados.size() == 0)
+				morto = j;
+		}
+
+		if(morto != null) {
+			listaJogadores.remove(morto);
+		
+			player.jogadoresEliminados.add(morto);
+			if(player.obj.verificaObj(player, listaContinente)){
+				ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
+				return;
+			}
+			else {
+				for (Jogador j : listaJogadores) {
+					if (j != player && j.obj.id - 8 == morto.cor.ordinal()) {//verifica se outro player tinha que eliminar o morto
+						j.obj = new Objetivo14(null); //se sim, substitui seu objetivo
+						if(j.obj.verificaObj(j, listaContinente)) {
+							ViewAPI.getViewAPI().showWinner(j.nome, j.obj.descricao);
+							return;
+						}
+						break;
+					}
+				}
+			}
+		}
+		
+		if(player.obj.verificaObj(player, listaContinente))
+			ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
+		return;
 	}
 	
 	public void finishGame() {

@@ -3,15 +3,13 @@ package model;
 import java.awt.Image;
 import java.util.ArrayList;
 
-class Objetivo {
+abstract class Objetivo {
 	String descricao;
 	int id;
 	Image toDisplay;
-	boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente) {
-		return false;
-	}
+	abstract boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente);
+	
 	boolean verificaConquista(Jogador atual, ArrayList<Continentes> continentes, ArrayList<Continente> listaContinente) {
-		
 		ArrayList<Territorio> territoriosObj = new ArrayList<>();
 		for(Continentes nome: continentes) {
 			for (Continente c: listaContinente) {

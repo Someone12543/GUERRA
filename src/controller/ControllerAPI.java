@@ -16,8 +16,6 @@ public class ControllerAPI {
 	ViewAPI view;
 	
 	private ControllerAPI() {
-		this.troca_atual = 1;
-		this.acao_atual = Turno.PosTropa;
 		this.view = ViewAPI.getViewAPI();
 	}
 	
@@ -29,6 +27,8 @@ public class ControllerAPI {
 	
 	public boolean startGame()
 	{
+		this.troca_atual = 1;
+		this.acao_atual = Turno.PosTropa;
 		this.game = ModelAPI.getModelAPI();
 		if(this.game.setupGame()) {
 			startAction();
