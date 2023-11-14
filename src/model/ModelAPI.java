@@ -61,7 +61,35 @@ public class ModelAPI {
 		return false;
 	}
 	
-	Troca drawTrade()
+	public void giveCardToPlayer() {
+		Jogador j = listaJogadores.get(0);
+		
+		if (j.dominouPaisTurno)
+			j.mao.add(drawTrade());
+		
+		j.dominouPaisTurno = false;
+	}
+	
+	public void nextPlayerToPlay() {
+		Jogador j = listaJogadores.get(0);
+		listaJogadores.remove(j);
+		listaJogadores.add(j);
+	}
+		
+	public void giveBonuses() {
+		Jogador j = listaJogadores.get(0);
+		for (Continente c : listaContinente) {
+			j.numTropasPosicionar += c.bonusPiece(j);
+		}
+		
+		j.numTropasPosicionar += j.bonusPiece();
+	}
+	
+	public void finishGame() {
+		instance = null;
+	}
+	
+ 	Troca drawTrade()
 	{
 		if (deckTroca.size() == 0)
 			return null;
@@ -92,11 +120,7 @@ public class ModelAPI {
 	void drawObjectives()
 	{
 		Objetivo obj;
-		for (Objetivo o : deckObjetivos){
-			if (o.id >= 8 && !existPlayerColor(o.id - 8)){
-				deckObjetivos.remove(o);
-			}
-		}
+		
 		for (Jogador j : listaJogadores)
 		{
 			obj = deckObjetivos.get(deckObjetivos.size() - 1);
@@ -137,12 +161,12 @@ public class ModelAPI {
 				id = 0;
  		}
 		
-		for(Jogador j : listaJogadores)
+		for(Jogador j : listaJogadores) {
 			for(Troca t : j.mao)
-			{
 				deckTroca.add(t);
-				j.mao.remove(t);
-			}
+			
+			j.mao.clear();
+		}
 		
 		Collections.shuffle(deckTroca);
 	}
@@ -164,6 +188,13 @@ public class ModelAPI {
 			deckTroca.add(0, temp.get(0));
 			deckTroca.add(0, temp.get(1));
 			deckTroca.add(0, temp.get(2));
+			
+			for (Troca c : temp) { //bonus de possuir o territorio da carta
+				if(id.paisesDominados.contains(c.representa)) {
+					c.representa.numTropas += 2;
+					c.representa.numTropasPodeMover += 2;
+				}
+			}
 			
 			int x;
 			char n = ControllerAPI.getControllerAPI().troca_atual++;
@@ -193,12 +224,18 @@ public class ModelAPI {
 		deckObjetivos.add(new Objetivo5(null));
 		deckObjetivos.add(new Objetivo6(null));
 		deckObjetivos.add(new Objetivo7(null));
-		deckObjetivos.add(new Objetivo8(null));
-		deckObjetivos.add(new Objetivo9(null));
-		deckObjetivos.add(new Objetivo10(null));
-		deckObjetivos.add(new Objetivo11(null));
-		deckObjetivos.add(new Objetivo12(null));
-		deckObjetivos.add(new Objetivo13(null));
+		if (existPlayerColor(0))
+			deckObjetivos.add(new Objetivo8(null));
+		if (existPlayerColor(1))
+			deckObjetivos.add(new Objetivo9(null));
+		if (existPlayerColor(2))
+			deckObjetivos.add(new Objetivo10(null));
+		if (existPlayerColor(3))
+			deckObjetivos.add(new Objetivo11(null));
+		if (existPlayerColor(4))
+			deckObjetivos.add(new Objetivo12(null));
+		if (existPlayerColor(5))
+			deckObjetivos.add(new Objetivo13(null));
 		deckObjetivos.add(new Objetivo14(null));
 		
 		Collections.shuffle(deckObjetivos);

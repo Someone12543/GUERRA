@@ -2,6 +2,8 @@ package view;
 
 import javax.swing.JFrame;
 
+import controller.ControllerAPI;
+
 class TelaTabuleiro extends JFrame {
 	/**
 	 * 
@@ -20,7 +22,7 @@ class TelaTabuleiro extends JFrame {
 
 	@Override
 	public void dispose() {
-		// implementar save
+		ControllerAPI.getControllerAPI().endGame();
 		super.dispose();
 	}
 }

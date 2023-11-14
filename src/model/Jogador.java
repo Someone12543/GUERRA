@@ -12,12 +12,14 @@ class Jogador {
 	ArrayList<Territorio> paisesDominados;
 	ArrayList<Jogador> jogadoresEliminados;
 	int numTropasPosicionar;
+	boolean dominouPaisTurno;
 	
 	public Jogador(String nome, Cores cor) {
 		this.nome = nome;
 		this.cor = cor;
 		this.mao = new ArrayList<Troca>();
 		this.paisesDominados = new ArrayList<Territorio>();
+		this.dominouPaisTurno = false;
 	}
 	
 	boolean posicionarTropas(Territorio pais, int qtd) {
@@ -118,6 +120,9 @@ class Jogador {
 			
 			aliado.numTropas -= lostatk;
 			inimigo.numTropas -= lostdef;
+			
+			//display resultados
+			//wait x sec
 		}
 		
 		if (inimigo.numTropas == 0) {
@@ -127,6 +132,7 @@ class Jogador {
 			
 			inimigo.numTropas += qtdatk;
 			aliado.numTropas -= qtdatk;
+			this.dominouPaisTurno = true;
 		}
 		
 		

@@ -12,6 +12,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
+import controller.ControllerAPI;
 import model.*;
 
 class TelaCriacaoJogo extends JFrame {
@@ -51,6 +52,8 @@ class TelaCriacaoJogo extends JFrame {
 		p.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				ControllerAPI ctrl = ControllerAPI.getControllerAPI();
+				ctrl.startGame();
 				TelaTabuleiro tt = new TelaTabuleiro();
 				tt.setTitle("WAR");
 				tt.setVisible(true);
