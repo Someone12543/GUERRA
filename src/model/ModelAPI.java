@@ -166,7 +166,8 @@ public class ModelAPI {
 		return false;
 	}
 	
-	boolean verifiesObjective(Jogador j) {
+	boolean verifiesObjective() {
+		Jogador j = listaJogadores.get(0);
 		return j.obj.verificaObj(j, listaContinente);
 	}
 

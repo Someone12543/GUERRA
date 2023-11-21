@@ -5,7 +5,7 @@ import java.awt.geom.Ellipse2D;
 class Exercito {
 	Ellipse2D elip;
 	int number, color;
-	float x, y, w = 35.0f, h = 35.0f;
+	float x, y, w = 30.0f, h = 30.0f;
 	
 	public Exercito(float pos_x, float pos_y, int color) {
 		this.x = pos_x;
