@@ -81,7 +81,7 @@ public class ControllerAPI {
 	public void saveGame() throws IOException{
 		PrintWriter outputStream = null;
 		LocalDateTime metadata = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-		String filename = "WarGame - " + metadata.format(DateTimeFormatter.BASIC_ISO_DATE) + ".txt";
+		String filename = "WarGame - " + metadata.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME).replace(':', '-') + ".txt";
 		
 		try {
 		outputStream = new PrintWriter(filename);
@@ -99,6 +99,32 @@ public class ControllerAPI {
 				outputStream.close();
 			}
 		}
+	}
 	
+	public void loadGame(String filename) throws IOException {
+		BufferedReader inputStream = null;
+		String ln, input[];
+		
+		try {
+			inputStream = new BufferedReader(new FileReader(filename));
+			
+			ln = inputStream.readLine();
+			
+			input = ln.split(";");
+			
+			troca_atual = input[0].charAt(0);
+			acao_atual = Turno.values()[input[1].charAt(0) - '0'];
+			
+			game.loadGame(inputStream);
+			
+		}
+		catch(IOException e) { 
+			System.out.print(e.getMessage());
+		}
+		finally {
+			if (inputStream != null) {
+				inputStream.close();
+			}
+		}
 	}
 }
