@@ -26,6 +26,11 @@ public class TelaAtaque extends JFrame {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
+		ModelAPI mod = ModelAPI.getModelAPI();
+		
+		a.add(cb1);
+		a.add(cb2);
+		
 		a.add(b1);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -33,19 +38,19 @@ public class TelaAtaque extends JFrame {
 			}
 		});
 		
-//		a.add(b2);
-//		b2.addActionListener(new ActionListener() {
-//			public void actionPerformed(ActionEvent e) {
-//				ControllerAPI ctrl = ControllerAPI.getControllerAPI();
-//				if(ctrl.startGame()) {
-//					TelaTabuleiro tt = new TelaTabuleiro();
-//					ViewAPI.getViewAPI().tt = tt;
-//					tt.setTitle("WAR");
-//					tt.setVisible(true);
-//					dispose();
-//				}
-//			}
-//		});
+		a.add(b2);
+		b2.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ControllerAPI ctrl = ControllerAPI.getControllerAPI();
+				if(ctrl.startGame()) {
+					TelaTabuleiro tt = new TelaTabuleiro();
+					ViewAPI.getViewAPI().tt = tt;
+					tt.setTitle("WAR");
+					tt.setVisible(true);
+					dispose();
+				}
+			}
+		});
 		
 		getContentPane().add(a);
 	}
