@@ -81,7 +81,7 @@ public class ControllerAPI {
 	public void saveGame() throws IOException{
 		PrintWriter outputStream = null;
 		LocalDateTime metadata = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-		String filename = "WarGame - " + metadata.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME).replace(':', '-') + ".txt";
+		String filename = "WarGame - " + metadata.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME).replace(':', '-') + ".war";
 		
 		try {
 		outputStream = new PrintWriter(filename);
@@ -101,19 +101,21 @@ public class ControllerAPI {
 		}
 	}
 	
-	public void loadGame(String filename) throws IOException {
+	public void loadGame(File file) throws IOException {
 		BufferedReader inputStream = null;
 		String ln, input[];
 		
 		try {
-			inputStream = new BufferedReader(new FileReader(filename));
+			inputStream = new BufferedReader(new FileReader(file));
 			
 			ln = inputStream.readLine();
 			
 			input = ln.split(";");
 			
 			troca_atual = input[0].charAt(0);
-			acao_atual = Turno.values()[input[1].charAt(0) - '0'];
+			acao_atual = Turno.values()[Integer.parseInt(input[1])];
+			
+			game = ModelAPI.getModelAPI();
 			
 			game.loadGame(inputStream);
 			
