@@ -2,6 +2,10 @@ package controller;
 
 import model.ModelAPI;
 import view.ViewAPI;
+import java.io.*;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 
 public class ControllerAPI {
 	
@@ -11,7 +15,7 @@ public class ControllerAPI {
 	
 	static ControllerAPI instance;
 	public char troca_atual;
-//	Turno acao_atual;
+	Turno acao_atual;
 	ModelAPI game;
 	ViewAPI view;
 	
@@ -28,7 +32,7 @@ public class ControllerAPI {
 	public boolean startGame()
 	{
 		this.troca_atual = 1;
-//		this.acao_atual = Turno.PosTropa;
+		this.acao_atual = Turno.PosTropa;
 		this.game = ModelAPI.getModelAPI();
 		if(this.game.setupGame()) {
 //			startAction();
@@ -73,4 +77,28 @@ public class ControllerAPI {
 //				break;
 //		}
 //	}
+	
+	public void saveGame() throws IOException{
+		PrintWriter outputStream = null;
+		LocalDateTime metadata = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
+		String filename = "WarGame - " + metadata.format(DateTimeFormatter.BASIC_ISO_DATE) + ".txt";
+		
+		try {
+		outputStream = new PrintWriter(filename);
+		
+		outputStream.printf("%c;%d;\n", troca_atual, acao_atual.ordinal());
+		
+		game.saveGame(outputStream);
+		
+		}
+		catch(IOException e) { 
+			System.out.print(e.getMessage());
+		}
+		finally {
+			if (outputStream != null) {
+				outputStream.close();
+			}
+		}
+	
+	}
 }

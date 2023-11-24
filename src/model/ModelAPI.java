@@ -6,6 +6,7 @@ import view.ViewAPI;
 import java.util.ArrayList;
 import java.util.Collections;
 import java.awt.Image;
+import java.io.*;
 
 public class ModelAPI {
 	
@@ -109,7 +110,7 @@ public class ModelAPI {
 		if(morto != null) {
 			listaJogadores.remove(morto);
 		
-			player.jogadoresEliminados.add(morto);
+			player.jogadoresEliminados.add(morto.cor);
 			if(player.obj.verificaObj(player, listaContinente)){
 				ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
 				return;
@@ -135,6 +136,32 @@ public class ModelAPI {
 	
 	public void finishGame() {
 		instance = null;
+	}
+	
+	public void restartGame() {
+		
+	}
+	
+	public void saveGame(PrintWriter outputStream) {
+		for (Jogador j : listaJogadores) {
+			outputStream.printf("%s;%d;%d;%d;%d;\n", j.nome, j.cor.ordinal(), j.obj.id, j.numTropasPosicionar, j.dominouPaisTurno ? 1 : 0);
+			
+			outputStream.println(j.mao.size());
+			for (Troca t : j.mao)
+				outputStream.println(t.representa.nome);
+			
+			outputStream.println(j.paisesDominados.size());
+			for (Territorio t : j.paisesDominados)
+				outputStream.println(t.nome);
+			
+			outputStream.println(j.jogadoresEliminados.size());
+			for (Cores c : j.jogadoresEliminados)
+				outputStream.println(c.ordinal());
+		}
+	}
+	
+	public void loadGame(FileReader inputStream) throws IOException {
+		
 	}
 	
 	//Debug
@@ -204,13 +231,15 @@ public class ModelAPI {
 		
 		while((card = drawTrade()) != null)
 		{
+			listaJogadores.get(id).mao.add(card);
+			
 			if (card.simbolo != Simbolo.Coringa) {
 				card.representa.numTropas = 1;
 				card.representa.corDominando = listaJogadores.get(id).cor;
 				listaJogadores.get(id).paisesDominados.add(card.representa);
+				id++;
 			}
-			listaJogadores.get(id).mao.add(card);
-			id++;
+			
 			if (id >= listaJogadores.size())
 				id = 0;
  		}

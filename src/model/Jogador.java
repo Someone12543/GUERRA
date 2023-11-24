@@ -10,7 +10,7 @@ class Jogador {
 	Objetivo obj;
 	ArrayList<Troca> mao;
 	ArrayList<Territorio> paisesDominados;
-	ArrayList<Jogador> jogadoresEliminados;
+	ArrayList<Cores> jogadoresEliminados;
 	int numTropasPosicionar;
 	boolean dominouPaisTurno;
 	
@@ -19,6 +19,8 @@ class Jogador {
 		this.cor = cor;
 		this.mao = new ArrayList<Troca>();
 		this.paisesDominados = new ArrayList<Territorio>();
+		this.jogadoresEliminados = new ArrayList<Cores>();
+		this.numTropasPosicionar = 0;
 		this.dominouPaisTurno = false;
 	}
 	

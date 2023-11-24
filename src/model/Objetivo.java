@@ -173,8 +173,8 @@ class Objetivo8 extends Objetivo{
 		this.toDisplay = _ref;
 	}
 	boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente) {
-		for(Jogador ini: atual.jogadoresEliminados) {
-			if(ini.cor == Cores.Amarelo) {
+		for(Cores ini: atual.jogadoresEliminados) {
+			if(ini == Cores.Amarelo) {
 				return true;
 			}
 		}
@@ -189,8 +189,8 @@ class Objetivo9 extends Objetivo{
 		this.toDisplay = _ref;
 	}
 	boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente) {
-		for(Jogador ini: atual.jogadoresEliminados) {
-			if(ini.cor == Cores.Azul) {
+		for(Cores ini: atual.jogadoresEliminados) {
+			if(ini == Cores.Azul) {
 				return true;
 			}
 		}
@@ -205,8 +205,8 @@ class Objetivo10 extends Objetivo{
 		this.toDisplay = _ref;
 	}
 	boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente) {
-		for(Jogador ini: atual.jogadoresEliminados) {
-			if(ini.cor == Cores.Branco) {
+		for(Cores ini: atual.jogadoresEliminados) {
+			if(ini == Cores.Branco) {
 				return true;
 			}
 		}
@@ -221,8 +221,8 @@ class Objetivo11 extends Objetivo{
 		this.toDisplay = _ref;
 	}
 	boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente) {
-		for(Jogador ini: atual.jogadoresEliminados) {
-			if(ini.cor == Cores.Verde) {
+		for(Cores ini: atual.jogadoresEliminados) {
+			if(ini == Cores.Verde) {
 				return true;
 			}
 		}
@@ -237,8 +237,8 @@ class Objetivo12 extends Objetivo{
 		this.toDisplay = _ref;
 	}
 	boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente) {
-		for(Jogador ini: atual.jogadoresEliminados) {
-			if(ini.cor == Cores.Vermelho) {
+		for(Cores ini: atual.jogadoresEliminados) {
+			if(ini == Cores.Vermelho) {
 				return true;
 			}
 		}
@@ -253,8 +253,8 @@ class Objetivo13 extends Objetivo{
 		this.toDisplay = _ref;
 	}
 	boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente) {
-		for(Jogador ini: atual.jogadoresEliminados) {
-			if(ini.cor == Cores.Preto) {
+		for(Cores ini: atual.jogadoresEliminados) {
+			if(ini == Cores.Preto) {
 				return true;
 			}
 		}

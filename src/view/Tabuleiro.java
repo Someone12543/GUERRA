@@ -1,8 +1,6 @@
 package view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -10,12 +8,7 @@ import java.util.Map;
 
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JButton;
-import javax.swing.JOptionPane;
 import javax.swing.JPanel;
-
-import controller.ControllerAPI;
-import model.ModelAPI;
 
 class Tabuleiro extends JPanel {
 	/**
@@ -257,30 +250,6 @@ class Tabuleiro extends JPanel {
             ArrayList<Integer> valores = entry.getValue();
             listaExercitos.add(new Exercito(valores.get(0), valores.get(1), 0));
         }
-		
-		JButton proxJog = new JButton(nextAction);
-		JButton jogaDad = new JButton(rollDices);
-		
-		proxJog.setMargin(new Insets(0,0,0,0));
-		proxJog.setContentAreaFilled(false);
-		proxJog.setBorder(null);
-		proxJog.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				ControllerAPI.getControllerAPI().nextAction();
-			}
-		});
-		
-		jogaDad.setMargin(new Insets(0,0,0,0));
-		jogaDad.setContentAreaFilled(false);
-		jogaDad.setBorder(null);
-		jogaDad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//ControllerAPI.getControllerAPI().attack();
-			}
-		});
-		
-		add(jogaDad);
-		add(proxJog);
 	}
 	
 	
