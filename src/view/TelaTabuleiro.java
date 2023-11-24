@@ -9,8 +9,8 @@ class TelaTabuleiro extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public final int LARG_DEFAULT = 1040;
-	public final int ALT_DEFAULT = 700;
+	public final int LARG_DEFAULT = 953;
+	public final int ALT_DEFAULT = 735;
 	Tabuleiro t = new Tabuleiro();
 	
 	public TelaTabuleiro() {

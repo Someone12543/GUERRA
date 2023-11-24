@@ -249,7 +249,7 @@ class Tabuleiro extends JPanel {
 		
 		for (Map.Entry<String, ArrayList<Integer>> entry : coordenadas.entrySet()) {
             ArrayList<Integer> valores = entry.getValue();
-            listaExercitos.add(new Exercito((1024*valores.get(0)/68)-20, (700*valores.get(1)/52)-16, 0));
+            listaExercitos.add(new Exercito((937*valores.get(0)/68)-20, (703*valores.get(1)/52)-16, 0));
         }
 		
 		JButton proxJog = new JButton(nextAction);
@@ -281,8 +281,8 @@ class Tabuleiro extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(bg, 0, 0, 1024, 700, null);
-		g2d.drawImage(source, 0, 0, 1024, 700,null);
+		g2d.drawImage(bg, 0, 0, 937, 700, null);
+		g2d.drawImage(source, 0, 0, 937, 700,null);
 		
 		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		
