@@ -8,7 +8,8 @@ import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
 public class Ataque extends JPanel{
-private static final long serialVersionUID = 1L;
+	
+	private static final long serialVersionUID = 1L;
 	
 	public Ataque() {
 		setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));

@@ -11,7 +11,7 @@ public class ControllerAPI {
 	
 	static ControllerAPI instance;
 	public char troca_atual;
-//	Turno acao_atual;
+	Turno acao_atual;
 	ModelAPI game;
 	ViewAPI view;
 	
@@ -28,10 +28,10 @@ public class ControllerAPI {
 	public boolean startGame()
 	{
 		this.troca_atual = 1;
-//		this.acao_atual = Turno.PosTropa;
+		this.acao_atual = Turno.PosTropa;
 		this.game = ModelAPI.getModelAPI();
 		if(this.game.setupGame()) {
-//			startAction();
+			startAction();
 			return true;
 		}
 		
@@ -43,34 +43,30 @@ public class ControllerAPI {
 		this.game.finishGame();
 		this.game = null;
 	}
-	
-//	public void nextAction() {
-//		if (this.acao_atual == Turno.MovTropa) {
-//			game.giveCardToPlayer();
-//			game.nextPlayerToPlay();
-//			acao_atual = Turno.PosTropa;
-//		}
-//		else
-//			acao_atual = Turno.values()[acao_atual.ordinal() + 1];
+
+	public void nextAction() {
+		if (this.acao_atual == Turno.PosTropa) {
+			if (game.verifyNextTurn()) return;
+		}
 		
-//		startAction();
-//	}
+		if (this.acao_atual == Turno.MovTropa) {
+			game.giveCardToPlayer();
+			game.nextPlayerToPlay();
+			acao_atual = Turno.PosTropa;
+		}
+		else
+			acao_atual = Turno.values()[acao_atual.ordinal() + 1];
+		
+		startAction();
+	}
 	
-//	void startAction() {
-//		game.printPlayingPlayer();
-//		switch(acao_atual) {
-//			case PosTropa:
-//				game.giveBonuses();
-//				System.out.print(" posicionar!\n");
-//				break;
-//			case Ataque:
-//				//faz nada
-//				System.out.print(" atacar!\n");
-//				break;
-//			case MovTropa:
-//				//nada tambem
-//				System.out.print(" mover!\n");
-//				break;
-//		}
-//	}
+	void startAction() {
+		if(acao_atual == Turno.PosTropa) {
+			game.giveBonuses();
+		}
+	}
+
+	public int getTurno() {
+		return acao_atual.ordinal();
+	}
 }

@@ -4,6 +4,7 @@ import controller.ControllerAPI;
 import view.ViewAPI;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.awt.Image;
 
@@ -82,22 +83,57 @@ public class ModelAPI {
 		listaJogadores.remove(j);
 		listaJogadores.add(j);
 	}
+	
+	public String[] getCurrPlayerTerr() {
+		ArrayList<Territorio> lista = listaJogadores.get(0).paisesDominados;
+		String[] terrs = new String[lista.size()];
 		
+		int i = 0;
+		
+		for (Territorio t : lista) {
+			terrs[i++] = t.nome;
+		}
+	
+		return terrs;
+	}
+
+	public String[] getFrontierNames(String name) {
+		Territorio t = getTerrByName(name);
+		String[] terrs = new String[t.paisesLigados.size()];
+		int i = 0;
+		
+		for (Territorio ter : t.paisesLigados) {
+			terrs[i++] = ter.nome;
+		}
+		
+		return terrs;
+	}
+	
+	public boolean verifyNextTurn() {
+		Jogador j = listaJogadores.get(0);
+		
+		if (j.numTropasPosicionar != 0) return false;
+		
+		for (int v : j.numTropasContinentes) {
+			if (v != 0) return false;
+		}
+
+		return true;
+	}
+	
 	public void giveBonuses() {
 		Jogador j = listaJogadores.get(0);
 		for (Continente c : listaContinente) {
-			j.numTropasPosicionar += c.bonusPiece(j);
+			j.numTropasContinentes[c.tipo.ordinal()] += c.bonusPiece(j);
 		}
 		
 		j.numTropasPosicionar += j.bonusPiece();
 	}
 
-	public void attackTerritory(/*param ainda n decididos*/) {
-		//orig = origemDoAtq
-		//dest = destDoAtq
+	public void attackTerritory(String orig, String dest) {
 		Jogador player = listaJogadores.get(0);
-		//if(!player.atacarTerritorio(orig, dest))
-		//	return;
+		
+		if(!player.atacarTerritorio(getTerrByName(orig), getTerrByName(dest))) return;
 		
 		Jogador morto = null;
 		
@@ -265,6 +301,15 @@ public class ModelAPI {
 		return false;
 	}
 		
+	private Territorio getTerrByName(String name) {
+		for (Continente c : listaContinente) {
+			for (Territorio t : c.paises) {
+				if (t.nome == name) return t;
+			}
+		}
+		return null;
+	}
+	
 	boolean setupCards()
 	{
 		//remover loop para adicionar as imagens de cada

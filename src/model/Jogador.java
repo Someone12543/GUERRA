@@ -12,6 +12,7 @@ class Jogador {
 	ArrayList<Territorio> paisesDominados;
 	ArrayList<Jogador> jogadoresEliminados;
 	int numTropasPosicionar;
+	int[] numTropasContinentes = new int[6];
 	boolean dominouPaisTurno;
 	
 	public Jogador(String nome, Cores cor) {

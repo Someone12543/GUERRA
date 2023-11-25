@@ -23,15 +23,12 @@ class Tabuleiro extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	Image source, bg;
-	ImageIcon nextAction, rollDices;
 	ArrayList<Exercito> listaExercitos;
 	
 	public Tabuleiro() {
 		try {
 			bg = ImageIO.read(new File("assets/tabuleiro/war_tabuleiro_fundo.png"));
 			source = ImageIO.read(new File("assets/tabuleiro/war_tabuleiro_mapa copy.png"));
-			nextAction = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnProxJogada.png")));
-			rollDices = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnJogarDados.png")));
 		}
 		catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -252,29 +249,9 @@ class Tabuleiro extends JPanel {
             listaExercitos.add(new Exercito((937*valores.get(0)/68)-20, (703*valores.get(1)/52)-16, 0));
         }
 		
-		JButton proxJog = new JButton(nextAction);
-		JButton jogaDad = new JButton(rollDices);
 		
-		proxJog.setMargin(new Insets(0,0,0,0));
-		proxJog.setContentAreaFilled(false);
-		proxJog.setBorder(null);
-		proxJog.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-//				ControllerAPI.getControllerAPI().nextAction();
-			}
-		});
 		
-		jogaDad.setMargin(new Insets(0,0,0,0));
-		jogaDad.setContentAreaFilled(false);
-		jogaDad.setBorder(null);
-		jogaDad.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				//ControllerAPI.getControllerAPI().attack();
-			}
-		});
 		
-		add(jogaDad);
-		add(proxJog);
 	}
 	
 	

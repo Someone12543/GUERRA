@@ -24,9 +24,6 @@ class TelaCriacaoJogo extends JFrame {
 	public final int ALT_DEFAULT = 650;
 	JButton b1 = new JButton("Adicionar novo jogador");
 	JButton b2 = new JButton("Iniciar Jogo");
-	
-	JButton temp = new JButton("teste ataque");
-	
 	JTextField nomeJogador = new JTextField();
 	String[] cores = {"Amarelo", "Azul", "Branco", "Verde", "Vermelho", "Preto"};
 	JComboBox<String> cb = new JComboBox<String>(cores);
@@ -66,15 +63,6 @@ class TelaCriacaoJogo extends JFrame {
 			}
 		});
 		
-		p.add(temp);
-		temp.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				TelaAtaque ta = new TelaAtaque();
-				ta.setTitle("ATAQUE!");
-				ta.setVisible(true);
-				dispose();
-			}
-		});
 		
 		getContentPane().add(p);
 	}
