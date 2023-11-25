@@ -86,7 +86,7 @@ public class ControllerAPI {
 		try {
 		outputStream = new PrintWriter(filename);
 		
-		outputStream.printf("%c;%d;\n", troca_atual, acao_atual.ordinal());
+		outputStream.println(troca_atual);
 		
 		game.saveGame(outputStream);
 		
@@ -110,10 +110,7 @@ public class ControllerAPI {
 			
 			ln = inputStream.readLine();
 			
-			input = ln.split(";");
-			
-			troca_atual = input[0].charAt(0);
-			acao_atual = Turno.values()[Integer.parseInt(input[1])];
+			troca_atual = ln.charAt(0);
 			
 			game = ModelAPI.getModelAPI();
 			

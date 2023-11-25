@@ -37,11 +37,16 @@ public class ViewAPI implements Observer{
 		String message = name + " ganhou ao " + objective;
 		JOptionPane.showMessageDialog(tt, message, "Temos um vencedor!", JOptionPane.INFORMATION_MESSAGE);
 		if (JOptionPane.showConfirmDialog(tt, "Desejam continuar?", "Continuar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 1) {
-			//load no save state inicial (falar com ivan)
+			//restart game
 		}
 		else
 			tt.dispose();
 	}
 	
-	
+	public void openTabuleiro() {
+		TelaTabuleiro tt = TelaTabuleiro.getTelaTabuleiro();
+		this.tt = tt;
+		tt.setTitle("WAR");
+		tt.setVisible(true);
+	}
 }

@@ -106,8 +106,6 @@ public class ModelAPI implements Subject{
 		listaJogadores.remove(j);
 		listaJogadores.add(j);
 	}
-	
-	
 		
 	public void giveBonuses() {
 		Jogador j = listaJogadores.get(0);
@@ -177,11 +175,15 @@ public class ModelAPI implements Subject{
 			
 			outputStream.println(j.paisesDominados.size());
 			for (Territorio t : j.paisesDominados)
-				outputStream.printf("%s;%d;%d;%d;%d;\n", t.nome, t.continente.tipo.ordinal(), t.corDominando.ordinal(), t.numTropas, t.numTropasPodeMover);
+				outputStream.printf("%s;%d;%d;\n", t.nome, t.numTropas, t.numTropasPodeMover);
 			
 			outputStream.println(j.mao.size());
-			for (Troca t : j.mao)
-				outputStream.println(t.representa.nome);
+			for (Troca t : j.mao) {
+				if (t.representa != null)
+					outputStream.println(t.representa.nome);
+				else
+					outputStream.println("Coringa");
+			}
 			
 			outputStream.println(j.jogadoresEliminados.size());
 			for (Cores c : j.jogadoresEliminados)
@@ -191,8 +193,16 @@ public class ModelAPI implements Subject{
 	
 	public void loadGame(BufferedReader inputStream) throws IOException {
 		Jogador j;
+		Territorio t;
+		Troca c;
+		Cores cor;
+		
 		String ln = inputStream.readLine(), infos[];
 		int numJ = Integer.parseInt(ln), numP, numT, numC;
+		
+		observadores.add(ViewAPI.getViewAPI());
+		setupContinents(listaContinente);
+		setupCards();
 		
 		for (int i = 0; i < numJ; i++) {
 			ln = inputStream.readLine();
@@ -219,17 +229,34 @@ public class ModelAPI implements Subject{
 			
 			ln = inputStream.readLine();
 			numP = Integer.parseInt(ln);
-			//guarda paises
+			for(int k = 0; k < numP; k++) {
+				ln = inputStream.readLine();
+				infos = ln.split(";");
+				t = getTerrByName(infos[0]);
+				t.corDominando = j.cor;
+				t.numTropas = Integer.parseInt(infos[1]);
+				t.numTropasPodeMover = Integer.parseInt(infos[2]);
+				prepareNotify(t);
+			}
 			
 			ln = inputStream.readLine();
 			numT = Integer.parseInt(ln);
-			//guarda cartas
+			for (int k = 0; k < numT; k++) {
+				ln = inputStream.readLine();
+				c = getCardByName(ln);
+				j.mao.add(c);
+			}
 			
 			ln = inputStream.readLine();
 			numC = Integer.parseInt(ln);
-			//guarda mortos
-			
+			for (int k = 0; k < numC; k++) {
+				ln = inputStream.readLine();
+				cor = Cores.values()[Integer.parseInt(ln)];
+				j.jogadoresEliminados.add(cor);
+			}
 		}
+		
+		ViewAPI.getViewAPI().openTabuleiro();
 	}
 	
 	//Debug
@@ -378,6 +405,34 @@ public class ModelAPI implements Subject{
 		}
 		
 		return false;
+	}
+	
+	private Territorio getTerrByName(String name) {
+        for (Continente c : listaContinente) {
+            for (Territorio t : c.paises) {
+                if (t.nome.equals(name)) 
+                	return t;
+            }
+        }
+        return null;
+    }
+	
+	private Troca getCardByName(String name) {
+		for(Troca t : deckTroca) {
+			if (t.representa == null) { 
+				if (name.equals("Coringa")) {
+					deckTroca.remove(t);
+					return t;
+				}
+			}
+			else {
+				if (t.representa.nome.equals(name)) {
+					deckTroca.remove(t);
+					return t;
+				}
+			}
+		}
+		return null;
 	}
 		
 	boolean setupCards()
