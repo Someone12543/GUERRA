@@ -171,48 +171,20 @@ public class ModelAPI {
 			infos = ln.split(";");
 			j = createPlayer(infos[0], Integer.parseInt(infos[1]));
 			switch (Integer.parseInt(infos[2])) {
-				case 1:
-					j.obj = new Objetivo1(null);
-					break;
-				case 2:
-					j.obj = new Objetivo2(null);
-					break;
-				case 3:
-					j.obj = new Objetivo3(null);
-					break;
-				case 4:
-					j.obj = new Objetivo4(null);
-					break;
-				case 5:
-					j.obj = new Objetivo5(null);
-					break;
-				case 6:
-					j.obj = new Objetivo6(null);
-					break;
-				case 7:
-					j.obj = new Objetivo7(null);
-					break;
-				case 8:
-					j.obj = new Objetivo8(null);
-					break;
-				case 9:
-					j.obj = new Objetivo9(null);
-					break;
-				case 10:
-					j.obj = new Objetivo10(null);
-					break;
-				case 11:
-					j.obj = new Objetivo11(null);
-					break;
-				case 12:
-					j.obj = new Objetivo12(null);
-					break;
-				case 13:
-					j.obj = new Objetivo13(null);
-					break;
-				case 14:
-					j.obj = new Objetivo14(null);
-					break;
+				case 1: j.obj = new Objetivo1(null); break;
+				case 2: j.obj = new Objetivo2(null); break;
+				case 3: j.obj = new Objetivo3(null); break;
+				case 4: j.obj = new Objetivo4(null); break;
+				case 5: j.obj = new Objetivo5(null); break;
+				case 6: j.obj = new Objetivo6(null); break;
+				case 7:	j.obj = new Objetivo7(null); break;
+				case 8:	j.obj = new Objetivo8(null); break;
+				case 9:	j.obj = new Objetivo9(null); break;
+				case 10: j.obj = new Objetivo10(null); break;
+				case 11: j.obj = new Objetivo11(null); break;
+				case 12: j.obj = new Objetivo12(null); break;
+				case 13: j.obj = new Objetivo13(null); break;
+				case 14: j.obj = new Objetivo14(null); break;
 			}
 			j.numTropasPosicionar = Integer.parseInt(infos[3]);
 			j.dominouPaisTurno = Integer.parseInt(infos[4]) == 1;
