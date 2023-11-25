@@ -7,7 +7,6 @@ import controller.ControllerAPI;
 
 import java.awt.event.*;
 import java.io.IOException;
-import java.io.File;
 
 class TelaPrincipal extends JFrame {
 	/**
@@ -19,7 +18,7 @@ class TelaPrincipal extends JFrame {
 	JButton b1 = new JButton("Novo Jogo");
 	JButton b2 = new JButton("Carregar Jogo");
 	Principal p = new Principal();
-	JFileChooser chooser = new JFileChooser(new File("/Documents/WAR-SaveFiles/"));
+	JFileChooser chooser = new JFileChooser();
     FileNameExtensionFilter filter = new FileNameExtensionFilter("War saved game", "war");
     
 	
@@ -30,12 +29,12 @@ class TelaPrincipal extends JFrame {
 		
 		p.add(b1);
 		b1.addActionListener(new ActionListener() {
-									public void actionPerformed(ActionEvent e) {
-										TelaCriacaoJogo tcj = new TelaCriacaoJogo();
-										tcj.setTitle("WAR");
-										tcj.setVisible(true);
-									}
-							});
+				public void actionPerformed(ActionEvent e) {
+					TelaCriacaoJogo tcj = new TelaCriacaoJogo();
+					tcj.setTitle("WAR");
+					tcj.setVisible(true);
+				}
+		});
 		
 		p.add(b2);
 		b2.addActionListener(new ActionListener() {
@@ -51,7 +50,6 @@ class TelaPrincipal extends JFrame {
 			    }
 			}
 		});
-		// adicionar listener de carregar jogo (depois de implementar save)
 		
 		getContentPane().add(p);
 	}

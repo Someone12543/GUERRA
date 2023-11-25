@@ -3,9 +3,6 @@ package controller;
 import model.ModelAPI;
 import view.ViewAPI;
 import java.io.*;
-import java.time.LocalDateTime;
-import java.time.format.DateTimeFormatter;
-import java.time.temporal.ChronoUnit;
 
 public class ControllerAPI {
 	
@@ -57,6 +54,7 @@ public class ControllerAPI {
 			game.giveCardToPlayer();
 			game.nextPlayerToPlay();
 			acao_atual = Turno.PosTropa;
+			view.enableSave();
 		}
 		else
 			acao_atual = Turno.values()[acao_atual.ordinal() + 1];
@@ -65,18 +63,15 @@ public class ControllerAPI {
 		startAction();
 	}
 	
-	public void saveGame() throws IOException{
+	public void saveGame(File file) throws IOException {
 		PrintWriter outputStream = null;
-		LocalDateTime metadata = LocalDateTime.now().truncatedTo(ChronoUnit.SECONDS);
-		String filename = "WarGame - " + metadata.format(DateTimeFormatter.ISO_LOCAL_DATE_TIME).replace(':', '-') + ".war";
 		
 		try {
-		outputStream = new PrintWriter(filename);
-		
-		outputStream.println(troca_atual);
-		
-		game.saveGame(outputStream);
-		
+			outputStream = new PrintWriter(file);
+			
+			outputStream.println(troca_atual);
+			
+			game.saveGame(outputStream);
 		}
 		catch(IOException e) { 
 			System.out.print(e.getMessage());

@@ -10,6 +10,7 @@ import java.io.IOException;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
+import javax.swing.JFileChooser;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -29,6 +30,7 @@ class TelaTabuleiro extends JFrame {
 	JButton b3;
 	ImageIcon nextAction, rollDices;
 	Tabuleiro t = new Tabuleiro();
+	JFileChooser chooser = new JFileChooser();
 	ControllerAPI controller = ControllerAPI.getControllerAPI();
 	
 	private TelaTabuleiro() {
@@ -43,7 +45,7 @@ class TelaTabuleiro extends JFrame {
 		
 		b1 = new JButton(rollDices);
 		b2 = new JButton(nextAction);
-		b3 = new JButton();
+		b3 = new JButton("Salvar Jogo");
 		
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -54,6 +56,7 @@ class TelaTabuleiro extends JFrame {
 		b1.setBorder(null);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+				b3.setEnabled(false);
 				switch (controller.getTurno()) {
 					case 0:
 						TelaPosicionar tp = new TelaPosicionar();
@@ -90,7 +93,16 @@ class TelaTabuleiro extends JFrame {
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
-					ControllerAPI.getControllerAPI().saveGame();
+					JFileChooser chooser = new JFileChooser();
+					
+					int returnval = chooser.showSaveDialog(null);
+					if (returnval != JFileChooser.APPROVE_OPTION)
+						return;
+					
+					String filename = chooser.getSelectedFile().getName() + ".war";
+					File file = new File(chooser.getSelectedFile().getParent(), filename);
+					
+					ControllerAPI.getControllerAPI().saveGame(file);
 				} catch (IOException err) {
 					JOptionPane.showMessageDialog(t, "Não foi possível salvar o jogo.", "Erro ao salvar", JOptionPane.ERROR_MESSAGE);
 				}
