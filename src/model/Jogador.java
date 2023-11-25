@@ -40,6 +40,8 @@ class Jogador {
 		
 		pais.numTropas += qtd;
 		
+		ModelAPI.getModelAPI().prepareNotify(pais);
+		
 		return true;
 	}
 	
@@ -68,6 +70,9 @@ class Jogador {
 		paisOrigem.numTropasPodeMover = paisOrigem.numTropasPodeMover - qtd;
 		
 		paisDestino.numTropas = paisDestino.numTropas+qtd;
+		
+		ModelAPI.getModelAPI().prepareNotify(paisOrigem);
+		ModelAPI.getModelAPI().prepareNotify(paisDestino);
 		
 		return true;
 	}
@@ -135,7 +140,8 @@ class Jogador {
 			this.dominouPaisTurno = true;
 		}
 		
-		
+		ModelAPI.getModelAPI().prepareNotify(aliado);
+		ModelAPI.getModelAPI().prepareNotify(inimigo);
 		return true;
 	}
 	

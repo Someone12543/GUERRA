@@ -7,7 +7,9 @@ import java.util.ArrayList;
 import java.util.Collections;
 import java.awt.Image;
 
-public class ModelAPI {
+import observer.*;
+
+public class ModelAPI implements Subject{
 	
 	static ModelAPI instance;
 	
@@ -15,6 +17,8 @@ public class ModelAPI {
 	ArrayList<Jogador> listaJogadores;
 	ArrayList<Objetivo> deckObjetivos;
 	ArrayList<Troca> deckTroca;
+	ArrayList<Observer> observadores;
+	ArrayList<Object> paramsForObserver;
 	
 	private ModelAPI()
 	{
@@ -22,6 +26,8 @@ public class ModelAPI {
 		this.listaJogadores = new ArrayList<Jogador>();
 		this.deckObjetivos = new ArrayList<Objetivo>();
 		this.deckTroca = new ArrayList<Troca>();
+		this.observadores = new ArrayList<Observer>();
+		this.paramsForObserver = new ArrayList<Object>();
 	}
 	
 	public static ModelAPI getModelAPI()
@@ -29,6 +35,22 @@ public class ModelAPI {
 		if (instance == null)
 			instance = new ModelAPI();
 		return instance;
+	}
+	
+	public void obsAdd(Observer o) {
+		observadores.add(o);
+	}
+	
+	public Object obsGet(int i) {
+		if (i == 0 || i == 1) {
+			return (int)paramsForObserver.get(i);
+		}
+		return (String)paramsForObserver.get(i);
+	}
+	
+	//Nao vai ser util em nenhum momento
+	public void obsRemove(Observer o) {
+		observadores.remove(o);
 	}
 	
 	public boolean addPlayer(String nome, int cor)
@@ -44,6 +66,7 @@ public class ModelAPI {
 		if (listaJogadores.size() < 2)
 			return false;
 		
+		observadores.add(ViewAPI.getViewAPI());
 		setupContinents(listaContinente);
 		setupCards();
 		
@@ -82,6 +105,8 @@ public class ModelAPI {
 		listaJogadores.remove(j);
 		listaJogadores.add(j);
 	}
+	
+	
 		
 	public void giveBonuses() {
 		Jogador j = listaJogadores.get(0);
@@ -98,6 +123,9 @@ public class ModelAPI {
 		Jogador player = listaJogadores.get(0);
 		//if(!player.atacarTerritorio(orig, dest))
 		//	return;
+		
+//		prepareNotify(orig);
+//		prepareNotify(dest);
 		
 		Jogador morto = null;
 		
@@ -151,6 +179,15 @@ public class ModelAPI {
 		return obj;
 	}
 	
+ 	void prepareNotify(Territorio ter) {
+ 		paramsForObserver.add(0, ter.corDominando.ordinal());
+		paramsForObserver.add(1, ter.numTropas);
+		paramsForObserver.add(2, ter.nome);
+		for (Observer obs: observadores) {
+			obs.notify(getModelAPI());
+		}
+ 	}
+ 	
 	boolean validateTrade(Troca c1, Troca c2, Troca c3)
 	{
 		if (c1.simbolo == Simbolo.Coringa || c2.simbolo == Simbolo.Coringa || c3.simbolo == Simbolo.Coringa)
@@ -208,6 +245,8 @@ public class ModelAPI {
 				card.representa.numTropas = 1;
 				card.representa.corDominando = listaJogadores.get(id).cor;
 				listaJogadores.get(id).paisesDominados.add(card.representa);
+				prepareNotify(card.representa);
+				
 			}
 			listaJogadores.get(id).mao.add(card);
 			id++;

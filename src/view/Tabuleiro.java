@@ -249,7 +249,7 @@ class Tabuleiro extends JPanel {
 		
 		for (Map.Entry<String, ArrayList<Integer>> entry : coordenadas.entrySet()) {
             ArrayList<Integer> valores = entry.getValue();
-            listaExercitos.add(new Exercito((1024*valores.get(0)/68)-20, (700*valores.get(1)/52)-16, 0));
+            listaExercitos.add(new Exercito((1024*valores.get(0)/68)-20, (700*valores.get(1)/52)-16, 0, entry.getKey()));
         }
 		
 		JButton proxJog = new JButton(nextAction);
@@ -320,6 +320,16 @@ class Tabuleiro extends JPanel {
 				g2d.setPaint(Color.WHITE);
 			
 			g2d.drawString(Integer.toString(e.number), e.x + e.w/2 - 5, e.y + e.h/2 + 8); //esse -5 e + 8 foi no olhômetro
+		}
+	}
+	
+	public void repaintExe(int color, int number, String nome) {
+		for (Exercito e: listaExercitos) {
+			if (nome.equals(e.nome)) {
+				e.color = color;
+				e.number = number;
+				break;
+			}
 		}
 	}
 	
