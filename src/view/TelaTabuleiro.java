@@ -17,6 +17,8 @@ class TelaTabuleiro extends JFrame {
 	/**
 	 * 
 	 */
+	
+	static TelaTabuleiro instance;
 	private static final long serialVersionUID = 1L;
 	public final int LARG_DEFAULT = 953;
 	public final int ALT_DEFAULT = 735;
@@ -26,7 +28,7 @@ class TelaTabuleiro extends JFrame {
 	Tabuleiro t = new Tabuleiro();
 	ControllerAPI controller = ControllerAPI.getControllerAPI();
 	
-	public TelaTabuleiro() {
+	private TelaTabuleiro() {
 		try {
 			nextAction = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnProxJogada.png")));
 			rollDices = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnJogarDados.png")));
@@ -81,6 +83,12 @@ class TelaTabuleiro extends JFrame {
 		});
 		
 		getContentPane().add(t);
+	}
+	
+	public static TelaTabuleiro getTelaTabuleiro() {
+		if(instance == null)
+			instance = new TelaTabuleiro();
+		return instance;
 	}
 
 	@Override

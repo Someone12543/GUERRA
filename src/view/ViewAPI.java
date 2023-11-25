@@ -4,7 +4,9 @@ import javax.swing.JOptionPane;
 
 import controller.ControllerAPI;
 
-public class ViewAPI {
+import observer.*;
+
+public class ViewAPI implements Observer{
 	
 	public static ViewAPI instance;
 	TelaTabuleiro tt;
@@ -21,6 +23,11 @@ public class ViewAPI {
 		return instance;
 	}
 	
+	public void notify(Subject s) {
+		TelaTabuleiro tt = TelaTabuleiro.getTelaTabuleiro();
+		tt.t.repaintExe((int)s.obsGet(0), (int)s.obsGet(1), (String)s.obsGet(2));
+	}
+	
 	public void showErrorInsufficientPlayers() {
 		JOptionPane.showMessageDialog(null, "Não há jogadores sufciente para iniciar o jogo.", "Error", JOptionPane.ERROR_MESSAGE);
 	}
@@ -35,5 +42,4 @@ public class ViewAPI {
 		else
 			tt.dispose();
 	}
-	
 }
