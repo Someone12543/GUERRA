@@ -1,8 +1,12 @@
 package model;
-import java.awt.Image;
+import java.io.File;
+import java.io.IOException;
 import java.security.SecureRandom;
 import java.util.ArrayList;
 import java.util.Collections;
+
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 class Jogador {
 	String nome;
@@ -12,6 +16,7 @@ class Jogador {
 	ArrayList<Territorio> paisesDominados;
 	ArrayList<Cores> jogadoresEliminados;
 	int numTropasPosicionar;
+	int[] numTropasContinentes = new int[6];
 	boolean dominouPaisTurno;
 	
 	public Jogador(String nome, Cores cor) {
@@ -80,6 +85,7 @@ class Jogador {
 	}
 	
 	boolean atacarTerritorio(Territorio aliado, Territorio inimigo) {
+		
 		if (aliado.corDominando != this.cor)
 			return false;
 		
@@ -89,61 +95,74 @@ class Jogador {
 		if (aliado.numTropas < 2)
 			return false;
 		
-		int qtdatk;
-		int qtddef;
-		int lostatk;
-		int lostdef;
+		int qtdAtk;
+		int qtdDef;
+		int lostAtk;
+		int lostDef;
 		int i;
+		
 		SecureRandom rand = new SecureRandom();
 		
-		ArrayList<Integer> listatk = new ArrayList<Integer>();
-		ArrayList<Integer> listdef = new ArrayList<Integer>();
-		ArrayList<Image> atkimage = new ArrayList<Image>();
-		ArrayList<Image> defimage = new ArrayList<Image>();
+		ArrayList<Integer> listAtk = new ArrayList<Integer>();
+		ArrayList<Integer> listDef = new ArrayList<Integer>();
+		ImageIcon atkImage = null, defImage = null;
+		ArrayList<ImageIcon> atkImages = new ArrayList<ImageIcon>();
+		ArrayList<ImageIcon> defImages = new ArrayList<ImageIcon>();
 		
-		while (aliado.numTropas != 1 || inimigo.numTropas != 0) {
-			qtdatk = aliado.numTropas - 1 > 2? 3 : aliado.numTropas - 1;
-			qtddef = inimigo.numTropas > 2? 3 : inimigo.numTropas;
-			
-			for(i = 0; i < qtdatk; i++) {
-				listatk.add(rand.nextInt(6) + 1);
-				listatk.get(i); // para futuramente adicionar na lista de imagens 
-			}
+		qtdAtk = aliado.numTropas - 1 > 2? 3 : aliado.numTropas - 1;
+		qtdDef = inimigo.numTropas > 2? 3 : inimigo.numTropas;
+		
+		for(i = 0; i < qtdAtk; i++) {
+			listAtk.add(rand.nextInt(6) + 1);
+		}
 
-			for(i = 0; i < qtddef; i++) {
-				listdef.add(rand.nextInt(6) + 1);
-				listdef.get(i); // para futuramente adicionar na lista de imagens 
+		for(i = 0; i < qtdDef; i++) {
+			listDef.add(rand.nextInt(6) + 1);
+		}
+			
+		Collections.sort(listAtk, Collections.reverseOrder());
+		Collections.sort(listDef, Collections.reverseOrder());
+		
+		for (i = 0; i < qtdAtk; i++) {
+			try {
+				atkImage = new ImageIcon(ImageIO.read(new File("assets/dados/dado_ataque_" + listAtk.get(i).toString() + ".png")));
+			}
+			catch (IOException e){
+				System.out.println(e.getMessage());
+				System.exit(1);
 			}
 			
-			Collections.sort(listatk, Collections.reverseOrder());
-			Collections.sort(listdef, Collections.reverseOrder());
-			
-			lostatk = lostdef = 0;
-			
-			for(i = 0; i < qtdatk && i < qtddef; i++) {
-				if (listatk.get(i) > listdef.get(i)) lostdef++;
-				else lostatk++;
+			atkImages.add(atkImage);
+		}
+		
+		for (i = 0; i < qtdDef; i++) {
+			try {
+				defImage = new ImageIcon(ImageIO.read(new File("assets/dados/dado_defesa_" + listDef.get(i).toString() + ".png")));
+			}
+			catch (IOException e){
+				System.out.println(e.getMessage());
+				System.exit(1);
 			}
 			
-			aliado.numTropas -= lostatk;
-			inimigo.numTropas -= lostdef;
-			
-			//display resultados
-			//wait x sec
+			defImages.add(defImage);
 		}
 		
-		if (inimigo.numTropas == 0) {
-			qtdatk = aliado.numTropas - 1 > 2? 3 : aliado.numTropas - 1;
-			
-			inimigo.corDominando = aliado.corDominando;
-			
-			inimigo.numTropas += qtdatk;
-			aliado.numTropas -= qtdatk;
-			this.dominouPaisTurno = true;
+		ModelAPI.getModelAPI().atkImages = atkImages;
+		ModelAPI.getModelAPI().defImages = defImages;
+		
+		lostAtk = lostDef = 0;
+		
+		for(i = 0; i < qtdAtk && i < qtdDef; i++) {
+			if (listAtk.get(i) > listDef.get(i)) lostDef++;
+			else lostAtk++;
 		}
 		
+		aliado.numTropas -= lostAtk;
+		inimigo.numTropas -= lostDef;
+
 		ModelAPI.getModelAPI().prepareNotify(aliado);
 		ModelAPI.getModelAPI().prepareNotify(inimigo);
+
 		return true;
 	}
 	

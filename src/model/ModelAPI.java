@@ -8,6 +8,8 @@ import java.util.Collections;
 import java.awt.Image;
 import java.io.*;
 
+import javax.swing.ImageIcon;
+
 import observer.*;
 
 public class ModelAPI implements Subject{
@@ -18,6 +20,8 @@ public class ModelAPI implements Subject{
 	ArrayList<Jogador> listaJogadores;
 	ArrayList<Objetivo> deckObjetivos;
 	ArrayList<Troca> deckTroca;
+	ArrayList<ImageIcon> atkImages;
+	ArrayList<ImageIcon> defImages;
 	ArrayList<Observer> observadores;
 	ArrayList<Object> paramsForObserver;
 	
@@ -103,22 +107,57 @@ public class ModelAPI implements Subject{
 		listaJogadores.remove(j);
 		listaJogadores.add(j);
 	}
+
+	public String[] getCurrPlayerTerr() {
+		ArrayList<Territorio> lista = listaJogadores.get(0).paisesDominados;
+		String[] terrs = new String[lista.size()];
+	
+		int i = 0;
 		
+		for (Territorio t : lista) {
+			terrs[i++] = t.nome;
+		}
+	
+		return terrs;
+	}
+
+	public String[] getFrontierNames(String name) {
+		Territorio t = getTerrByName(name);
+		String[] terrs = new String[t.paisesLigados.size()];
+		int i = 0;
+		
+		for (Territorio ter : t.paisesLigados) {
+			terrs[i++] = ter.nome;
+		}
+		
+		return terrs;
+	}
+	
+	public boolean verifyNextTurn() {
+		Jogador j = listaJogadores.get(0);
+		
+		if (j.numTropasPosicionar != 0) return false;
+		
+		for (int v : j.numTropasContinentes) {
+			if (v != 0) return false;
+		}
+
+		return true;
+	}
+	
 	public void giveBonuses() {
 		Jogador j = listaJogadores.get(0);
 		for (Continente c : listaContinente) {
-			j.numTropasPosicionar += c.bonusPiece(j);
+			j.numTropasContinentes[c.tipo.ordinal()] += c.bonusPiece(j);
 		}
 		
 		j.numTropasPosicionar += j.bonusPiece();
 	}
 
-	public void attackTerritory(/*param ainda n decididos*/) {
-		//orig = origemDoAtq
-		//dest = destDoAtq
+	public boolean attackTerritory(String orig, String dest) {
 		Jogador player = listaJogadores.get(0);
-		//if(!player.atacarTerritorio(orig, dest))
-		//	return;
+		
+		if(!player.atacarTerritorio(getTerrByName(orig), getTerrByName(dest))) return false;
 		
 //		prepareNotify(orig);
 //		prepareNotify(dest);
@@ -136,7 +175,7 @@ public class ModelAPI implements Subject{
 			player.jogadoresEliminados.add(morto.cor);
 			if(player.obj.verificaObj(player, listaContinente)){
 				ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
-				return;
+				return true;
 			}
 			else {
 				for (Jogador j : listaJogadores) {
@@ -144,7 +183,7 @@ public class ModelAPI implements Subject{
 						j.obj = new Objetivo14(null); //se sim, substitui seu objetivo
 						if(j.obj.verificaObj(j, listaContinente)) {
 							ViewAPI.getViewAPI().showWinner(j.nome, j.obj.descricao);
-							return;
+							return true;
 						}
 						break;
 					}
@@ -154,7 +193,7 @@ public class ModelAPI implements Subject{
 		
 		if(player.obj.verificaObj(player, listaContinente))
 			ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
-		return;
+		return true;
 	}
 	
 	public void finishGame() {
@@ -269,6 +308,14 @@ public class ModelAPI implements Subject{
 				j.jogadoresEliminados.add(cor);
 			}
 		}
+	}
+
+	public ArrayList<ImageIcon> getAtkImages() {
+		return atkImages;
+	}
+	
+	public ArrayList<ImageIcon> getDefImages() {
+		return defImages;
 	}
 	
 	//Debug
@@ -449,7 +496,7 @@ public class ModelAPI implements Subject{
 		}
 		return null;
 	}
-		
+	
 	boolean setupCards()
 	{
 		//remover loop para adicionar as imagens de cada

@@ -7,7 +7,6 @@ import java.util.HashMap;
 import java.util.Map;
 
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 import javax.swing.JPanel;
 
 class Tabuleiro extends JPanel {
@@ -16,15 +15,12 @@ class Tabuleiro extends JPanel {
 	 */
 	private static final long serialVersionUID = 1L;
 	Image source, bg;
-	ImageIcon nextAction, rollDices;
 	ArrayList<Exercito> listaExercitos;
 	
 	public Tabuleiro() {
 		try {
 			bg = ImageIO.read(new File("assets/tabuleiro/war_tabuleiro_fundo.png"));
 			source = ImageIO.read(new File("assets/tabuleiro/war_tabuleiro_mapa copy.png"));
-			nextAction = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnProxJogada.png")));
-			rollDices = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnJogarDados.png")));
 		}
 		catch (IOException e) {
 			System.out.println(e.getMessage());
@@ -242,7 +238,7 @@ class Tabuleiro extends JPanel {
 		
 		for (Map.Entry<String, ArrayList<Integer>> entry : coordenadas.entrySet()) {
             ArrayList<Integer> valores = entry.getValue();
-            listaExercitos.add(new Exercito((1024*valores.get(0)/68)-20, (700*valores.get(1)/52)-16, 0, entry.getKey()));
+            listaExercitos.add(new Exercito((937*valores.get(0)/68)-20, (703*valores.get(1)/52)-16, 0, entry.getKey()));
         }
 	}
 	
@@ -250,8 +246,8 @@ class Tabuleiro extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(bg, 0, 0, 1024, 700, null);
-		g2d.drawImage(source, 0, 0, 1024, 700,null);
+		g2d.drawImage(bg, 0, 0, 937, 700, null);
+		g2d.drawImage(source, 0, 0, 937, 700,null);
 		
 		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		

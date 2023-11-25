@@ -49,6 +49,10 @@ public class ControllerAPI {
 	}
 
 	public void nextAction() {
+		if (this.acao_atual == Turno.PosTropa) {
+			if (game.verifyNextTurn()) return;
+		}
+
 		if (this.acao_atual == Turno.MovTropa) {
 			game.giveCardToPlayer();
 			game.nextPlayerToPlay();
@@ -56,26 +60,9 @@ public class ControllerAPI {
 		}
 		else
 			acao_atual = Turno.values()[acao_atual.ordinal() + 1];
+
 		
 		startAction();
-	}
-	
-	void startAction() {
-		game.printPlayingPlayer();
-		switch(acao_atual) {
-			case PosTropa:
-				game.giveBonuses();
-				System.out.print(" posicionar!\n");
-				break;
-			case Ataque:
-				//faz nada
-				System.out.print(" atacar!\n");
-				break;
-			case MovTropa:
-				//nada tambem
-				System.out.print(" mover!\n");
-				break;
-		}
 	}
 	
 	public void saveGame() throws IOException{
@@ -127,5 +114,17 @@ public class ControllerAPI {
 		}
 
 		ViewAPI.getViewAPI().openTabuleiro();
+		
+		startAction();
+	}
+	
+	void startAction() {
+		if(acao_atual == Turno.PosTropa) {
+			game.giveBonuses();
+		}
+	}
+
+	public int getTurno() {
+		return acao_atual.ordinal();
 	}
 }

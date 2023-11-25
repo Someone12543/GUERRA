@@ -7,16 +7,13 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-class CriacaoJogo extends JPanel {
-
-	/**
-	 * 
-	 */
+public class Ataque extends JPanel{
+	
 	private static final long serialVersionUID = 1L;
 	
-	public CriacaoJogo() {
+	public Ataque() {
 		setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-		setLayout(new GridLayout(0, 1, 0, 120));
+		setLayout(new GridLayout(0, 1, 0, 100));
 	}
 	
 	public void paintComponent(Graphics g) {

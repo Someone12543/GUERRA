@@ -50,4 +50,5 @@ public class ViewAPI implements Observer{
 		tt.setTitle("WAR");
 		tt.setVisible(true);
 	}
+
 }

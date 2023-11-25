@@ -7,16 +7,13 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-class CriacaoJogo extends JPanel {
-
-	/**
-	 * 
-	 */
+public class Dados extends JPanel{
+	
 	private static final long serialVersionUID = 1L;
 	
-	public CriacaoJogo() {
+	public Dados() {
 		setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-		setLayout(new GridLayout(0, 1, 0, 120));
+		setLayout(new GridLayout(2, 3, 30, 20));
 	}
 	
 	public void paintComponent(Graphics g) {
