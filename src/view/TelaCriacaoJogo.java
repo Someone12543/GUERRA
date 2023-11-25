@@ -54,7 +54,7 @@ class TelaCriacaoJogo extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				ControllerAPI ctrl = ControllerAPI.getControllerAPI();
 				if(ctrl.startGame()) {
-					TelaTabuleiro tt = new TelaTabuleiro();
+					TelaTabuleiro tt = TelaTabuleiro.getTelaTabuleiro();
 					ViewAPI.getViewAPI().tt = tt;
 					tt.setTitle("WAR");
 					tt.setVisible(true);
