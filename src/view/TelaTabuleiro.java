@@ -20,6 +20,8 @@ class TelaTabuleiro extends JFrame {
 	private static final long serialVersionUID = 1L;
 	public final int LARG_DEFAULT = 953;
 	public final int ALT_DEFAULT = 735;
+	JButton b1;
+	JButton b2;
 	ImageIcon nextAction, rollDices;
 	Tabuleiro t = new Tabuleiro();
 	ControllerAPI controller = ControllerAPI.getControllerAPI();
@@ -34,8 +36,8 @@ class TelaTabuleiro extends JFrame {
 			System.exit(1);
 		}
 		
-		JButton b1 = new JButton(rollDices);
-		JButton b2 = new JButton(nextAction);
+		b1 = new JButton(rollDices);
+		b2 = new JButton(nextAction);
 		
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
