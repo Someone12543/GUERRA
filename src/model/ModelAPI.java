@@ -4,9 +4,7 @@ import controller.ControllerAPI;
 import view.ViewAPI;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.Collections;
-import java.awt.Image;
 
 public class ModelAPI {
 	
