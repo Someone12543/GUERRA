@@ -243,9 +243,6 @@ class Tabuleiro extends JPanel {
             listaExercitos.add(new Exercito((937*valores.get(0)/68)-20, (703*valores.get(1)/52)-16, 0, entry.getKey()));
         }
 		
-		
-		
-		
 	}
 	
 	
