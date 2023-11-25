@@ -43,10 +43,7 @@ public class ModelAPI implements Subject{
 	}
 	
 	public Object obsGet(int i) {
-		if (i == 0 || i == 1) {
-			return (int)paramsForObserver.get(i);
-		}
-		return (String)paramsForObserver.get(i);
+		return paramsForObserver.get(i);
 	}
 	
 	//Nao vai ser util em nenhum momento
@@ -165,7 +162,24 @@ public class ModelAPI implements Subject{
 	}
 	
 	public void restartGame() {
+		for (Jogador j : listaJogadores) {
+			j.paisesDominados.clear();
+			j.mao.clear();
+			j.numTropasPosicionar = 0;
+		}
 		
+		listaContinente = new ArrayList<Continente>();
+		deckObjetivos = new ArrayList<Objetivo>();
+		deckTroca = new ArrayList<Troca>();	
+		observadores = new ArrayList<Observer>();
+		
+		observadores.add(ViewAPI.getViewAPI());
+		setupContinents(listaContinente);
+		setupCards();
+		
+		drawObjectives();
+		rafflePlayers();
+		raffleTerritory();
 	}
 	
 	public void saveGame(PrintWriter outputStream) {
@@ -255,8 +269,6 @@ public class ModelAPI implements Subject{
 				j.jogadoresEliminados.add(cor);
 			}
 		}
-		
-		ViewAPI.getViewAPI().openTabuleiro();
 	}
 	
 	//Debug
@@ -288,6 +300,7 @@ public class ModelAPI implements Subject{
 		for (Observer obs: observadores) {
 			obs.notify(getModelAPI());
 		}
+		paramsForObserver.clear();
  	}
  	
 	boolean validateTrade(Troca c1, Troca c2, Troca c3)
@@ -338,17 +351,19 @@ public class ModelAPI implements Subject{
 	
 	void raffleTerritory()
 	{
+		Jogador j1;
 		Troca card;
 		int id = 0;
 		
 		while((card = drawTrade()) != null)
 		{
-			listaJogadores.get(id).mao.add(card);
+			j1 = listaJogadores.get(id);
+			j1.mao.add(card);
 			
 			if (card.simbolo != Simbolo.Coringa) {
 				card.representa.numTropas = 1;
-				card.representa.corDominando = listaJogadores.get(id).cor;
-				listaJogadores.get(id).paisesDominados.add(card.representa);
+				card.representa.corDominando = j1.cor;
+				j1.paisesDominados.add(card.representa);
 				id++;
 				prepareNotify(card.representa);
 			}

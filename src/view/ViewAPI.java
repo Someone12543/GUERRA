@@ -3,7 +3,7 @@ package view;
 import javax.swing.JOptionPane;
 
 import controller.ControllerAPI;
-
+import model.ModelAPI;
 import observer.*;
 
 public class ViewAPI implements Observer{
@@ -26,6 +26,7 @@ public class ViewAPI implements Observer{
 	public void notify(Subject s) {
 		TelaTabuleiro tt = TelaTabuleiro.getTelaTabuleiro();
 		tt.t.repaintExe((int)s.obsGet(0), (int)s.obsGet(1), (String)s.obsGet(2));
+		tt.repaint();
 	}
 	
 	public void showErrorInsufficientPlayers() {
@@ -36,8 +37,8 @@ public class ViewAPI implements Observer{
 		ControllerAPI ctrl = ControllerAPI.getControllerAPI();
 		String message = name + " ganhou ao " + objective;
 		JOptionPane.showMessageDialog(tt, message, "Temos um vencedor!", JOptionPane.INFORMATION_MESSAGE);
-		if (JOptionPane.showConfirmDialog(tt, "Desejam continuar?", "Continuar", JOptionPane.YES_NO_OPTION, JOptionPane.QUESTION_MESSAGE) == 1) {
-			//restart game
+		if (JOptionPane.showConfirmDialog(tt, "Desejam continuar?", "Continuar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION) {
+			ModelAPI.getModelAPI().restartGame();
 		}
 		else
 			tt.dispose();

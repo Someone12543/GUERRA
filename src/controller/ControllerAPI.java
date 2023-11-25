@@ -35,7 +35,7 @@ public class ControllerAPI {
 		this.acao_atual = Turno.PosTropa;
 		this.game = ModelAPI.getModelAPI();
 		if(this.game.setupGame()) {
-//			startAction();
+			startAction();
 			return true;
 		}
 		
@@ -47,36 +47,36 @@ public class ControllerAPI {
 		this.game.finishGame();
 		this.game = null;
 	}
-	
-//	public void nextAction() {
-//		if (this.acao_atual == Turno.MovTropa) {
-//			game.giveCardToPlayer();
-//			game.nextPlayerToPlay();
-//			acao_atual = Turno.PosTropa;
-//		}
-//		else
-//			acao_atual = Turno.values()[acao_atual.ordinal() + 1];
+
+	public void nextAction() {
+		if (this.acao_atual == Turno.MovTropa) {
+			game.giveCardToPlayer();
+			game.nextPlayerToPlay();
+			acao_atual = Turno.PosTropa;
+		}
+		else
+			acao_atual = Turno.values()[acao_atual.ordinal() + 1];
 		
-//		startAction();
-//	}
+		startAction();
+	}
 	
-//	void startAction() {
-//		game.printPlayingPlayer();
-//		switch(acao_atual) {
-//			case PosTropa:
-//				game.giveBonuses();
-//				System.out.print(" posicionar!\n");
-//				break;
-//			case Ataque:
-//				//faz nada
-//				System.out.print(" atacar!\n");
-//				break;
-//			case MovTropa:
-//				//nada tambem
-//				System.out.print(" mover!\n");
-//				break;
-//		}
-//	}
+	void startAction() {
+		game.printPlayingPlayer();
+		switch(acao_atual) {
+			case PosTropa:
+				game.giveBonuses();
+				System.out.print(" posicionar!\n");
+				break;
+			case Ataque:
+				//faz nada
+				System.out.print(" atacar!\n");
+				break;
+			case MovTropa:
+				//nada tambem
+				System.out.print(" mover!\n");
+				break;
+		}
+	}
 	
 	public void saveGame() throws IOException{
 		PrintWriter outputStream = null;
@@ -103,7 +103,7 @@ public class ControllerAPI {
 	
 	public void loadGame(File file) throws IOException {
 		BufferedReader inputStream = null;
-		String ln, input[];
+		String ln;
 		
 		try {
 			inputStream = new BufferedReader(new FileReader(file));
@@ -125,5 +125,7 @@ public class ControllerAPI {
 				inputStream.close();
 			}
 		}
+
+		ViewAPI.getViewAPI().openTabuleiro();
 	}
 }

@@ -36,7 +36,7 @@ class TelaTabuleiro extends JFrame {
 		proxJog.setBorder(null);
 		proxJog.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-//				ControllerAPI.getControllerAPI().nextAction();
+				ControllerAPI.getControllerAPI().nextAction();
 			}
 		});
 		
