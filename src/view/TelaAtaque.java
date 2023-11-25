@@ -5,6 +5,7 @@ import java.awt.event.ActionListener;
 import java.text.Collator;
 import java.util.Arrays;
 
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
@@ -20,16 +21,11 @@ public class TelaAtaque extends JFrame {
 	JComboBox<String> cb2 = new JComboBox<String>();
 	JButton b1 = new JButton("Cancelar ataque");
 	JButton b2 = new JButton("Confirmar ataque");
+	JButton temp;
 	Ataque a = new Ataque();
+	Dados d = new Dados();
 	ModelAPI mod;
 	String[] terrs;
-	
-	public boolean isSame(String a, String b) {
-	    Collator insenstiveStringComparator = Collator.getInstance();
-	    insenstiveStringComparator.setStrength(Collator.PRIMARY);
-	    // Collator.PRIMARY also works, but is case senstive
-	    return insenstiveStringComparator.compare(a, b) == 0;
-	}
 	
 	public TelaAtaque() {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
@@ -81,7 +77,17 @@ public class TelaAtaque extends JFrame {
 		a.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				mod.attackTerritory(cb1.getSelectedItem().toString(), cb2.getSelectedItem().toString());
+				if (mod.attackTerritory(cb1.getSelectedItem().toString(), cb2.getSelectedItem().toString())) {
+					for (ImageIcon im : mod.getAtkImages()) {
+						temp = new JButton(im);
+						d.add(temp);
+					}
+					for (ImageIcon im : mod.getDefImages()) {
+						temp = new JButton(im);
+						d.add(temp);
+					}
+				}
+				
 				dispose();
 			}
 		});

@@ -6,6 +6,8 @@ import view.ViewAPI;
 import java.util.ArrayList;
 import java.util.Collections;
 
+import javax.swing.ImageIcon;
+
 public class ModelAPI {
 	
 	static ModelAPI instance;
@@ -14,6 +16,8 @@ public class ModelAPI {
 	ArrayList<Jogador> listaJogadores;
 	ArrayList<Objetivo> deckObjetivos;
 	ArrayList<Troca> deckTroca;
+	ArrayList<ImageIcon> atkImages;
+	ArrayList<ImageIcon> defImages;
 	
 	private ModelAPI()
 	{
@@ -128,10 +132,10 @@ public class ModelAPI {
 		j.numTropasPosicionar += j.bonusPiece();
 	}
 
-	public void attackTerritory(String orig, String dest) {
+	public boolean attackTerritory(String orig, String dest) {
 		Jogador player = listaJogadores.get(0);
 		
-		if(!player.atacarTerritorio(getTerrByName(orig), getTerrByName(dest))) return;
+		if(!player.atacarTerritorio(getTerrByName(orig), getTerrByName(dest))) return false;
 		
 		Jogador morto = null;
 		
@@ -146,7 +150,7 @@ public class ModelAPI {
 			player.jogadoresEliminados.add(morto);
 			if(player.obj.verificaObj(player, listaContinente)){
 				ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
-				return;
+				return true;
 			}
 			else {
 				for (Jogador j : listaJogadores) {
@@ -154,7 +158,7 @@ public class ModelAPI {
 						j.obj = new Objetivo14(null); //se sim, substitui seu objetivo
 						if(j.obj.verificaObj(j, listaContinente)) {
 							ViewAPI.getViewAPI().showWinner(j.nome, j.obj.descricao);
-							return;
+							return true;
 						}
 						break;
 					}
@@ -164,11 +168,19 @@ public class ModelAPI {
 		
 		if(player.obj.verificaObj(player, listaContinente))
 			ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
-		return;
+		return true;
 	}
 	
 	public void finishGame() {
 		instance = null;
+	}
+	
+	public ArrayList<ImageIcon> getAtkImages() {
+		return atkImages;
+	}
+	
+	public ArrayList<ImageIcon> getDefImages() {
+		return defImages;
 	}
 	
 	//Debug
@@ -302,7 +314,7 @@ public class ModelAPI {
 	private Territorio getTerrByName(String name) {
 		for (Continente c : listaContinente) {
 			for (Territorio t : c.paises) {
-				if (t.nome == name) return t;
+				if (t.nome.equals(name)) return t;
 			}
 		}
 		return null;
