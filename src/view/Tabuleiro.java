@@ -1,6 +1,7 @@
 package view;
 
 import java.awt.*;
+import java.awt.geom.Ellipse2D;
 import java.io.*;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -43,7 +44,7 @@ class Tabuleiro extends JPanel {
         coordenadas.put("Groelândia", groCoord);
         ArrayList<Integer> vanCoord = new ArrayList<>();
         vanCoord.add(13);
-        vanCoord.add(13);
+        vanCoord.add(14);
         coordenadas.put("Vancouver", vanCoord);
         ArrayList<Integer> qCoord = new ArrayList<>();
         qCoord.add(18);
@@ -70,16 +71,16 @@ class Tabuleiro extends JPanel {
         venCoord.add(29);
         coordenadas.put("Venezuela", venCoord);
         ArrayList<Integer> brCoord = new ArrayList<>();
-        brCoord.add(19);
-        brCoord.add(29);
+        brCoord.add(20);
+        brCoord.add(31);
         coordenadas.put("Brasil", brCoord);
         ArrayList<Integer> perCoord = new ArrayList<>();
-        perCoord.add(16);
-        perCoord.add(36);
+        perCoord.add(17);
+        perCoord.add(35);
         coordenadas.put("Peru", perCoord);
         ArrayList<Integer> argCoord = new ArrayList<>();
-        argCoord.add(19);
-        argCoord.add(38);
+        argCoord.add(20);
+        argCoord.add(37);
         coordenadas.put("Argentina", argCoord);
         ArrayList<Integer> ruCoord = new ArrayList<>();
         ruCoord.add(31);
@@ -102,8 +103,8 @@ class Tabuleiro extends JPanel {
         romCoord.add(18);
         coordenadas.put("Romênia", romCoord);
         ArrayList<Integer> itaCoord = new ArrayList<>();
-        itaCoord.add(35);
-        itaCoord.add(18);
+        itaCoord.add(36);
+        itaCoord.add(17);
         coordenadas.put("Itália", itaCoord);
         ArrayList<Integer> frCoord = new ArrayList<>();
         frCoord.add(32);
@@ -118,7 +119,7 @@ class Tabuleiro extends JPanel {
         argeCoord.add(25);
         coordenadas.put("Argélia", argeCoord);
         ArrayList<Integer> nigCoord = new ArrayList<>();
-        nigCoord.add(30);
+        nigCoord.add(32);
         nigCoord.add(29);
         coordenadas.put("Nigéria", nigCoord);
         ArrayList<Integer> egeCoord = new ArrayList<>();
@@ -175,7 +176,7 @@ class Tabuleiro extends JPanel {
         coordenadas.put("Síria", sirCoord);
         ArrayList<Integer> paqCoord = new ArrayList<>();
         paqCoord.add(50);
-        paqCoord.add(20);
+        paqCoord.add(21);
         coordenadas.put("Paquistão", paqCoord);
         ArrayList<Integer> chiCoord = new ArrayList<>();
         chiCoord.add(53);
@@ -222,7 +223,7 @@ class Tabuleiro extends JPanel {
         indoCoord.add(34);
         coordenadas.put("Indonésia", indoCoord);
         ArrayList<Integer> austCoord = new ArrayList<>();
-        austCoord.add(60);
+        austCoord.add(59);
         austCoord.add(41);
         coordenadas.put("Austrália", austCoord);
         ArrayList<Integer> pertCoord = new ArrayList<>();
@@ -274,6 +275,11 @@ class Tabuleiro extends JPanel {
 			default:
 				g2d.setPaint(Color.GRAY);
 			}
+			
+			if (e.number > 9) {
+				e.elip = new Ellipse2D.Double(e.x, e.y, 25, 25);
+			}
+			
 			g2d.fill(e.elip);			
 			
 			g2d.setPaint(Color.DARK_GRAY);
@@ -283,8 +289,13 @@ class Tabuleiro extends JPanel {
 				g2d.setPaint(Color.BLACK);
 			else
 				g2d.setPaint(Color.WHITE);
-			
-			g2d.drawString(Integer.toString(e.number), e.x + e.w/2 - 5, e.y + e.h/2 + 8); //esse -5 e + 8 foi no olhômetro
+			Font originalFont = g.getFont();
+            Font newFont = originalFont.deriveFont(originalFont.getSize() * 0.65f); // Reduza o tamanho da fonte em 20%
+            if (e.number > 99) {
+                g.setFont(newFont);
+            }
+			g2d.drawString(Integer.toString(e.number), e.x + e.w/2 - (e.number < 9 ? 5 : 8), e.y + e.h/2 + (e.number < 9 ? 8 : 10)); //esse -5 e + 8 foi no olhômetro
+			g.setFont(originalFont);
 		}
 	}
 	
