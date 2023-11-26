@@ -29,7 +29,7 @@ class Jogador {
 		this.dominouPaisTurno = false;
 	}
 	
-	boolean posicionarTropas(Territorio pais, int qtd) {
+	boolean posicionarTropas(Territorio pais, int qtd, Continentes cont) {
 		if (pais.corDominando != this.cor) {
 			System.out.println("O pais não pertence ao Jogador");
 			return false;
@@ -40,13 +40,35 @@ class Jogador {
 			return false;
 		}
 		
-		if (qtd > this.numTropasPosicionar) {
-			System.out.println("Tropas insuficientes");
-			return false;
+		
+		if (cont == null) {
+			if (qtd > this.numTropasPosicionar) {
+				System.out.println("Tropas insuficientes");
+				return false;
+			}
+			
+			pais.numTropas += qtd;
+			this.numTropasPosicionar -= qtd;
 		}
-		
-		pais.numTropas += qtd;
-		
+		else {
+			int temp = this.numTropasContinentes[cont.ordinal()];
+			
+			if (temp == 0) {
+				System.out.println("Sem tropas para distribuir nesse continente.");
+				return false;
+			}
+			
+			if (qtd > temp) {
+				System.out.println("Tropas insuficientes");
+				return false;
+			}
+			
+
+			pais.numTropas += qtd;
+			this.numTropasContinentes[cont.ordinal()] -= qtd;
+			
+		}
+			
 		ModelAPI.getModelAPI().prepareNotify(pais);
 		
 		return true;

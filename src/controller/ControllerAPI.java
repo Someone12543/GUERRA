@@ -47,7 +47,7 @@ public class ControllerAPI {
 
 	public void nextAction() {
 		if (this.acao_atual == Turno.PosTropa) {
-			if (game.verifyNextTurn()) return;
+			if (!game.verifyNextTurn()) return;
 		}
 
 		if (this.acao_atual == Turno.MovTropa) {

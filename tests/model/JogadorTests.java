@@ -82,23 +82,23 @@ class JogadorTests {
 	
 	@Test
 	void posicionarTropasTerritorioNaoDominado() {
-		assertFalse(p1.posicionarTropas(t4, 3));
+		assertFalse(p1.posicionarTropas(t4, 3, null));
 	}
 	
 	@Test
 	void posicionarTropasQtdErrada() {
-		assertFalse(p1.posicionarTropas(t1, -10));
+		assertFalse(p1.posicionarTropas(t1, -10, null));
 	}
 	
 	@Test
 	void posicionarTropasQtdInsuficiente() {
-		assertFalse(p1.posicionarTropas(t1, 7));
+		assertFalse(p1.posicionarTropas(t1, 7, null));
 	}
 	
 	@Test
 	void posicionarTropasOk() {
 		int expectedNumTropas = t1.numTropas + 4;
-		assertTrue(p1.posicionarTropas(t1, 4));
+		assertTrue(p1.posicionarTropas(t1, 4, null));
 		assertEquals(expectedNumTropas, t1.numTropas);
 	}
 	

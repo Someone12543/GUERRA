@@ -14,7 +14,7 @@ class TelaPrincipal extends JFrame {
 	 */
 	private static final long serialVersionUID = 1L; // não sei o que é isso
 	public final int LARG_DEFAULT = 395;
-	public final int ALT_DEFAULT = 650;
+	public final int ALT_DEFAULT = 682;
 	JButton b1 = new JButton("Novo Jogo");
 	JButton b2 = new JButton("Carregar Jogo");
 	Principal p = new Principal();

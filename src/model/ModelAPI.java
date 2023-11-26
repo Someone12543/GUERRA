@@ -195,6 +195,25 @@ public class ModelAPI implements Subject{
 			ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
 		return true;
 	}
+
+	public boolean positionTroops(String t, int qtd, boolean cont) {
+		Territorio terr = getTerrByName(t);
+		Jogador j = listaJogadores.get(0);
+		
+		
+		if (cont) {
+			Continentes c = terr.continente.tipo;
+			if (!hasAllTerrCont(c)) return false;
+			if (!j.posicionarTropas(terr, qtd, c)) return false;	
+		}
+		else {
+			if (!j.posicionarTropas(terr, qtd, null)) return false;
+		}
+		
+		
+		
+		return true;
+	}
 	
 	public void finishGame() {
 		instance = null;
@@ -477,6 +496,20 @@ public class ModelAPI implements Subject{
         }
         return null;
     }
+	
+	private boolean hasAllTerrCont(Continentes cont) {
+		Jogador j = listaJogadores.get(0);
+		
+		for (Continente c : listaContinente) {
+			if (c.tipo == cont) {
+				for (Territorio t : c.paises) {
+					if (!j.paisesDominados.contains(t)) return false;
+				}
+			}
+		}
+		
+		return true;
+	}
 	
 	private Troca getCardByName(String name) {
 		for(Troca t : deckTroca) {

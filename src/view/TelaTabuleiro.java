@@ -60,8 +60,8 @@ class TelaTabuleiro extends JFrame {
 				switch (controller.getTurno()) {
 					case 0:
 						TelaPosicionar tp = new TelaPosicionar();
-						//tp.setTitle("POSICIONAR!");
-						//tp.setVisible(true);
+						tp.setTitle("POSICIONAR!");
+						tp.setVisible(true);
 						break;
 					case 1:
 						TelaAtaque ta = new TelaAtaque();

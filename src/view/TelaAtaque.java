@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 
 import model.ModelAPI;
 
@@ -77,15 +78,18 @@ public class TelaAtaque extends JFrame {
 		a.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				if (mod.attackTerritory(cb1.getSelectedItem().toString(), cb2.getSelectedItem().toString())) {
-					for (ImageIcon im : mod.getAtkImages()) {
-						temp = new JButton(im);
-						d.add(temp);
-					}
-					for (ImageIcon im : mod.getDefImages()) {
-						temp = new JButton(im);
-						d.add(temp);
-					}
+				if (!mod.attackTerritory(cb1.getSelectedItem().toString(), cb2.getSelectedItem().toString())) {
+					JOptionPane.showMessageDialog(a, "Combinação de países incompatível.", getTitle(), JOptionPane.ERROR_MESSAGE);
+					return;
+				}
+				
+				for (ImageIcon im : mod.getAtkImages()) {
+					temp = new JButton(im);
+					d.add(temp);
+				}
+				for (ImageIcon im : mod.getDefImages()) {
+					temp = new JButton(im);
+					d.add(temp);
 				}
 				
 				dispose();
