@@ -13,7 +13,7 @@ public class Movimentar extends JPanel{
 	
 	public Movimentar() {
 		setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-		setLayout(new GridLayout(0, 1, 0, 100));
+		setLayout(new GridLayout(0, 1, 0, 50));
 	}
 	
 	public void paintComponent(Graphics g) {

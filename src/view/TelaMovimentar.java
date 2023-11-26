@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -65,9 +66,13 @@ public class TelaMovimentar extends JFrame {
 			cb2.addItem(s);
 		}
 		
+		m.add(new JLabel("País de origem:"));
 		m.add(cb1);
+		
+		m.add(new JLabel("País de destino:"));
 		m.add(cb2);
 		
+		m.add(new JLabel("Tropas a movimentar:"));
 		m.add(quantidade);
 		
 		m.add(b1);

@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import model.ModelAPI;
@@ -66,7 +67,10 @@ public class TelaAtaque extends JFrame {
 			cb2.addItem(s);
 		}
 		
+		a.add(new JLabel("País de origem:"));
 		a.add(cb1);
+		
+		a.add(new JLabel("País de destino:"));
 		a.add(cb2);
 		
 		a.add(b1);
