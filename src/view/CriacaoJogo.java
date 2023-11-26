@@ -16,7 +16,7 @@ class CriacaoJogo extends JPanel {
 	
 	public CriacaoJogo() {
 		setBorder(BorderFactory.createEmptyBorder(30, 30, 30, 30));
-		setLayout(new GridLayout(0, 1, 0, 120));
+		setLayout(new GridLayout(0, 1, 0, 80));
 	}
 	
 	public void paintComponent(Graphics g) {

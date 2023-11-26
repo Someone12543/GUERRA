@@ -142,7 +142,7 @@ public class ModelAPI implements Subject{
 
 	public boolean setupGame()
 	{
-		if (listaJogadores.size() < 2)
+		if (listaJogadores.size() < 3)
 			return false;
 		
 		observadores.add(ViewAPI.getViewAPI());
