@@ -255,13 +255,27 @@ public class ModelAPI implements Subject{
 		return true;
 	}
 	
-	public void giveBonuses() {
+	public boolean giveBonuses() {
 		Jogador j = listaJogadores.get(0);
+		
 		for (Continente c : listaContinente) {
 			j.numTropasContinentes[c.tipo.ordinal()] += c.bonusPiece(j);
 		}
 		
 		j.numTropasPosicionar += j.bonusPiece();
+		
+		return true;
+	}
+	
+	public boolean check1stTurn() {
+		Jogador j = listaJogadores.get(0);
+		
+		if (j.primeiraJogada) {
+			j.primeiraJogada = false;
+			return true;
+		}
+		
+		return false;
 	}
 
 	public boolean attackTerritory(String orig, String dest) {
