@@ -17,6 +17,8 @@ class Tabuleiro extends JPanel {
 	private static final long serialVersionUID = 1L;
 	Image source, bg;
 	ArrayList<Exercito> listaExercitos;
+	String acao = "Posicionar";
+	String corPlayer = "Azul";
 	
 	public Tabuleiro() {
 		try {
@@ -299,9 +301,55 @@ class Tabuleiro extends JPanel {
 			g2d.drawString(Integer.toString(e.number), e.x + e.w/2 - (e.number < 9 ? 5 : 8), e.y + e.h/2 + (e.number < 9 ? 8 : 10)); //esse -5 e + 8 foi no olhômetro
 			g.setFont(originalFont);
 		}
+		
+		switch(corPlayer) {
+		case "Azul":
+			g2d.setPaint(Color.BLUE);
+			break;
+		case "Amarelo":
+			g2d.setPaint(Color.YELLOW);
+			break;
+		case "Branco":
+			g2d.setPaint(Color.WHITE);
+			break;
+		case "Verde":
+			g2d.setPaint(Color.GREEN);
+			break;
+		case "Vermelho":
+			g2d.setPaint(Color.RED);
+			break;
+		case "Preto":
+			g2d.setPaint(Color.BLACK);
+			break;
+		default:
+			g2d.setPaint(Color.GRAY);
+		} // Cor do retângulo
+	    int rectWidth = 100; // Largura do retângulo
+	    int rectHeight = 35; // Altura do retângulo
+	    int rectX = (getWidth() - rectWidth) / 2 -10; // Posição X do retângulo (centralizado)
+	    int rectY = getHeight() - rectHeight - 120; // Posição Y do retângulo (20 pixels acima do fundo)
+
+	    g2d.fillRect(rectX, rectY, rectWidth, rectHeight);
+	    
+	    // Adiciona borda cinza ao retângulo
+	    g2d.setPaint(Color.GRAY); // Cor da borda
+	    g2d.drawRect(rectX, rectY, rectWidth, rectHeight);
+
+	    // Adiciona texto no retângulo
+	    if (corPlayer != "Preto") {
+	    	g2d.setPaint(Color.BLACK); // Cor do texto
+	    }else {
+	    	g2d.setPaint(Color.WHITE);
+	    }
+	    g2d.setFont(new Font("Arial", Font.BOLD, 18)); // Fonte do texto
+	    String texto = acao;
+	    int textX = rectX + rectWidth / 2 - g2d.getFontMetrics().stringWidth(texto) / 2; // Posição X do texto (centralizado no retângulo)
+	    int textY = rectY + rectHeight / 2 + g2d.getFontMetrics().getHeight() / 4; // Posição Y do texto (centralizado verticalmente no retângulo)
+
+	    g2d.drawString(texto, textX, textY);
 	}
 	
-	public void repaintExe(int color, int number, String nome) {
+	public void repaintExe(int color, int number, String nome, String colorJog, String action) {
 		for (Exercito e: listaExercitos) {
 			if (nome.equals(e.nome)) {
 				e.color = color;
@@ -309,6 +357,8 @@ class Tabuleiro extends JPanel {
 				break;
 			}
 		}
+		acao = action;
+		corPlayer = colorJog;
 	}
 	
 }

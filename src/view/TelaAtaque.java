@@ -46,8 +46,6 @@ public class TelaAtaque extends JFrame {
 
 		cb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
-				
 				try {
 					terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
 					Arrays.sort(terrs, collator);
@@ -84,6 +82,7 @@ public class TelaAtaque extends JFrame {
 		a.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
+
 				String temp1 = cb1.getSelectedItem().toString();
 				String temp2 = cb2.getSelectedItem().toString();
 				
@@ -92,14 +91,9 @@ public class TelaAtaque extends JFrame {
 					return;
 				}
 				
-//				for (ImageIcon im : mod.getAtkImages()) {
-//					temp = new JButton(im);
-//					d.add(temp);
-//				}
-//				for (ImageIcon im : mod.getDefImages()) {
-//					temp = new JButton(im);
-//					d.add(temp);
-//				}
+				TelaDados td = new TelaDados(cb1.getSelectedItem().toString(), cb2.getSelectedItem().toString());
+				td.setTitle(getTitle());
+				td.setVisible(true);
 				
 				terrs = mod.getCurrPlayerTerr();
 				Arrays.sort(terrs, collator);

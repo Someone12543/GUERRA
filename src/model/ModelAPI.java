@@ -4,11 +4,15 @@ import controller.ControllerAPI;
 import view.ViewAPI;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Collections;
 import java.awt.Image;
 import java.io.*;
+import java.security.SecureRandom;
+import java.text.Collator;
 
 import javax.imageio.ImageIO;
+import javax.swing.Icon;
 import javax.swing.ImageIcon;
 
 import observer.*;
@@ -49,6 +53,8 @@ public class ModelAPI implements Subject{
 	public static void setupImages() throws IOException{
 		cardImages = new ArrayList<Image>();
 		objectiveImages = new ArrayList<Image>();
+		atkImages = new ArrayList<ImageIcon>();
+		defImages = new ArrayList<ImageIcon>();
 		
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_africadosul.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_angola.png")));
@@ -117,6 +123,23 @@ public class ModelAPI implements Subject{
 		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_12.jpg")));
 		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_13.jpg")));
 		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_14.jpg")));
+		
+		ImageIcon desativado = new ImageIcon(ImageIO.read(new File("assets/dados/dado_desativado.png")));
+		atkImages.add(desativado);
+		atkImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_ataque_1.png"))));
+		atkImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_ataque_2.png"))));
+		atkImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_ataque_3.png"))));
+		atkImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_ataque_4.png"))));
+		atkImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_ataque_5.png"))));
+		atkImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_ataque_6.png"))));
+		
+		defImages.add(desativado);
+		defImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_defesa_1.png"))));
+		defImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_defesa_2.png"))));
+		defImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_defesa_3.png"))));
+		defImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_defesa_4.png"))));
+		defImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_defesa_5.png"))));
+		defImages.add(new ImageIcon(ImageIO.read(new File("assets/dados/dado_defesa_6.png"))));
 	}
 	
 	public void obsAdd(Observer o) {
@@ -238,6 +261,18 @@ public class ModelAPI implements Subject{
 		return terrs;
 	}
 	
+	public int[] getTroopQtds(String orig, String dest) {
+		Territorio aliado = getTerrByName(orig);
+		Territorio inimigo = getTerrByName(dest);
+		
+		int[] nums = new int[2];
+		
+		nums[0] = aliado.numTropas - 1 > 2? 3 : aliado.numTropas - 1;
+		nums[1] = inimigo.numTropas > 2? 3 : inimigo.numTropas;
+		
+		return nums;
+	}
+	
 	public boolean performTrade(int[] cards) {
 		Jogador j = listaJogadores.get(0);
 		return trade(j, j.mao.get(cards[0]), j.mao.get(cards[1]), j.mao.get(cards[2]));
@@ -251,7 +286,7 @@ public class ModelAPI implements Subject{
 		for (int v : j.numTropasContinentes) {
 			if (v != 0) return false;
 		}
-
+		prepareNotify();
 		return true;
 	}
 	
@@ -263,6 +298,7 @@ public class ModelAPI implements Subject{
 		}
 		
 		j.numTropasPosicionar += j.bonusPiece();
+		prepareNotify();
 		
 		return true;
 	}
@@ -278,12 +314,12 @@ public class ModelAPI implements Subject{
 		return false;
 	}
 
-	public boolean attackTerritory(String orig, String dest) {
+	public boolean attackTerritory(String orig, String dest, Integer[] atkDices, Integer[] defDices) {
 		Jogador player = listaJogadores.get(0);
 		Territorio original = getTerrByName(orig);
 		Territorio destino = getTerrByName(dest);
 		
-		if(!original.atacarTerritorio(player.cor, destino)) return false;
+		if(!original.atacarTerritorio(player.cor, destino, atkDices, defDices)) return false;
 		
 		ModelAPI.getModelAPI().prepareNotify(original);
 		ModelAPI.getModelAPI().prepareNotify(destino);
@@ -336,7 +372,7 @@ public class ModelAPI implements Subject{
 			if (!j.posicionarTropas(terr, qtd, null)) return false;
 		}
 		
-		
+		prepareNotify(terr);
 		
 		return true;
 	}
@@ -350,7 +386,8 @@ public class ModelAPI implements Subject{
 		
 		ModelAPI.getModelAPI().prepareNotify(original);
 		ModelAPI.getModelAPI().prepareNotify(destino);
-		
+		prepareNotify(original);
+		prepareNotify(destino);
 		return true;
 	}
 	
@@ -360,7 +397,7 @@ public class ModelAPI implements Subject{
 				t.numTropasPodeMover = t.numTropas - 1;
 			}
 		}
-		
+		prepareNotify();
 		return true;
 	}
 	
@@ -477,12 +514,22 @@ public class ModelAPI implements Subject{
 		}
 	}
 
-	public ArrayList<ImageIcon> getAtkImages() {
-		return atkImages;
+	public ImageIcon getAtkImage(int ind) {
+		return atkImages.get(ind);
 	}
 	
-	public ArrayList<ImageIcon> getDefImages() {
-		return defImages;
+	public ImageIcon getAtkImage(Icon icone) {
+		int ind = atkImages.indexOf(icone) + 1;
+		return atkImages.get(ind > 6 ? 0 : ind);
+	}
+	
+	public ImageIcon getDefImage(int ind) {
+		return defImages.get(ind);
+	}
+	
+	public ImageIcon getDefImage(Icon icone) {
+		int ind = defImages.indexOf(icone) + 1;
+		return defImages.get(ind > 6 ? 0 : ind);
 	}
 	
 	//Debug
@@ -511,6 +558,62 @@ public class ModelAPI implements Subject{
  		paramsForObserver.add(0, ter.corDominando.ordinal());
 		paramsForObserver.add(1, ter.numTropas);
 		paramsForObserver.add(2, ter.nome);
+		switch(listaJogadores.get(0).cor) {
+		case Azul:
+			paramsForObserver.add(3, "Azul");
+			break;
+		case Amarelo:
+			paramsForObserver.add(3, "Amarelo");
+			break;
+		case Branco:
+			paramsForObserver.add(3, "Branco");
+			break;
+		case Verde:
+			paramsForObserver.add(3, "Verde");
+			break;
+		case Vermelho:
+			paramsForObserver.add(3, "Vermelho");
+			break;
+		case Preto:
+			paramsForObserver.add(3, "Preto");
+			break;
+		default:
+			paramsForObserver.add(3, "xyz");
+		}
+		paramsForObserver.add(4, ControllerAPI.getControllerAPI().getAcaoStr());
+		for (Observer obs: observadores) {
+			obs.notify(getModelAPI());
+		}
+		paramsForObserver.clear();
+ 	}
+ 	
+ 	void prepareNotify() {
+ 		paramsForObserver.add(0, 0);
+		paramsForObserver.add(1, 0);
+		paramsForObserver.add(2, "xyz");
+		switch(listaJogadores.get(0).cor) {
+		case Azul:
+			paramsForObserver.add(3, "Azul");
+			break;
+		case Amarelo:
+			paramsForObserver.add(3, "Amarelo");
+			break;
+		case Branco:
+			paramsForObserver.add(3, "Branco");
+			break;
+		case Verde:
+			paramsForObserver.add(3, "Verde");
+			break;
+		case Vermelho:
+			paramsForObserver.add(3, "Vermelho");
+			break;
+		case Preto:
+			paramsForObserver.add(3, "Preto");
+			break;
+		default:
+			paramsForObserver.add(3, "xyz");
+		}
+		paramsForObserver.add(4, ControllerAPI.getControllerAPI().getAcaoStr());
 		for (Observer obs: observadores) {
 			obs.notify(getModelAPI());
 		}
@@ -557,7 +660,26 @@ public class ModelAPI implements Subject{
 			j.obj = obj;
 		}
 	}
-
+	
+	public Integer[] throwDices(int qtd) {
+		SecureRandom rand = new SecureRandom();
+		
+		Integer[] list = new Integer[3]; 
+		int i;
+		
+		for(i = 0; i < qtd; i++) {
+			list[i] = rand.nextInt(6) + 1;
+		}
+		
+		for (;i < 3; i++) {
+			list[i] = 0;
+		}
+		
+		Arrays.sort(list, Collections.reverseOrder());
+		
+		return list;
+	}
+	
 	void rafflePlayers()
 	{
 		Collections.shuffle(listaJogadores);
