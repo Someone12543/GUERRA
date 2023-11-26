@@ -114,6 +114,7 @@ public class ControllerAPI {
 			ln = inputStream.readLine();
 			
 			troca_atual = ln.charAt(0);
+			acao_atual = Turno.PosTropa;
 			
 			game = ModelAPI.getModelAPI();
 			

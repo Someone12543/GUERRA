@@ -354,8 +354,8 @@ class Tabuleiro extends JPanel {
 	    g2d.drawString(texto, textX, textY);
 	}
 	
-	//método que é chamado pela viewAPI para atualizar as infos do mapa com as infos do observer
-	public void repaintExe(int color, int number, String nome, String colorJog, String action) {
+	//métodos que sao chamados pela viewAPI para atualizar as infos do mapa com as infos do observer
+	public void repaintExe(int color, int number, String nome, String colorJog) {
 		for (Exercito e: listaExercitos) {
 			if (nome.equals(e.nome)) {
 				e.color = color;
@@ -363,8 +363,11 @@ class Tabuleiro extends JPanel {
 				break;
 			}
 		}
-		acao = action;
 		corPlayer = colorJog;
+	}
+	
+	void repaintAction(String action) {
+		acao = action;
 	}
 	
 }

@@ -1,12 +1,5 @@
 package model;
-import java.io.File;
-import java.io.IOException;
-import java.security.SecureRandom;
 import java.util.ArrayList;
-import java.util.Collections;
-
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 class Territorio {
 	String nome;
@@ -53,8 +46,7 @@ class Territorio {
 		return true;
 	}
 	
-boolean atacarTerritorio(Cores cor, Territorio inimigo) {
-		
+	boolean atacarTerritorio(Cores cor, Territorio inimigo, Integer[] atk, Integer[] def) {
 		if (this.corDominando != cor)
 			return false;
 		
@@ -64,66 +56,15 @@ boolean atacarTerritorio(Cores cor, Territorio inimigo) {
 		if (this.numTropas < 2)
 			return false;
 		
-		int qtdAtk;
-		int qtdDef;
 		int lostAtk;
 		int lostDef;
 		int i;
 		ModelAPI mod = ModelAPI.getModelAPI();
 		
-		SecureRandom rand = new SecureRandom();
-		
-		ArrayList<Integer> listAtk = new ArrayList<Integer>();
-		ArrayList<Integer> listDef = new ArrayList<Integer>();
-		ImageIcon atkImage = null, defImage = null;
-		ArrayList<ImageIcon> atkImages = new ArrayList<ImageIcon>();
-		ArrayList<ImageIcon> defImages = new ArrayList<ImageIcon>();
-		
-		qtdAtk = this.numTropas - 1 > 2? 3 : this.numTropas - 1;
-		qtdDef = inimigo.numTropas > 2? 3 : inimigo.numTropas;
-		
-		for(i = 0; i < qtdAtk; i++) {
-			listAtk.add(rand.nextInt(6) + 1);
-		}
-
-		for(i = 0; i < qtdDef; i++) {
-			listDef.add(rand.nextInt(6) + 1);
-		}
-			
-		Collections.sort(listAtk, Collections.reverseOrder());
-		Collections.sort(listDef, Collections.reverseOrder());
-		
-		for (i = 0; i < qtdAtk; i++) {
-			try {
-				atkImage = new ImageIcon(ImageIO.read(new File("assets/dados/dado_ataque_" + listAtk.get(i).toString() + ".png")));
-			}
-			catch (IOException e){
-				System.out.println(e.getMessage());
-				System.exit(1);
-			}
-			
-			atkImages.add(atkImage);
-		}
-		
-		for (i = 0; i < qtdDef; i++) {
-			try {
-				defImage = new ImageIcon(ImageIO.read(new File("assets/dados/dado_defesa_" + listDef.get(i).toString() + ".png")));
-			}
-			catch (IOException e){
-				System.out.println(e.getMessage());
-				System.exit(1);
-			}
-			
-			defImages.add(defImage);
-		}
-		
-		mod.atkImages = atkImages;
-		mod.defImages = defImages;
-		
 		lostAtk = lostDef = 0;
 		
-		for(i = 0; i < qtdAtk && i < qtdDef; i++) {
-			if (listAtk.get(i) > listDef.get(i)) lostDef++;
+		for(i = 0; i < 3 && (atk[i] != 0 && def[i] != 0); i++) {
+			if (atk[i] > def[i]) lostDef++;
 			else lostAtk++;
 		}
 		
