@@ -10,13 +10,13 @@ import javax.swing.ImageIcon;
 
 class Jogador {
 	String nome;
-	Cores cor;
-	Objetivo obj;
-	ArrayList<Troca> mao;
+	Cores cor; //cor do jogador no enum
+	Objetivo obj; //obj do jogador
+	ArrayList<Troca> mao; //cartas do jogador
 	ArrayList<Territorio> paisesDominados;
-	ArrayList<Cores> jogadoresEliminados;
-	int numTropasPosicionar;
-	int[] numTropasContinentes = new int[6];
+	ArrayList<Cores> jogadoresEliminados; //cores do jogadores que o jogador eliminou
+	int numTropasPosicionar; //numero de tropas que o jogador tem para posicionar
+	int[] numTropasContinentes = new int[6]; //numero de tropas de bonus dos continentes do jogador para posicionar
 	boolean dominouPaisTurno;
 	boolean primeiraJogada;
 	
@@ -31,6 +31,7 @@ class Jogador {
 		this.primeiraJogada = true;
 	}
 	
+	// metodo para posicionar tropas
 	boolean posicionarTropas(Territorio pais, int qtd, Continentes cont) {
 		if (pais.corDominando != this.cor) {
 			System.out.println("O pais não pertence ao Jogador");
@@ -70,7 +71,8 @@ class Jogador {
 			this.numTropasContinentes[cont.ordinal()] -= qtd;
 			
 		}
-			
+		
+		//notificando via observer os observadores que houve uma mudança na quantidade de tropas do pais
 		ModelAPI.getModelAPI().prepareNotify(pais);
 		
 		return true;
