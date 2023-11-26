@@ -24,8 +24,6 @@ public class ModelAPI implements Subject{
 	ArrayList<ImageIcon> defImages;
 	ArrayList<Observer> observadores;
 	ArrayList<Object> paramsForObserver;
-	int[] tropasContinentes;
-	int tropasPosicionar;
 	
 	private ModelAPI()
 	{
@@ -150,7 +148,9 @@ public class ModelAPI implements Subject{
 	public void giveBonuses() {
 		Jogador j = listaJogadores.get(0);
 		for (Continente c : listaContinente) {
-			j.numTropasContinentes[c.tipo.ordinal()] += c.bonusPiece(j);
+			if (hasAllTerrCont(c.tipo)){
+				j.numTropasContinentes[c.tipo.ordinal()] += c.bonusPiece(j);
+			}
 		}
 		
 		j.numTropasPosicionar += j.bonusPiece();
@@ -202,20 +202,19 @@ public class ModelAPI implements Subject{
 		Territorio terr = getTerrByName(t);
 		Jogador j = listaJogadores.get(0);
 		
+		
 		if (cont) {
-			if (!j.posicionarTropas(terr, qtd, terr.continente.tipo)) return false;
+			Continentes c = terr.continente.tipo;
+			if (!hasAllTerrCont(c)) return false;
+			if (!j.posicionarTropas(terr, qtd, c)) return false;	
 		}
 		else {
 			if (!j.posicionarTropas(terr, qtd, null)) return false;
 		}
 		
-		tropasPosicionar = j.numTropasPosicionar;
+		
 		
 		return true;
-	}
-
-	public boolean positionTroopsCont() {
-		return false;
 	}
 	
 	public void finishGame() {
@@ -500,6 +499,20 @@ public class ModelAPI implements Subject{
         }
         return null;
     }
+	
+	private boolean hasAllTerrCont(Continentes cont) {
+		Jogador j = listaJogadores.get(0);
+		
+		for (Continente c : listaContinente) {
+			if (c.tipo == cont) {
+				for (Territorio t : c.paises) {
+					if (!j.paisesDominados.contains(t)) return false;
+				}
+			}
+		}
+		
+		return true;
+	}
 	
 	private Troca getCardByName(String name) {
 		for(Troca t : deckTroca) {

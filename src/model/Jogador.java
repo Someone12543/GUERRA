@@ -40,18 +40,33 @@ class Jogador {
 			return false;
 		}
 		
-		if (qtd > this.numTropasPosicionar) {
-			System.out.println("Tropas insuficientes");
-			return false;
-		}
-		
 		
 		if (cont == null) {
+			if (qtd > this.numTropasPosicionar) {
+				System.out.println("Tropas insuficientes");
+				return false;
+			}
+			
 			pais.numTropas += qtd;
 			this.numTropasPosicionar -= qtd;
 		}
 		else {
-			if (this.numTropasContinentes[cont.ordinal()] == 0) return false; 
+			int temp = this.numTropasContinentes[cont.ordinal()];
+			
+			if (temp == 0) {
+				System.out.println("Sem tropas para distribuir nesse continente.");
+				return false;
+			}
+			
+			if (qtd > temp) {
+				System.out.println("Tropas insuficientes");
+				return false;
+			}
+			
+
+			pais.numTropas += qtd;
+			this.numTropasContinentes[cont.ordinal()] -= qtd;
+			
 		}
 			
 		ModelAPI.getModelAPI().prepareNotify(pais);

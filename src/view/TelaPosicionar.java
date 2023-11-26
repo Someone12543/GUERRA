@@ -22,6 +22,7 @@ public class TelaPosicionar extends JFrame {
 	public final int ALT_DEFAULT = 650;
 	JComboBox<String> cb1;
 	JTextField quantidade = new JTextField();
+	JButton b0 = new JButton("Posicionar exércitos de continentes");
 	JButton b1 = new JButton("Cancelar posicionamento");
 	JButton b2 = new JButton("Confirmar posicionamento");
 	JButton temp;
@@ -62,12 +63,13 @@ public class TelaPosicionar extends JFrame {
 				
 				try {
 					qtd = Integer.valueOf(quantidade.getText());
-					mod.positionTroops(cb1.getSelectedItem().toString(), qtd, true);
+					mod.positionTroops(cb1.getSelectedItem().toString(), qtd, false);
 					dispose();
 				}
 				catch (NumberFormatException ex){
 					JOptionPane.showMessageDialog(p, "Somente números interios são aceitos.", getTitle(), JOptionPane.ERROR_MESSAGE);
 				}
+
 			}
 		});
 		
