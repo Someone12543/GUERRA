@@ -11,10 +11,10 @@ import javax.swing.ImageIcon;
 class Territorio {
 	String nome;
 	Continente continente;
-	int numTropas;
-	int numTropasPodeMover;
+	int numTropas; //num de tropas totais do territorio
+	int numTropasPodeMover; //num de tropas que podem ser movidas do territorio
 	Cores corDominando;
-	ArrayList<Territorio> paisesLigados;
+	ArrayList<Territorio> paisesLigados; //paises que o territorio está ligado com
 	
 	public Territorio(String nome, Continente continente) {
 		this.nome = nome;

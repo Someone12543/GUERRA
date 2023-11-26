@@ -3,12 +3,16 @@ package model;
 import java.awt.Image;
 import java.util.ArrayList;
 
+//classe abstrata Objetivo que sera herdada por cada tipo de objetivo
 abstract class Objetivo {
-	String descricao;
-	int id;
-	Image toDisplay;
+	String descricao; //descrição do objetivo
+	int id; //identificador dele, seu numero
+	Image toDisplay; //imagem do objetivo
+	
+	//metodo para ser implementado por cada classe objetivo diferente para informar se o objetivo foi concluido
 	abstract boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente);
 	
+	//metodo que é usado por outros objetivos para verificar se o jogador atual conquistou os continentes da listaContinente
 	boolean verificaConquista(Jogador atual, ArrayList<Continentes> continentes, ArrayList<Continente> listaContinente) {
 		ArrayList<Territorio> territoriosObj = new ArrayList<>();
 		for(Continentes nome: continentes) {
@@ -97,6 +101,8 @@ class Objetivo5 extends Objetivo{
 		continentes.add(Continentes.EUROPA);
 		continentes.add(Continentes.OCEANIA);
 		
+		//há varias combinações de continentes que o jogador pode conquistar para concluir este objetivo
+		//esses for loops testam se alguma delas foi concluida
 		ArrayList<ArrayList<Continentes>> combinacoes = new ArrayList<>();
 		for(Continentes t: Continentes.values()) {
 			if(t != Continentes.EUROPA && t != Continentes.OCEANIA) {
@@ -127,6 +133,8 @@ class Objetivo6 extends Objetivo{
 		continentes.add(Continentes.EUROPA);
 		continentes.add(Continentes.AMSUL);
 		
+		//há varias combinações de continentes que o jogador pode conquistar para concluir este objetivo
+		//esses for loops testam se alguma delas foi concluida
 		ArrayList<ArrayList<Continentes>> combinacoes = new ArrayList<>();
 		for(Continentes t: Continentes.values()) {
 			if(t != Continentes.EUROPA && t != Continentes.AMSUL) {
@@ -152,6 +160,8 @@ class Objetivo7 extends Objetivo{
 		this.descricao = "Conquistar 18 territorios com pelo menos 2 exercitos em cada";
 		this.toDisplay = _ref;
 	}
+	
+	//funcao para ver quantos territorios o jogador possui que tenham mais de 1 exercito, caso sejam mais de 18 retorna true
 	boolean verificaObj(Jogador atual, ArrayList<Continente> listaContinente) {
 		int counter = 0;
 		for(Territorio t: atual.paisesDominados) {
@@ -276,58 +286,3 @@ class Objetivo14 extends Objetivo{
 	}
 }
 
-//class Objetivo {
-//	String descricao;
-//	int id;
-//	Image toDisplay;
-//	
-//	public Objetivo(int id, Image _ref)
-//	{
-//		this.id = id;
-//		this.toDisplay = _ref;
-//		switch(id)
-//		{
-//		case 1:
-//			this.descricao = "Conquistar na totalidade a Asia e a Africa";
-//			break;
-//		case 2:
-//			this.descricao = "Conquistar na totalidade Asia e America do Sul";
-//			break;
-//		case 3:
-//			this.descricao = "Conquistar na totalidade a America do Norte e a Africa";
-//			break;
-//		case 4:
-//			this.descricao = "Conquistar na totalidade a America do Norte e a Oceania";
-//			break;
-//		case 5:
-//			this.descricao = "Conquistar na totalidade a Europa, a Oceania e mais um continente a sua escolha";
-//			break;
-//		case 6:
-//			this.descricao = "Conquistar na totalidade a Europa, a America do Sul e mais um continente a sua escolha";
-//			break;
-//		case 7:
-//			this.descricao = "Conquistar 18 territorios com pelo menos 2 exercitos em cada";
-//			break;
-//		case 8:
-//			this.descricao = "Destruir todos os exércitos Amarelo";
-//			break;
-//		case 9:
-//			this.descricao = "Destruir todos os exércitos Azul";
-//			break;
-//		case 10:
-//			this.descricao = "Destruir todos os exércitos Branco";
-//			break;
-//		case 11:
-//			this.descricao = "Destruir todos os exércitos Verde";
-//			break;
-//		case 12:
-//			this.descricao = "Destruir todos os exércitos Vermelho";
-//			break;
-//		case 13:
-//			this.descricao = "Destruir todos os exércitos Preto";
-//			break;
-//		default:
-//			this.descricao = "Conquistar 24 territorios a sua escolha";
-//		}
-//	}
-//}

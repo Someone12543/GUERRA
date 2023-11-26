@@ -4,8 +4,10 @@ import model.ModelAPI;
 import view.ViewAPI;
 import java.io.*;
 
+//Nossa fachada para o pacote Controller que também é um singleton e onde está nossa main
 public class ControllerAPI {
 	
+	// main preparando imagens e iniciando o controller
 	public static void main(String[] args) {
 		getControllerAPI();
 		try {
@@ -16,9 +18,13 @@ public class ControllerAPI {
 		}
 	}
 	
+	//singleton
 	static ControllerAPI instance;
+	
 	public char troca_atual;
 	Turno acao_atual;
+	
+	//variaveis para pegar singletons das outras fachadas
 	ModelAPI game;
 	ViewAPI view;
 	
@@ -27,6 +33,8 @@ public class ControllerAPI {
 		this.acao_atual = Turno.PosTropa;
 	}
 	
+	
+	//get do singleton
 	public static ControllerAPI getControllerAPI() {
 		if(instance == null)
 			instance = new ControllerAPI();
@@ -42,6 +50,7 @@ public class ControllerAPI {
 			return true;
 		}
 		
+		//erro para o caso de nao ter jogadores suficientes para iniciar o jogo 
 		view.showErrorInsufficientPlayers();
 		return false;
 	}
@@ -51,11 +60,14 @@ public class ControllerAPI {
 		this.game = null;
 	}
 
+	//Preparando a proxima acao
 	public void nextAction() {
+		//check para saber se o jogador add todas as tropas que precisava
 		if (this.acao_atual == Turno.PosTropa) {
 			if (!game.verifyNextTurn()) return;
 		}
-
+		
+		//dando as cartas pro jogador e habilitando o save
 		if (this.acao_atual == Turno.MovTropa) {
 			game.giveCardToPlayer();
 			game.nextPlayerToPlay();
@@ -71,6 +83,7 @@ public class ControllerAPI {
 		startAction();
 	}
 	
+	//auto-explicativa
 	public void saveGame(File file) throws IOException {
 		PrintWriter outputStream = null;
 		
@@ -121,6 +134,7 @@ public class ControllerAPI {
 		startAction();
 	}
 	
+	//Chamar as funcoes necessarias do modelAPI para cada caso de tipo de acao do turno
 	void startAction() {
 		switch (acao_atual) {
 			case PosTropa:
@@ -137,11 +151,13 @@ public class ControllerAPI {
 				break;
 		}
 	}
-
+	
+	//caputrando o numero do turno via ordinal do enum
 	public int getTurno() {
 		return acao_atual.ordinal();
 	}
 	
+	//devolvendo o tipo de acao em formato de String para ser exibida na tela
 	public String getAcaoStr() {
 		if (acao_atual == Turno.Ataque) {
 			return "Ataque";

@@ -21,7 +21,7 @@ class TelaTabuleiro extends JFrame {
 	 * 
 	 */
 	
-	static TelaTabuleiro instance;
+	static TelaTabuleiro instance; //singleton
 	private static final long serialVersionUID = 1L;
 	public final int LARG_DEFAULT = 953;
 	public final int ALT_DEFAULT = 735;
@@ -140,6 +140,7 @@ class TelaTabuleiro extends JFrame {
 		getContentPane().add(t);
 	}
 	
+	//singleton
 	public static TelaTabuleiro getTelaTabuleiro() {
 		if(instance == null)
 			instance = new TelaTabuleiro();

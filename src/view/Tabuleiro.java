@@ -239,6 +239,7 @@ class Tabuleiro extends JPanel {
         
 		this.listaExercitos = new ArrayList<Exercito>();
 		
+		//as coordenadas estavam em formato de quadrados do mapa, aqui elas sao passadas para o formato de pixel e colocadas no exercito que vai para a lista
 		for (Map.Entry<String, ArrayList<Integer>> entry : coordenadas.entrySet()) {
             ArrayList<Integer> valores = entry.getValue();
             listaExercitos.add(new Exercito((937*valores.get(0)/68)-20, (703*valores.get(1)/52)-16, 0, entry.getKey()));
@@ -278,6 +279,7 @@ class Tabuleiro extends JPanel {
 				g2d.setPaint(Color.GRAY);
 			}
 			
+			//aumentando o tamanho do exercito se forem mais de 9
 			if (e.number > 9) {
 				e.elip = new Ellipse2D.Double(e.x, e.y, 25, 25);
 			}else {
@@ -293,6 +295,8 @@ class Tabuleiro extends JPanel {
 				g2d.setPaint(Color.BLACK);
 			else
 				g2d.setPaint(Color.WHITE);
+			
+			//diminuindo a fonte caso o numero de exercitos passe de 99
 			Font originalFont = g.getFont();
             Font newFont = originalFont.deriveFont(originalFont.getSize() * 0.65f); // Reduza o tamanho da fonte em 20%
             if (e.number > 99) {
@@ -302,6 +306,7 @@ class Tabuleiro extends JPanel {
 			g.setFont(originalFont);
 		}
 		
+		//adicionando um retangulo no mapa para indicar a cor do jogador da vez e a ação que é pra ser tomada
 		switch(corPlayer) {
 		case "Azul":
 			g2d.setPaint(Color.BLUE);
@@ -349,6 +354,7 @@ class Tabuleiro extends JPanel {
 	    g2d.drawString(texto, textX, textY);
 	}
 	
+	//método que é chamado pela viewAPI para atualizar as infos do mapa com as infos do observer
 	public void repaintExe(int color, int number, String nome, String colorJog, String action) {
 		for (Exercito e: listaExercitos) {
 			if (nome.equals(e.nome)) {

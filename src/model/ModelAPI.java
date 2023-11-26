@@ -15,9 +15,10 @@ import observer.*;
 
 public class ModelAPI implements Subject{
 	
-	static ModelAPI instance;
+	static ModelAPI instance; //singleton
 	
-	static ArrayList<Image> cardImages;
+	//imagens
+	static ArrayList<Image> cardImages; 
 	static ArrayList<Image> objectiveImages;
 	static ArrayList<ImageIcon> atkImages;
 	static ArrayList<ImageIcon> defImages;
@@ -27,7 +28,7 @@ public class ModelAPI implements Subject{
 	ArrayList<Objetivo> deckObjetivos;
 	ArrayList<Troca> deckTroca;
 	ArrayList<Observer> observadores;
-	ArrayList<Object> paramsForObserver;
+	ArrayList<Object> paramsForObserver; //lista dos valores que serao passados via observer para os observadores
 	
 	private ModelAPI()
 	{
@@ -39,6 +40,7 @@ public class ModelAPI implements Subject{
 		this.paramsForObserver = new ArrayList<Object>();
 	}
 	
+	//singleton
 	public static ModelAPI getModelAPI()
 	{
 		if (instance == null)
@@ -119,6 +121,7 @@ public class ModelAPI implements Subject{
 		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_14.jpg")));
 	}
 	
+	//metodos que o subject do observer deve implementar
 	public void obsAdd(Observer o) {
 		observadores.add(o);
 	}
@@ -132,6 +135,8 @@ public class ModelAPI implements Subject{
 		observadores.remove(o);
 	}
 	
+	
+	
 	public boolean addPlayer(String nome, int cor)
 	{
 		Jogador newPlayer = new Jogador(nome, Cores.values()[cor]);
@@ -140,17 +145,26 @@ public class ModelAPI implements Subject{
 		return true;
 	}
 
+	
+	//setup que deve ser realizado para o jogo começar
 	public boolean setupGame()
 	{
+		//numero minimo de jogadores é 3
 		if (listaJogadores.size() < 3)
 			return false;
 		
+		//adicionando o observador (ViewAPI) a lista de observadores do subject (modelAPI)
 		observadores.add(ViewAPI.getViewAPI());
 		setupContinents(listaContinente);
 		setupCards();
 		
+		//função para distribuir objetivos
 		drawObjectives();
+		
+		//função para embaralhar os jogadores
 		rafflePlayers();
+		
+		//função para distribuir os territorios inicais para os jogadores
 		raffleTerritory();
 		
 		return true;
@@ -170,6 +184,8 @@ public class ModelAPI implements Subject{
 		return false;
 	}
 	
+	
+	//função para dar uma carta para o jogador que dominou um territorio
 	public void giveCardToPlayer() {
 		Jogador j = listaJogadores.get(0);
 		
@@ -179,6 +195,7 @@ public class ModelAPI implements Subject{
 		j.dominouPaisTurno = false;
 	}
 	
+	//função para ir para o proximo jogador e colocar o atual no fim da lista
 	public void nextPlayerToPlay() {
 		Jogador j = listaJogadores.get(0);
 		listaJogadores.remove(j);
@@ -189,6 +206,7 @@ public class ModelAPI implements Subject{
 		return listaJogadores.get(0).obj.toDisplay;
 	}
 	
+	//funções para pegar as imagens e nomes das cartas do jogador
 	public Image[] getCardImages() {
 		Jogador j = listaJogadores.get(0);
 		Image[] images = new Image[j.mao.size()];
@@ -213,6 +231,8 @@ public class ModelAPI implements Subject{
 		return names;
 	}
 	
+	
+	//função que retorna a lista de nomes dos territorios do jogador atual
  	public String[] getCurrPlayerTerr() {
 		ArrayList<Territorio> lista = listaJogadores.get(0).paisesDominados;
 		String[] terrs = new String[lista.size()];
@@ -225,7 +245,8 @@ public class ModelAPI implements Subject{
 	
 		return terrs;
 	}
-
+ 	
+ 	//retorna lista de territorios que fazem fronteira com o territorio x, recebe como parametro a string do nome desse territorio
 	public String[] getFrontierNames(String name) {
 		Territorio t = getTerrByName(name);
 		String[] terrs = new String[t.paisesLigados.size()];
@@ -238,11 +259,13 @@ public class ModelAPI implements Subject{
 		return terrs;
 	}
 	
+	//troca de cartas
 	public boolean performTrade(int[] cards) {
 		Jogador j = listaJogadores.get(0);
 		return trade(j, j.mao.get(cards[0]), j.mao.get(cards[1]), j.mao.get(cards[2]));
 	}
 	
+	//verificar se o jogador já posicionou todas as tropas que deveria
 	public boolean verifyNextTurn() {
 		Jogador j = listaJogadores.get(0);
 		
@@ -251,7 +274,7 @@ public class ModelAPI implements Subject{
 		for (int v : j.numTropasContinentes) {
 			if (v != 0) return false;
 		}
-		prepareNotify();
+		prepareNotify(); //notificando o observador que vai para a próxima ação
 		return true;
 	}
 	
@@ -279,23 +302,28 @@ public class ModelAPI implements Subject{
 		return false;
 	}
 
+	//funcao para o jogador atual atacar o territorio de outro jogador com algum territorio proprio
 	public boolean attackTerritory(String orig, String dest) {
-		Jogador player = listaJogadores.get(0);
+		Jogador player = listaJogadores.get(0); //jogador atual
 		Territorio original = getTerrByName(orig);
 		Territorio destino = getTerrByName(dest);
 		
-		if(!original.atacarTerritorio(player.cor, destino)) return false;
+		if(!original.atacarTerritorio(player.cor, destino)) return false;//se o jogador tiver tentando atacar um territorio que n possa retorna false senao realiza o atk
 		
+		//notificando os observadores sobre as mudanças após o atk
 		ModelAPI.getModelAPI().prepareNotify(original);
 		ModelAPI.getModelAPI().prepareNotify(destino);
 		
+		//testando se o jogador eliminou algum outro no atk
 		Jogador morto = null;
-		
 		for (Jogador j : listaJogadores) {
 			if (j.paisesDominados.size() == 0)
 				morto = j;
 		}
 
+		//removendo o jogador eliminado da lista, checando se o objetivo do jogador atual era eliminar ele para mostrar o vencedor se for o caso e
+		//testando se o objetivo de outro jogador era eliminar o jogador que fora eliminado, caso sim o objetivo deste outro jogador passa a ser 
+		//capturar 24 territorios (objetivo 14)
 		if(morto != null) {
 			listaJogadores.remove(morto);
 		
@@ -342,6 +370,7 @@ public class ModelAPI implements Subject{
 		return true;
 	}
 	
+	//movimentando as tropas do jogador e notificando o observador que os territorios envolvidos na movimentação tiveram alterações
 	public boolean moveTroops(String orig, String dest, int qtd) {
 		Cores c = listaJogadores.get(0).cor;
 		Territorio original = getTerrByName(orig);
@@ -509,6 +538,9 @@ public class ModelAPI implements Subject{
 		return obj;
 	}
 	
+ 	//função para preparar notificação dos observadores adicionando os valores na lista que será usada para a passagem de valores
+ 	//ha dois modelos da funcao pois um deles serve so para notificar mudança do tipo de ação do jogador e da cor do jogador atual\
+ 	//enquanto o outro alem disso atualiza informações de um territorio, cor e qtd de exercitos dele
  	void prepareNotify(Territorio ter) {
  		paramsForObserver.add(0, ter.corDominando.ordinal());
 		paramsForObserver.add(1, ter.numTropas);
@@ -541,7 +573,7 @@ public class ModelAPI implements Subject{
 		}
 		paramsForObserver.clear();
  	}
- 	
+
  	void prepareNotify() {
  		paramsForObserver.add(0, 0);
 		paramsForObserver.add(1, 0);
@@ -590,11 +622,14 @@ public class ModelAPI implements Subject{
 		return false;
 	}
 	
+	//função para verificar conclusão do objetivo do jogador atual
 	boolean verifiesObjective() {
 		Jogador j = listaJogadores.get(0);
 		return j.obj.verificaObj(j, listaContinente);
 	}
 
+	
+	//função para sacar os objetivos, caso o jogador saque um objetivo de eliminar ele mesmo, este é trocado para o objetivo de conquistar 24 territorios
 	void drawObjectives()
 	{
 		Objetivo obj;
@@ -616,11 +651,13 @@ public class ModelAPI implements Subject{
 		}
 	}
 
+	//embaralha jogadores
 	void rafflePlayers()
 	{
 		Collections.shuffle(listaJogadores);
 	}
 	
+	//distribui os territorios inicais para os jogadores
 	void raffleTerritory()
 	{
 		Jogador j1;
