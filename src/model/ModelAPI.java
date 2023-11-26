@@ -571,7 +571,6 @@ public class ModelAPI implements Subject{
 			for (Troca c : temp) { //bonus de possuir o territorio da carta
 				if(id.paisesDominados.contains(c.representa)) {
 					c.representa.numTropas += 2;
-					c.representa.numTropasPodeMover += 2;
 				}
 			}
 			
