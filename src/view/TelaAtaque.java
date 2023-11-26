@@ -9,6 +9,7 @@ import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
 import model.ModelAPI;
@@ -42,18 +43,19 @@ public class TelaAtaque extends JFrame {
 		Arrays.sort(terrs, collator);
 		
 		cb1 = new JComboBox<String>(terrs);
-		
+
 		cb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
 				
+				terrs = mod.getCurrPlayerTerr();
 				Arrays.sort(terrs, collator);
 				
-				cb2.removeAllItems();
+				update(cb1);
 				
-				for (String s : terrs) {
-					cb2.addItem(s);
-				}
+				terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
+				Arrays.sort(terrs, collator);
+				
+				update(cb2);
 			}
 		});
 		
@@ -65,7 +67,10 @@ public class TelaAtaque extends JFrame {
 			cb2.addItem(s);
 		}
 		
+		a.add(new JLabel("País de origem:"));
 		a.add(cb1);
+		
+		a.add(new JLabel("País de destino:"));
 		a.add(cb2);
 		
 		a.add(b1);
@@ -83,20 +88,33 @@ public class TelaAtaque extends JFrame {
 					return;
 				}
 				
-				for (ImageIcon im : mod.getAtkImages()) {
-					temp = new JButton(im);
-					d.add(temp);
-				}
-				for (ImageIcon im : mod.getDefImages()) {
-					temp = new JButton(im);
-					d.add(temp);
-				}
+//				for (ImageIcon im : mod.getAtkImages()) {
+//					temp = new JButton(im);
+//					d.add(temp);
+//				}
+//				for (ImageIcon im : mod.getDefImages()) {
+//					temp = new JButton(im);
+//					d.add(temp);
+//				}
 				
-				dispose();
+				terrs = mod.getCurrPlayerTerr();
+				Arrays.sort(terrs, collator);
+				
+				update(cb1);
 			}
 		});
 		
 		getContentPane().add(a);
 	}
 	
+	private void update(JComboBox<String> c) {
+		
+		c.removeAllItems();
+		
+		for (String s : terrs) {
+			c.addItem(s);
+		}
+		
+		return;
+	}
 }

@@ -8,6 +8,7 @@ import java.util.Arrays;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -23,7 +24,6 @@ public class TelaPosicionar extends JFrame {
 	JButton b0 = new JButton("Posicionar exércitos de continentes");
 	JButton b1 = new JButton("Cancelar posicionamento");
 	JButton b2 = new JButton("Confirmar posicionamento");
-	JButton temp;
 	Posicionar p = new Posicionar();
 	ModelAPI mod;
 	String[] terrs;
@@ -46,8 +46,10 @@ public class TelaPosicionar extends JFrame {
 		
 		cb1 = new JComboBox<String>(terrs);
 		
+		p.add(new JLabel("País a posicionar:"));
 		p.add(cb1);
 		
+		p.add(new JLabel("Tropas a posicionar:"));
 		p.add(quantidade);
 		
 		p.add(b0);

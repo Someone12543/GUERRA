@@ -24,6 +24,7 @@ public class ControllerAPI {
 	
 	private ControllerAPI() {
 		this.view = ViewAPI.getViewAPI();
+		this.acao_atual = Turno.PosTropa;
 	}
 	
 	public static ControllerAPI getControllerAPI() {
@@ -35,7 +36,6 @@ public class ControllerAPI {
 	public boolean startGame()
 	{
 		this.troca_atual = 1;
-		this.acao_atual = Turno.PosTropa;
 		this.game = ModelAPI.getModelAPI();
 		if(this.game.setupGame()) {
 			startAction();
@@ -62,8 +62,10 @@ public class ControllerAPI {
 			acao_atual = Turno.PosTropa;
 			view.enableSave();
 		}
-		else
+		else {
 			acao_atual = Turno.values()[acao_atual.ordinal() + 1];
+		}
+			
 
 		
 		startAction();
@@ -122,6 +124,9 @@ public class ControllerAPI {
 	void startAction() {
 		if(acao_atual == Turno.PosTropa) {
 			game.giveBonuses();
+		}
+		else if (acao_atual == Turno.MovTropa) {
+			game.updateTroops();
 		}
 	}
 

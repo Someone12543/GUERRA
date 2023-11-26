@@ -249,11 +249,13 @@ public class ModelAPI implements Subject{
 
 	public boolean attackTerritory(String orig, String dest) {
 		Jogador player = listaJogadores.get(0);
+		Territorio original = getTerrByName(orig);
+		Territorio destino = getTerrByName(dest);
 		
-		if(!player.atacarTerritorio(getTerrByName(orig), getTerrByName(dest))) return false;
+		if(!original.atacarTerritorio(player.cor, destino)) return false;
 		
-//		prepareNotify(orig);
-//		prepareNotify(dest);
+		ModelAPI.getModelAPI().prepareNotify(original);
+		ModelAPI.getModelAPI().prepareNotify(destino);
 		
 		Jogador morto = null;
 		
@@ -304,6 +306,30 @@ public class ModelAPI implements Subject{
 		}
 		
 		
+		
+		return true;
+	}
+	
+	public boolean moveTroops(String orig, String dest, int qtd) {
+		Cores c = listaJogadores.get(0).cor;
+		Territorio original = getTerrByName(orig);
+		Territorio destino = getTerrByName(dest);
+		
+		if (!original.moverTropas(c, destino, qtd)) return false;
+		
+		ModelAPI.getModelAPI().prepareNotify(original);
+		ModelAPI.getModelAPI().prepareNotify(destino);
+		
+		return true;
+	}
+	
+ 	public boolean updateTroops() {
+		
+		for (Continente c : listaContinente) {
+			for (Territorio t : c.paises) {
+				t.numTropasPodeMover = t.numTropas - 1;
+			}
+		}
 		
 		return true;
 	}
