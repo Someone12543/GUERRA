@@ -24,6 +24,8 @@ public class ModelAPI implements Subject{
 	ArrayList<ImageIcon> defImages;
 	ArrayList<Observer> observadores;
 	ArrayList<Object> paramsForObserver;
+	int[] tropasContinentes;
+	int tropasPosicionar;
 	
 	private ModelAPI()
 	{
@@ -194,6 +196,26 @@ public class ModelAPI implements Subject{
 		if(player.obj.verificaObj(player, listaContinente))
 			ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
 		return true;
+	}
+
+	public boolean positionTroops(String t, int qtd, boolean cont) {
+		Territorio terr = getTerrByName(t);
+		Jogador j = listaJogadores.get(0);
+		
+		if (cont) {
+			if (!j.posicionarTropas(terr, qtd, terr.continente.tipo)) return false;
+		}
+		else {
+			if (!j.posicionarTropas(terr, qtd, null)) return false;
+		}
+		
+		tropasPosicionar = j.numTropasPosicionar;
+		
+		return true;
+	}
+
+	public boolean positionTroopsCont() {
+		return false;
 	}
 	
 	public void finishGame() {

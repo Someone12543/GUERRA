@@ -29,7 +29,7 @@ class Jogador {
 		this.dominouPaisTurno = false;
 	}
 	
-	boolean posicionarTropas(Territorio pais, int qtd) {
+	boolean posicionarTropas(Territorio pais, int qtd, Continentes cont) {
 		if (pais.corDominando != this.cor) {
 			System.out.println("O pais não pertence ao Jogador");
 			return false;
@@ -45,8 +45,15 @@ class Jogador {
 			return false;
 		}
 		
-		pais.numTropas += qtd;
 		
+		if (cont == null) {
+			pais.numTropas += qtd;
+			this.numTropasPosicionar -= qtd;
+		}
+		else {
+			if (this.numTropasContinentes[cont.ordinal()] == 0) return false; 
+		}
+			
 		ModelAPI.getModelAPI().prepareNotify(pais);
 		
 		return true;
