@@ -173,8 +173,8 @@ public class ModelAPI implements Subject{
 	public void giveCardToPlayer() {
 		Jogador j = listaJogadores.get(0);
 		
-		if (j.dominouPaisTurno)
-			j.mao.add(drawTrade());
+		if (j.dominouPaisTurno && j.mao.size() < 5)
+				j.mao.add(drawTrade());
 		
 		j.dominouPaisTurno = false;
 	}
@@ -189,7 +189,19 @@ public class ModelAPI implements Subject{
 		return listaJogadores.get(0).obj.toDisplay;
 	}
 	
-	public String[] getCurrPlayerTerr() {
+	public Image[] getCardImages() {
+		Jogador j = listaJogadores.get(0);
+		Image[] images = new Image[j.mao.size()];
+		
+		int i = 0;
+		for (Troca t : j.mao) {
+			images[i++] = t.toDisplay;
+		}
+		
+		return images;
+	}
+	
+ 	public String[] getCurrPlayerTerr() {
 		ArrayList<Territorio> lista = listaJogadores.get(0).paisesDominados;
 		String[] terrs = new String[lista.size()];
 	

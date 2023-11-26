@@ -125,7 +125,9 @@ class TelaTabuleiro extends JFrame {
 		b5.setBorder(null);
 		b5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				//controller.nextAction();
+				TelaCartas tc = new TelaCartas();
+				tc.setTitle("Suas cartas");
+				tc.setVisible(true);
 			}
 		});
 		
