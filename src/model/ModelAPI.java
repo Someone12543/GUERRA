@@ -65,6 +65,10 @@ public class ModelAPI implements Subject{
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_quebec.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_texas.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_vancouver.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_argentina.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_brasil.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_peru.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_venezuela.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_arabiasaudita.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_bangladesh.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_cazaquistao.png")));
@@ -85,10 +89,6 @@ public class ModelAPI implements Subject{
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_siria.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_tailandia.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_turquia.png")));
-		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_argentina.png")));
-		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_brasil.png")));
-		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_peru.png")));
-		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_venezuela.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_espanha.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_franca.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_italia.png")));
@@ -362,7 +362,7 @@ public class ModelAPI implements Subject{
 	public void saveGame(PrintWriter outputStream) {
 		outputStream.println(listaJogadores.size());
 		for (Jogador j : listaJogadores) {
-			outputStream.printf("%s;%d;%d;%d;\n", j.nome, j.cor.ordinal(), j.obj.id, j.numTropasPosicionar);
+			outputStream.printf("%s;%d;%d;\n", j.nome, j.cor.ordinal(), j.obj.id);
 			
 			outputStream.println(j.paisesDominados.size());
 			for (Territorio t : j.paisesDominados)
@@ -415,7 +415,6 @@ public class ModelAPI implements Subject{
 				case 13: j.obj = new Objetivo13(ModelAPI.objectiveImages.get(12)); break;
 				case 14: j.obj = new Objetivo14(ModelAPI.objectiveImages.get(13)); break;
 			}
-			j.numTropasPosicionar = Integer.parseInt(infos[3]);
 			
 			ln = inputStream.readLine();
 			numP = Integer.parseInt(ln);
@@ -427,6 +426,7 @@ public class ModelAPI implements Subject{
 				t.numTropas = Integer.parseInt(infos[1]);
 				t.numTropasPodeMover = Integer.parseInt(infos[2]);
 				prepareNotify(t);
+				j.paisesDominados.add(t);
 			}
 			
 			ln = inputStream.readLine();

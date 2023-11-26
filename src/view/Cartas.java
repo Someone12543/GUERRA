@@ -22,10 +22,10 @@ class Cartas extends JPanel {
 		Graphics2D g2d = (Graphics2D) g;
 		super.paintComponent(g);
 
-		System.out.println("eeee");
 		int i = 0;
 		for (Image img : imgs) {
 			g2d.drawImage(img, 0 + (i * 150), 0, 132, 218, null);
+			i++;
 		}
 	}
 }
