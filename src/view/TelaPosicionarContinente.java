@@ -1,9 +1,11 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.Collator;
 import java.util.Arrays;
+import java.util.stream.IntStream;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -11,6 +13,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.border.Border;
 
 import model.ModelAPI;
 
@@ -23,11 +26,14 @@ public class TelaPosicionarContinente extends JFrame {
 	JTextField quantidade = new JTextField();
 	JButton b1 = new JButton("Cancelar posicionamento");
 	JButton b2 = new JButton("Confirmar posicionamento");
+	JLabel posicionar;
 	Posicionar p = new Posicionar();
 	ModelAPI mod;
 	String[] terrs;
 	
 	public TelaPosicionarContinente(TelaPosicionar tp) {
+		String temp;
+		
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
@@ -45,7 +51,20 @@ public class TelaPosicionarContinente extends JFrame {
 		p.add(new JLabel("País a posicionar:"));
 		p.add(cb1);
 		
-		p.add(new JLabel("Tropas a posicionar:"));
+		Integer[] troops = mod.getTroopsPos();
+		
+		posicionar = new JLabel("<html>Tropas de continentes a posicionar: "
+			+ sumInteger(troops).toString()
+			+ (troops[1] != 0? "<br>África: " + troops[1].toString() : "")
+			+ (troops[2] != 0? "<br>América do Norte: " + troops[2].toString() : "")
+			+ (troops[3] != 0? "<br>América do Sul: " + troops[3].toString() : "")
+			+ (troops[4] != 0? "<br>Ásia: " + troops[4].toString() : "")
+			+ (troops[5] != 0? "<br>Europa: " + troops[5].toString() : "")
+			+ (troops[6] != 0? "<br>Oceania: </html>" + troops[6].toString() : ""));
+		
+		posicionar.setMinimumSize(new Dimension(100, 200));
+		
+		p.add(posicionar);
 		p.add(quantidade);
 		
 		
@@ -69,6 +88,18 @@ public class TelaPosicionarContinente extends JFrame {
 						JOptionPane.showMessageDialog(p, "Número inválido", getTitle(), JOptionPane.ERROR_MESSAGE);
 						return;
 					}
+					
+					Integer[] troops = mod.getTroopsPos();
+					
+					posicionar.setText("<html>Tropas de continentes a posicionar: "
+							+ sumInteger(troops).toString()
+							+ (troops[1] != 0? "<br>África: " + troops[1].toString() : "")
+							+ (troops[2] != 0? "<br>América do Norte: " + troops[2].toString() : "")
+							+ (troops[3] != 0? "<br>América do Sul: " + troops[3].toString() : "")
+							+ (troops[4] != 0? "<br>Ásia: " + troops[4].toString() : "")
+							+ (troops[5] != 0? "<br>Europa: " + troops[5].toString() : "")
+							+ (troops[6] != 0? "<br>Oceania: </html>" + troops[6].toString() : ""));
+					
 				}
 				catch (NumberFormatException ex){
 					JOptionPane.showMessageDialog(p, "Somente números interios são aceitos.", getTitle(), JOptionPane.ERROR_MESSAGE);
@@ -78,6 +109,16 @@ public class TelaPosicionarContinente extends JFrame {
 		});
 		
 		getContentPane().add(p);
+	}
+	
+	private Integer sumInteger(Integer[] ints) {
+		Integer temp = 0;
+		
+		for (int i = 1; i < 7; i++) {
+			temp += ints[i];
+		}
+		
+		return temp;
 	}
 	
 }

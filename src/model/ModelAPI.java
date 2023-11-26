@@ -337,7 +337,22 @@ public class ModelAPI implements Subject{
 		
 		return false;
 	}
-
+	
+	public Integer[] getTroopsPos() {
+		Jogador j = listaJogadores.get(0);
+		
+		// primeiro é tropas genéricas, o resto é por continente
+		Integer[] ints = {0,0,0,0,0,0,0};
+		
+		ints[0] = j.numTropasPosicionar;
+		
+		for (int i = 1; i < 7; i++) {
+			ints[i] = j.numTropasContinentes[i-1];
+		}
+		
+		return ints;
+		
+	}
 
 	//funcao para o jogador atual atacar o territorio de outro jogador com algum territorio proprio
 	public boolean attackTerritory(String orig, String dest, Integer[] atkDices, Integer[] defDices) {

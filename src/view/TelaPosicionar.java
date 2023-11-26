@@ -24,6 +24,7 @@ public class TelaPosicionar extends JFrame {
 	JButton b0 = new JButton("Posicionar exércitos de continentes");
 	JButton b1 = new JButton("Cancelar posicionamento");
 	JButton b2 = new JButton("Confirmar posicionamento");
+	JLabel posicionar;
 	Posicionar p = new Posicionar();
 	ModelAPI mod;
 	String[] terrs;
@@ -45,11 +46,14 @@ public class TelaPosicionar extends JFrame {
 		Arrays.sort(terrs, collator);
 		
 		cb1 = new JComboBox<String>(terrs);
-		
+	
 		p.add(new JLabel("País a posicionar:"));
 		p.add(cb1);
 		
-		p.add(new JLabel("Tropas a posicionar:"));
+		posicionar = new JLabel("Tropas a posicionar: " + mod.getTroopsPos()[0].toString());
+		
+		p.add(posicionar);
+		
 		p.add(quantidade);
 		
 		p.add(b0);
@@ -80,6 +84,8 @@ public class TelaPosicionar extends JFrame {
 						JOptionPane.showMessageDialog(p, "Número inválido", getTitle(), JOptionPane.ERROR_MESSAGE);
 						return;
 					}
+					
+					posicionar.setText("Tropas a posicionar: " + mod.getTroopsPos()[0].toString());
 				}
 				catch (NumberFormatException ex){
 					JOptionPane.showMessageDialog(p, "Somente números interios são aceitos.", getTitle(), JOptionPane.ERROR_MESSAGE);
