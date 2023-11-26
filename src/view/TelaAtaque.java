@@ -92,7 +92,16 @@ public class TelaAtaque extends JFrame {
 					d.add(temp);
 				}
 				
-				dispose();
+				terrs = mod.getCurrPlayerTerr();
+				
+				Arrays.sort(terrs, collator);
+				
+				cb1.removeAllItems();
+				
+				for (String s : terrs) {
+					cb1.addItem(s);
+				}
+				
 			}
 		});
 		

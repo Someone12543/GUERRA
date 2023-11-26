@@ -25,7 +25,6 @@ public class TelaPosicionar extends JFrame {
 	JButton b0 = new JButton("Posicionar exércitos de continentes");
 	JButton b1 = new JButton("Cancelar posicionamento");
 	JButton b2 = new JButton("Confirmar posicionamento");
-	JButton temp;
 	Posicionar p = new Posicionar();
 	ModelAPI mod;
 	String[] terrs;
