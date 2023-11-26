@@ -37,12 +37,6 @@ public class ModelAPI implements Subject{
 		this.deckTroca = new ArrayList<Troca>();
 		this.observadores = new ArrayList<Observer>();
 		this.paramsForObserver = new ArrayList<Object>();
-		try {
-			ModelAPI.setupImages();
-		} catch (IOException e) {
-			System.out.println("Não foi possível carregar os arquivos!");
-			System.exit(2);
-		}
 	}
 	
 	public static ModelAPI getModelAPI()
