@@ -37,6 +37,12 @@ public class ModelAPI implements Subject{
 		this.deckTroca = new ArrayList<Troca>();
 		this.observadores = new ArrayList<Observer>();
 		this.paramsForObserver = new ArrayList<Object>();
+		try {
+			ModelAPI.setupImages();
+		} catch (IOException e) {
+			System.out.println("Não foi possível carregar os arquivos!");
+			System.exit(2);
+		}
 	}
 	
 	public static ModelAPI getModelAPI()
@@ -47,6 +53,9 @@ public class ModelAPI implements Subject{
 	}
 	
 	public static void setupImages() throws IOException{
+		cardImages = new ArrayList<Image>();
+		objectiveImages = new ArrayList<Image>();
+		
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_africadosul.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_angola.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_argelia.png")));

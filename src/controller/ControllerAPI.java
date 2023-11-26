@@ -8,12 +8,6 @@ public class ControllerAPI {
 	
 	public static void main(String[] args) {
 		getControllerAPI();
-		try {
-			ModelAPI.setupImages();
-		} catch (IOException e) {
-			System.out.println("Não foi possível carregar os arquivos!");
-			System.exit(2);
-		}
 	}
 	
 	static ControllerAPI instance;
