@@ -43,6 +43,7 @@ class TelaPrincipal extends JFrame {
 			    if(returnVal == JFileChooser.APPROVE_OPTION) {
 			       System.out.println("You chose to open this file: " + chooser.getSelectedFile().getName());
 			       try {
+			   		   ViewAPI.getViewAPI().tt = TelaTabuleiro.getTelaTabuleiro();
 			    	   ControllerAPI.getControllerAPI().loadGame(chooser.getSelectedFile());
 			       } catch (IOException err) { 
 			    	   System.out.println(err.getMessage());

@@ -102,6 +102,7 @@ public class ControllerAPI {
 			
 			troca_atual = ln.charAt(0);
 			acao_atual = Turno.PosTropa;
+			view.updateAction(getAcaoStr());
 			
 			game = ModelAPI.getModelAPI();
 			
@@ -110,6 +111,7 @@ public class ControllerAPI {
 		}
 		catch(IOException e) { 
 			System.out.print(e.getMessage());
+			game.finishGame();
 		}
 		finally {
 			if (inputStream != null) {

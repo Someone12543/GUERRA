@@ -73,9 +73,7 @@ class TelaTabuleiro extends JFrame {
 						tm.setTitle("MOVIMENTAR!");
 						tm.setVisible(true);
 						break;
-				}
-				
-					
+				}	
 			}
 		});
 		

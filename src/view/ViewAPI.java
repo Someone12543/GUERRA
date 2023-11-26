@@ -49,6 +49,11 @@ public class ViewAPI implements Observer{
 		tt.setVisible(true);
 	}
 	
+	public void updateAction (String act) {
+		tt.t.repaintAction(act);
+		tt.repaint();
+	}
+	
 	public void enableSave() {
 		tt.b3.setEnabled(true);
 	}
