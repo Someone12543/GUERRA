@@ -70,8 +70,8 @@ class TelaTabuleiro extends JFrame {
 						break;
 					case 2:
 						TelaMovimentar tm = new TelaMovimentar();
-						//tm.setTitle("ATAQUE!");
-						//tm.setVisible(true);
+						tm.setTitle("MOVIMENTAR!");
+						tm.setVisible(true);
 						break;
 				}
 				

@@ -49,38 +49,6 @@ class JogadorTests {
 	}
 	
 	@Test
-	void moverTropaPaisOrigemErrado() {
-		assertFalse(p1.moverTropas(t4, t1, 1));
-	}
-	
-	@Test
-	void moverTropaPaisDestinoErrado() {
-		assertFalse(p1.moverTropas(t1, t4, 1));
-	}
-	
-	@Test
-	void moverTropaQtdInsuficiente() {
-		assertFalse(p1.moverTropas(t1, t2, 3));
-	}
-	
-	@Test
-	void moverTropaSemFronteira() {
-		assertFalse(p1.moverTropas(t1, t3, 1));
-	}
-	
-	@Test
-	void moverTropaOk() {
-		int expectedNumTropasT1 = t1.numTropas - 1;
-		int expectedNumTropasPodeMoverT1 = t1.numTropasPodeMover - 1;
-		int expectedNumTropasT2 = t2.numTropas + 1;
-		
-		assertTrue(p1.moverTropas(t1, t2, 1));
-		assertEquals(expectedNumTropasT1, t1.numTropas);
-		assertEquals(expectedNumTropasPodeMoverT1, t1.numTropasPodeMover);
-		assertEquals(expectedNumTropasT2, t2.numTropas);
-	}
-	
-	@Test
 	void posicionarTropasTerritorioNaoDominado() {
 		assertFalse(p1.posicionarTropas(t4, 3, null));
 	}

@@ -22,7 +22,6 @@ public class TelaPosicionarContinente extends JFrame {
 	JTextField quantidade = new JTextField();
 	JButton b1 = new JButton("Cancelar posicionamento");
 	JButton b2 = new JButton("Confirmar posicionamento");
-	JButton temp;
 	Posicionar p = new Posicionar();
 	ModelAPI mod;
 	String[] terrs;

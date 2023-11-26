@@ -62,8 +62,10 @@ public class ControllerAPI {
 			acao_atual = Turno.PosTropa;
 			view.enableSave();
 		}
-		else
+		else {
 			acao_atual = Turno.values()[acao_atual.ordinal() + 1];
+		}
+			
 
 		
 		startAction();
@@ -122,6 +124,9 @@ public class ControllerAPI {
 	void startAction() {
 		if(acao_atual == Turno.PosTropa) {
 			game.giveBonuses();
+		}
+		else if (acao_atual == Turno.MovTropa) {
+			game.updateTroops();
 		}
 	}
 
