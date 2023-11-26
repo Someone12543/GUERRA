@@ -278,6 +278,8 @@ class Tabuleiro extends JPanel {
 			
 			if (e.number > 9) {
 				e.elip = new Ellipse2D.Double(e.x, e.y, 25, 25);
+			}else {
+				e.elip = new Ellipse2D.Double(e.x, e.y, 20, 20);
 			}
 			
 			g2d.fill(e.elip);			
