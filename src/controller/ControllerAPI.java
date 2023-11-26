@@ -21,7 +21,7 @@ public class ControllerAPI {
 	//singleton
 	static ControllerAPI instance;
 	
-	public char troca_atual;
+	public int troca_atual;
 	Turno acao_atual;
 	
 	//variaveis para pegar singletons das outras fachadas
@@ -113,7 +113,7 @@ public class ControllerAPI {
 			
 			ln = inputStream.readLine();
 			
-			troca_atual = ln.charAt(0);
+			troca_atual = Integer.parseInt(ln);
 			acao_atual = Turno.PosTropa;
 			view.updateAction(getAcaoStr());
 			
