@@ -2,7 +2,6 @@ package view;
 
 import javax.swing.JOptionPane;
 
-import controller.ControllerAPI;
 import model.ModelAPI;
 import observer.*;
 
@@ -34,7 +33,6 @@ public class ViewAPI implements Observer{
 	}
 	
 	public void showWinner(String name, String objective) {
-		ControllerAPI ctrl = ControllerAPI.getControllerAPI();
 		String message = name + " ganhou ao " + objective;
 		JOptionPane.showMessageDialog(tt, message, "Temos um vencedor!", JOptionPane.INFORMATION_MESSAGE);
 		if (JOptionPane.showConfirmDialog(tt, "Desejam continuar?", "Continuar", JOptionPane.OK_CANCEL_OPTION, JOptionPane.QUESTION_MESSAGE) == JOptionPane.OK_OPTION) {

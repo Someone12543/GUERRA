@@ -8,6 +8,7 @@ import java.util.Collections;
 import java.awt.Image;
 import java.io.*;
 
+import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 import observer.*;
@@ -16,12 +17,15 @@ public class ModelAPI implements Subject{
 	
 	static ModelAPI instance;
 	
+	static ArrayList<Image> cardImages;
+	static ArrayList<Image> objectiveImages;
+	static ArrayList<ImageIcon> atkImages;
+	static ArrayList<ImageIcon> defImages;
+	
 	ArrayList<Continente> listaContinente;
 	ArrayList<Jogador> listaJogadores;
 	ArrayList<Objetivo> deckObjetivos;
 	ArrayList<Troca> deckTroca;
-	ArrayList<ImageIcon> atkImages;
-	ArrayList<ImageIcon> defImages;
 	ArrayList<Observer> observadores;
 	ArrayList<Object> paramsForObserver;
 	
@@ -40,6 +44,79 @@ public class ModelAPI implements Subject{
 		if (instance == null)
 			instance = new ModelAPI();
 		return instance;
+	}
+	
+	public static void setupImages() throws IOException{
+		cardImages = new ArrayList<Image>();
+		objectiveImages = new ArrayList<Image>();
+		
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_africadosul.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_angola.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_argelia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_egito.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_nigeria.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_af_somalia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_alasca.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_calgary.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_california.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_groelandia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_mexico.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_novayork.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_quebec.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_texas.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_vancouver.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_arabiasaudita.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_bangladesh.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_cazaquistao.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_china.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_coreiadonorte.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_coreiadosul.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_estonia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_india.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_ira.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_iraque.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_japao.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_jordania.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_letonia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_mongolia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_paquistao.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_russia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_siberia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_siria.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_tailandia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_turquia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_argentina.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_brasil.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_peru.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_venezuela.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_espanha.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_franca.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_italia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_polonia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_reinounido.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_romenia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_suecia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_ucrania.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_oc_australia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_oc_indonesia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_oc_novazelandia.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_oc_perth.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_coringa.png")));
+		
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_01.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_02.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_03.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_04.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_05.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_06.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_07.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_08.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_09.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_10.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_11.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_12.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_13.jpg")));
+		objectiveImages.add(ImageIO.read(new File("assets/cartas/objetivos/obj_14.jpg")));
 	}
 	
 	public void obsAdd(Observer o) {
@@ -269,7 +346,7 @@ public class ModelAPI implements Subject{
 	public void saveGame(PrintWriter outputStream) {
 		outputStream.println(listaJogadores.size());
 		for (Jogador j : listaJogadores) {
-			outputStream.printf("%s;%d;%d;%d;%d;\n", j.nome, j.cor.ordinal(), j.obj.id, j.numTropasPosicionar, j.dominouPaisTurno ? 1 : 0);
+			outputStream.printf("%s;%d;%d;%d;\n", j.nome, j.cor.ordinal(), j.obj.id, j.numTropasPosicionar);
 			
 			outputStream.println(j.paisesDominados.size());
 			for (Territorio t : j.paisesDominados)
@@ -307,23 +384,22 @@ public class ModelAPI implements Subject{
 			infos = ln.split(";");
 			j = createPlayer(infos[0], Integer.parseInt(infos[1]));
 			switch (Integer.parseInt(infos[2])) {
-				case 1: j.obj = new Objetivo1(null); break;
-				case 2: j.obj = new Objetivo2(null); break;
-				case 3: j.obj = new Objetivo3(null); break;
-				case 4: j.obj = new Objetivo4(null); break;
-				case 5: j.obj = new Objetivo5(null); break;
-				case 6: j.obj = new Objetivo6(null); break;
-				case 7:	j.obj = new Objetivo7(null); break;
-				case 8:	j.obj = new Objetivo8(null); break;
-				case 9:	j.obj = new Objetivo9(null); break;
-				case 10: j.obj = new Objetivo10(null); break;
-				case 11: j.obj = new Objetivo11(null); break;
-				case 12: j.obj = new Objetivo12(null); break;
-				case 13: j.obj = new Objetivo13(null); break;
-				case 14: j.obj = new Objetivo14(null); break;
+				case 1: j.obj = new Objetivo1(ModelAPI.objectiveImages.get(0)); break;
+				case 2: j.obj = new Objetivo2(ModelAPI.objectiveImages.get(1)); break;
+				case 3: j.obj = new Objetivo3(ModelAPI.objectiveImages.get(2)); break;
+				case 4: j.obj = new Objetivo4(ModelAPI.objectiveImages.get(3)); break;
+				case 5: j.obj = new Objetivo5(ModelAPI.objectiveImages.get(4)); break;
+				case 6: j.obj = new Objetivo6(ModelAPI.objectiveImages.get(5)); break;
+				case 7:	j.obj = new Objetivo7(ModelAPI.objectiveImages.get(6)); break;
+				case 8:	j.obj = new Objetivo8(ModelAPI.objectiveImages.get(7)); break;
+				case 9:	j.obj = new Objetivo9(ModelAPI.objectiveImages.get(8)); break;
+				case 10: j.obj = new Objetivo10(ModelAPI.objectiveImages.get(9)); break;
+				case 11: j.obj = new Objetivo11(ModelAPI.objectiveImages.get(10)); break;
+				case 12: j.obj = new Objetivo12(ModelAPI.objectiveImages.get(11)); break;
+				case 13: j.obj = new Objetivo13(ModelAPI.objectiveImages.get(12)); break;
+				case 14: j.obj = new Objetivo14(ModelAPI.objectiveImages.get(13)); break;
 			}
 			j.numTropasPosicionar = Integer.parseInt(infos[3]);
-			j.dominouPaisTurno = Integer.parseInt(infos[4]) == 1;
 			
 			ln = inputStream.readLine();
 			numP = Integer.parseInt(ln);
@@ -428,7 +504,7 @@ public class ModelAPI implements Subject{
 			{
 				if (obj.id - 8 == j.cor.ordinal()) // se voce mesmo
 				{
-					obj = new Objetivo14(null); // entao troca objetivo
+					obj = new Objetivo14(ModelAPI.objectiveImages.get(13)); // entao troca objetivo
 				}
 			}
 			
@@ -562,32 +638,35 @@ public class ModelAPI implements Subject{
 //		for (int i = 0; i <= 13; i++)
 //			deckObjetivos.add(new Objetivo(i, null));
 		
-		deckObjetivos.add(new Objetivo1(null));
-		deckObjetivos.add(new Objetivo2(null));
-		deckObjetivos.add(new Objetivo3(null));
-		deckObjetivos.add(new Objetivo4(null));
-		deckObjetivos.add(new Objetivo5(null));
-		deckObjetivos.add(new Objetivo6(null));
-		deckObjetivos.add(new Objetivo7(null));
+		deckObjetivos.add(new Objetivo1(ModelAPI.objectiveImages.get(0)));
+		deckObjetivos.add(new Objetivo2(ModelAPI.objectiveImages.get(1)));
+		deckObjetivos.add(new Objetivo3(ModelAPI.objectiveImages.get(2)));
+		deckObjetivos.add(new Objetivo4(ModelAPI.objectiveImages.get(3)));
+		deckObjetivos.add(new Objetivo5(ModelAPI.objectiveImages.get(4)));
+		deckObjetivos.add(new Objetivo6(ModelAPI.objectiveImages.get(5)));
+		deckObjetivos.add(new Objetivo7(ModelAPI.objectiveImages.get(6)));
 		if (existPlayerColor(0))
-			deckObjetivos.add(new Objetivo8(null));
+			deckObjetivos.add(new Objetivo8(ModelAPI.objectiveImages.get(7)));
 		if (existPlayerColor(1))
-			deckObjetivos.add(new Objetivo9(null));
+			deckObjetivos.add(new Objetivo9(ModelAPI.objectiveImages.get(8)));
 		if (existPlayerColor(2))
-			deckObjetivos.add(new Objetivo10(null));
+			deckObjetivos.add(new Objetivo10(ModelAPI.objectiveImages.get(9)));
 		if (existPlayerColor(3))
-			deckObjetivos.add(new Objetivo11(null));
+			deckObjetivos.add(new Objetivo11(ModelAPI.objectiveImages.get(10)));
 		if (existPlayerColor(4))
-			deckObjetivos.add(new Objetivo12(null));
+			deckObjetivos.add(new Objetivo12(ModelAPI.objectiveImages.get(11)));
 		if (existPlayerColor(5))
-			deckObjetivos.add(new Objetivo13(null));
-		deckObjetivos.add(new Objetivo14(null));
+			deckObjetivos.add(new Objetivo13(ModelAPI.objectiveImages.get(12)));
+		deckObjetivos.add(new Objetivo14(ModelAPI.objectiveImages.get(13)));
 		
 		Collections.shuffle(deckObjetivos);
 		
+		int i = 0;
 		for(Continente c : listaContinente)
-			for(Territorio p : c.paises)
-				deckTroca.add(new Troca(p, null, null));
+			for(Territorio p : c.paises) {
+				deckTroca.add(new Troca(p, null, ModelAPI.cardImages.get(i)));
+				i++;
+			}
 		
 		//africa
 		deckTroca.get(0).simbolo = Simbolo.Triangulo;
@@ -653,8 +732,8 @@ public class ModelAPI implements Subject{
 		deckTroca.get(50).simbolo = Simbolo.Circulo;
 		
 		//coringas
-		deckTroca.add(new Troca(null, Simbolo.Coringa, null));
-		deckTroca.add(new Troca(null, Simbolo.Coringa, null));
+		deckTroca.add(new Troca(null, Simbolo.Coringa, ModelAPI.cardImages.get(51)));
+		deckTroca.add(new Troca(null, Simbolo.Coringa, ModelAPI.cardImages.get(51)));
 		
 		Collections.shuffle(deckTroca);
 		return true;
