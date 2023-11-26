@@ -81,6 +81,7 @@ class Territorio {
 			for (Jogador j : mod.listaJogadores) {
 				if (j.cor == this.corDominando) {
 					j.paisesDominados.add(inimigo);
+					j.dominouPaisTurno = true;
 				}
 			}
 			
