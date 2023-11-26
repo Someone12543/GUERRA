@@ -5,6 +5,7 @@ import view.ViewAPI;
 
 import java.util.ArrayList;
 import java.util.Collections;
+import java.awt.Color;
 import java.awt.Image;
 import java.io.*;
 
@@ -251,7 +252,7 @@ public class ModelAPI implements Subject{
 		for (int v : j.numTropasContinentes) {
 			if (v != 0) return false;
 		}
-
+		prepareNotify();
 		return true;
 	}
 	
@@ -262,6 +263,7 @@ public class ModelAPI implements Subject{
 		}
 		
 		j.numTropasPosicionar += j.bonusPiece();
+		prepareNotify();
 	}
 
 	public boolean attackTerritory(String orig, String dest) {
@@ -322,7 +324,7 @@ public class ModelAPI implements Subject{
 			if (!j.posicionarTropas(terr, qtd, null)) return false;
 		}
 		
-		
+		prepareNotify(terr);
 		
 		return true;
 	}
@@ -336,7 +338,8 @@ public class ModelAPI implements Subject{
 		
 		ModelAPI.getModelAPI().prepareNotify(original);
 		ModelAPI.getModelAPI().prepareNotify(destino);
-		
+		prepareNotify(original);
+		prepareNotify(destino);
 		return true;
 	}
 	
@@ -346,7 +349,7 @@ public class ModelAPI implements Subject{
 				t.numTropasPodeMover = t.numTropas - 1;
 			}
 		}
-		
+		prepareNotify();
 		return true;
 	}
 	
@@ -497,6 +500,62 @@ public class ModelAPI implements Subject{
  		paramsForObserver.add(0, ter.corDominando.ordinal());
 		paramsForObserver.add(1, ter.numTropas);
 		paramsForObserver.add(2, ter.nome);
+		switch(listaJogadores.get(0).cor) {
+		case Azul:
+			paramsForObserver.add(3, "Azul");
+			break;
+		case Amarelo:
+			paramsForObserver.add(3, "Amarelo");
+			break;
+		case Branco:
+			paramsForObserver.add(3, "Branco");
+			break;
+		case Verde:
+			paramsForObserver.add(3, "Verde");
+			break;
+		case Vermelho:
+			paramsForObserver.add(3, "Vermelho");
+			break;
+		case Preto:
+			paramsForObserver.add(3, "Preto");
+			break;
+		default:
+			paramsForObserver.add(3, "xyz");
+		}
+		paramsForObserver.add(4, ControllerAPI.getControllerAPI().getAcaoStr());
+		for (Observer obs: observadores) {
+			obs.notify(getModelAPI());
+		}
+		paramsForObserver.clear();
+ 	}
+ 	
+ 	void prepareNotify() {
+ 		paramsForObserver.add(0, 0);
+		paramsForObserver.add(1, 0);
+		paramsForObserver.add(2, "xyz");
+		switch(listaJogadores.get(0).cor) {
+		case Azul:
+			paramsForObserver.add(3, "Azul");
+			break;
+		case Amarelo:
+			paramsForObserver.add(3, "Amarelo");
+			break;
+		case Branco:
+			paramsForObserver.add(3, "Branco");
+			break;
+		case Verde:
+			paramsForObserver.add(3, "Verde");
+			break;
+		case Vermelho:
+			paramsForObserver.add(3, "Vermelho");
+			break;
+		case Preto:
+			paramsForObserver.add(3, "Preto");
+			break;
+		default:
+			paramsForObserver.add(3, "xyz");
+		}
+		paramsForObserver.add(4, ControllerAPI.getControllerAPI().getAcaoStr());
 		for (Observer obs: observadores) {
 			obs.notify(getModelAPI());
 		}

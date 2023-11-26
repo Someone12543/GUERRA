@@ -133,4 +133,14 @@ public class ControllerAPI {
 	public int getTurno() {
 		return acao_atual.ordinal();
 	}
+	
+	public String getAcaoStr() {
+		if (acao_atual == Turno.Ataque) {
+			return "Ataque";
+		}
+		if (acao_atual == Turno.MovTropa) {
+			return "Movimentar";
+		}
+		return "Posicionar";
+	}
 }
