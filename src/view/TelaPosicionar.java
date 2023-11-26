@@ -80,7 +80,6 @@ public class TelaPosicionar extends JFrame {
 						JOptionPane.showMessageDialog(p, "Número inválido", getTitle(), JOptionPane.ERROR_MESSAGE);
 						return;
 					}
-					dispose();
 				}
 				catch (NumberFormatException ex){
 					JOptionPane.showMessageDialog(p, "Somente números interios são aceitos.", getTitle(), JOptionPane.ERROR_MESSAGE);
