@@ -429,7 +429,7 @@ public class ModelAPI implements Subject{
 	public void saveGame(PrintWriter outputStream) {
 		outputStream.println(listaJogadores.size());
 		for (Jogador j : listaJogadores) {
-			outputStream.printf("%s;%d;%d;\n", j.nome, j.cor.ordinal(), j.obj.id);
+			outputStream.printf("%s;%d;%d;%d;\n", j.nome, j.cor.ordinal(), j.obj.id, j.primeiraJogada ? 1 : 0);
 			
 			outputStream.println(j.paisesDominados.size());
 			for (Territorio t : j.paisesDominados)
@@ -482,6 +482,7 @@ public class ModelAPI implements Subject{
 				case 13: j.obj = new Objetivo13(ModelAPI.objectiveImages.get(12)); break;
 				case 14: j.obj = new Objetivo14(ModelAPI.objectiveImages.get(13)); break;
 			}
+			j.primeiraJogada = Integer.parseInt(infos[3]) == 1;
 			
 			ln = inputStream.readLine();
 			numP = Integer.parseInt(ln);
