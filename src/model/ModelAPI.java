@@ -580,7 +580,7 @@ public class ModelAPI implements Subject{
 		default:
 			paramsForObserver.add(3, "xyz");
 		}
-		paramsForObserver.add(4, ControllerAPI.getControllerAPI().getAcaoStr());
+		
 		for (Observer obs: observadores) {
 			obs.notify(getModelAPI());
 		}
@@ -613,7 +613,7 @@ public class ModelAPI implements Subject{
 		default:
 			paramsForObserver.add(3, "xyz");
 		}
-		paramsForObserver.add(4, ControllerAPI.getControllerAPI().getAcaoStr());
+		
 		for (Observer obs: observadores) {
 			obs.notify(getModelAPI());
 		}

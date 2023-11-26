@@ -82,7 +82,6 @@ public class TelaAtaque extends JFrame {
 		a.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				
 				TelaDados td = new TelaDados(cb1.getSelectedItem().toString(), cb2.getSelectedItem().toString());
 				td.setTitle(getTitle());
 				td.setVisible(true);

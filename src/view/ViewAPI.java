@@ -24,7 +24,7 @@ public class ViewAPI implements Observer{
 	
 	public void notify(Subject s) {
 		TelaTabuleiro tt = TelaTabuleiro.getTelaTabuleiro();
-		tt.t.repaintExe((int)s.obsGet(0), (int)s.obsGet(1), (String)s.obsGet(2), (String)s.obsGet(3), (String)s.obsGet(4));
+		tt.t.repaintExe((int)s.obsGet(0), (int)s.obsGet(1), (String)s.obsGet(2), (String)s.obsGet(3));
 		tt.repaint();
 	}
 	

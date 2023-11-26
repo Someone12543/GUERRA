@@ -47,6 +47,16 @@ class TelaDados extends JFrame {
 		atk = mod.throwDices(troopQtd[0]);
 		def = mod.throwDices(troopQtd[1]);
 		
+		for (int q = 0; q <= atk.length; q++) {
+			if (q == atk.length) {
+				JOptionPane.showMessageDialog(d, "Não há tropas suficientes", getTitle(), JOptionPane.ERROR_MESSAGE);
+				dispose();
+				break;
+			}
+			if (atk[q] != 0)
+				break;
+		}
+		
 		int i = 0;
 		for (Integer j : atk) {
 			dadoAtq[i] = new JButton(mod.getAtkImage(j));

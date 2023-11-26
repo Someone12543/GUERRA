@@ -86,6 +86,8 @@ class TelaTabuleiro extends JFrame {
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.nextAction();
+				t.repaintAction(controller.getAcaoStr());
+				TelaTabuleiro.getTelaTabuleiro().repaint();
 			}
 		});
 		

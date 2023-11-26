@@ -349,7 +349,7 @@ class Tabuleiro extends JPanel {
 	    g2d.drawString(texto, textX, textY);
 	}
 	
-	public void repaintExe(int color, int number, String nome, String colorJog, String action) {
+	public void repaintExe(int color, int number, String nome, String colorJog) {
 		for (Exercito e: listaExercitos) {
 			if (nome.equals(e.nome)) {
 				e.color = color;
@@ -357,8 +357,11 @@ class Tabuleiro extends JPanel {
 				break;
 			}
 		}
-		acao = action;
 		corPlayer = colorJog;
+	}
+	
+	void repaintAction(String action) {
+		acao = action;
 	}
 	
 }
