@@ -5,7 +5,6 @@ import view.ViewAPI;
 
 import java.util.ArrayList;
 import java.util.Collections;
-import java.awt.Color;
 import java.awt.Image;
 import java.io.*;
 
@@ -143,7 +142,7 @@ public class ModelAPI implements Subject{
 
 	public boolean setupGame()
 	{
-		if (listaJogadores.size() < 2)
+		if (listaJogadores.size() < 3)
 			return false;
 		
 		observadores.add(ViewAPI.getViewAPI());
@@ -256,14 +255,28 @@ public class ModelAPI implements Subject{
 		return true;
 	}
 	
-	public void giveBonuses() {
+	public boolean giveBonuses() {
 		Jogador j = listaJogadores.get(0);
+		
 		for (Continente c : listaContinente) {
 			j.numTropasContinentes[c.tipo.ordinal()] += c.bonusPiece(j);
 		}
 		
 		j.numTropasPosicionar += j.bonusPiece();
 		prepareNotify();
+		
+		return true;
+	}
+	
+	public boolean check1stTurn() {
+		Jogador j = listaJogadores.get(0);
+		
+		if (j.primeiraJogada) {
+			j.primeiraJogada = false;
+			return true;
+		}
+		
+		return false;
 	}
 
 	public boolean attackTerritory(String orig, String dest) {

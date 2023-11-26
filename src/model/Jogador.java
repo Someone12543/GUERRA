@@ -18,6 +18,7 @@ class Jogador {
 	int numTropasPosicionar;
 	int[] numTropasContinentes = new int[6];
 	boolean dominouPaisTurno;
+	boolean primeiraJogada;
 	
 	public Jogador(String nome, Cores cor) {
 		this.nome = nome;
@@ -27,6 +28,7 @@ class Jogador {
 		this.jogadoresEliminados = new ArrayList<Cores>();
 		this.numTropasPosicionar = 0;
 		this.dominouPaisTurno = false;
+		this.primeiraJogada = true;
 	}
 	
 	boolean posicionarTropas(Territorio pais, int qtd, Continentes cont) {
