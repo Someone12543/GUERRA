@@ -6,6 +6,7 @@ import java.awt.event.ActionListener;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
 
@@ -30,7 +31,9 @@ class TelaCriacaoJogo extends JFrame {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
+		p.add(new JLabel("Nome do Jogador:"));
 		p.add(nomeJogador);
+		
 		p.add(cb);
 		
 		p.add(b1);
@@ -41,6 +44,7 @@ class TelaCriacaoJogo extends JFrame {
 					JOptionPane.showMessageDialog(p, "Já existe um jogador dessa cor.", getTitle(), JOptionPane.ERROR_MESSAGE);
 				else
 					mod.addPlayer(nomeJogador.getText(), cb.getSelectedIndex());
+				JOptionPane.showMessageDialog(p, "Jogador adicionado.", getTitle(), JOptionPane.INFORMATION_MESSAGE);
 				nomeJogador.setText("");
 			}
 		});

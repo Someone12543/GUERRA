@@ -122,15 +122,33 @@ public class ControllerAPI {
 	}
 	
 	void startAction() {
-		if(acao_atual == Turno.PosTropa) {
-			game.giveBonuses();
-		}
-		else if (acao_atual == Turno.MovTropa) {
-			game.updateTroops();
+		switch (acao_atual) {
+			case PosTropa:
+				game.giveBonuses();
+				break;
+			case Ataque:
+				if (game.check1stTurn()) {
+					this.acao_atual = Turno.MovTropa;
+					nextAction();
+				}
+				break;
+			case MovTropa:
+				game.updateTroops();
+				break;
 		}
 	}
 
 	public int getTurno() {
 		return acao_atual.ordinal();
+	}
+	
+	public String getAcaoStr() {
+		if (acao_atual == Turno.Ataque) {
+			return "Ataque";
+		}
+		if (acao_atual == Turno.MovTropa) {
+			return "Movimentar";
+		}
+		return "Posicionar";
 	}
 }
