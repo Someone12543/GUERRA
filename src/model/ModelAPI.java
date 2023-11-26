@@ -65,6 +65,10 @@ public class ModelAPI implements Subject{
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_quebec.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_texas.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_an_vancouver.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_argentina.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_brasil.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_peru.png")));
+		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_venezuela.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_arabiasaudita.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_bangladesh.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_cazaquistao.png")));
@@ -85,10 +89,6 @@ public class ModelAPI implements Subject{
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_siria.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_tailandia.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_as_turquia.png")));
-		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_argentina.png")));
-		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_brasil.png")));
-		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_peru.png")));
-		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_asl_venezuela.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_espanha.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_franca.png")));
 		cardImages.add(ImageIO.read(new File("assets/cartas/trocas/war_carta_eu_italia.png")));
@@ -173,8 +173,8 @@ public class ModelAPI implements Subject{
 	public void giveCardToPlayer() {
 		Jogador j = listaJogadores.get(0);
 		
-		if (j.dominouPaisTurno)
-			j.mao.add(drawTrade());
+		if (j.dominouPaisTurno && j.mao.size() < 5)
+				j.mao.add(drawTrade());
 		
 		j.dominouPaisTurno = false;
 	}
@@ -185,7 +185,35 @@ public class ModelAPI implements Subject{
 		listaJogadores.add(j);
 	}
 
-	public String[] getCurrPlayerTerr() {
+	public Image getObjectiveImage() { 
+		return listaJogadores.get(0).obj.toDisplay;
+	}
+	
+	public Image[] getCardImages() {
+		Jogador j = listaJogadores.get(0);
+		Image[] images = new Image[j.mao.size()];
+		
+		int i = 0;
+		for (Troca t : j.mao) {
+			images[i++] = t.toDisplay;
+		}
+		
+		return images;
+	}
+	
+	public String[] getCardNames() {
+		Jogador j = listaJogadores.get(0);
+		String[] names = new String[j.mao.size()];
+		
+		int i = 0;
+		for (Troca t : j.mao) {
+			names[i++] = t.representa.nome;
+		}
+		
+		return names;
+	}
+	
+ 	public String[] getCurrPlayerTerr() {
 		ArrayList<Territorio> lista = listaJogadores.get(0).paisesDominados;
 		String[] terrs = new String[lista.size()];
 	
@@ -208,6 +236,11 @@ public class ModelAPI implements Subject{
 		}
 		
 		return terrs;
+	}
+	
+	public boolean performTrade(int[] cards) {
+		Jogador j = listaJogadores.get(0);
+		return trade(j, j.mao.get(cards[0]), j.mao.get(cards[1]), j.mao.get(cards[2]));
 	}
 	
 	public boolean verifyNextTurn() {
@@ -259,7 +292,7 @@ public class ModelAPI implements Subject{
 			else {
 				for (Jogador j : listaJogadores) {
 					if (j != player && j.obj.id - 8 == morto.cor.ordinal()) {//verifica se outro player tinha que eliminar o morto
-						j.obj = new Objetivo14(null); //se sim, substitui seu objetivo
+						j.obj = new Objetivo14(j.obj.toDisplay); //se sim, substitui seu objetivo
 						if(j.obj.verificaObj(j, listaContinente)) {
 							ViewAPI.getViewAPI().showWinner(j.nome, j.obj.descricao);
 							return true;
@@ -308,7 +341,6 @@ public class ModelAPI implements Subject{
 	}
 	
  	public boolean updateTroops() {
-		
 		for (Continente c : listaContinente) {
 			for (Territorio t : c.paises) {
 				t.numTropasPodeMover = t.numTropas - 1;
@@ -346,7 +378,7 @@ public class ModelAPI implements Subject{
 	public void saveGame(PrintWriter outputStream) {
 		outputStream.println(listaJogadores.size());
 		for (Jogador j : listaJogadores) {
-			outputStream.printf("%s;%d;%d;%d;\n", j.nome, j.cor.ordinal(), j.obj.id, j.numTropasPosicionar);
+			outputStream.printf("%s;%d;%d;\n", j.nome, j.cor.ordinal(), j.obj.id);
 			
 			outputStream.println(j.paisesDominados.size());
 			for (Territorio t : j.paisesDominados)
@@ -399,7 +431,6 @@ public class ModelAPI implements Subject{
 				case 13: j.obj = new Objetivo13(ModelAPI.objectiveImages.get(12)); break;
 				case 14: j.obj = new Objetivo14(ModelAPI.objectiveImages.get(13)); break;
 			}
-			j.numTropasPosicionar = Integer.parseInt(infos[3]);
 			
 			ln = inputStream.readLine();
 			numP = Integer.parseInt(ln);
@@ -411,6 +442,7 @@ public class ModelAPI implements Subject{
 				t.numTropas = Integer.parseInt(infos[1]);
 				t.numTropasPodeMover = Integer.parseInt(infos[2]);
 				prepareNotify(t);
+				j.paisesDominados.add(t);
 			}
 			
 			ln = inputStream.readLine();
@@ -571,6 +603,7 @@ public class ModelAPI implements Subject{
 			for (Troca c : temp) { //bonus de possuir o territorio da carta
 				if(id.paisesDominados.contains(c.representa)) {
 					c.representa.numTropas += 2;
+					prepareNotify(c.representa);
 				}
 			}
 			
