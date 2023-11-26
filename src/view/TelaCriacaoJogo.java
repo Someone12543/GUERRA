@@ -42,9 +42,10 @@ class TelaCriacaoJogo extends JFrame {
 				ModelAPI mod = ModelAPI.getModelAPI();
 				if (mod.existPlayerColor(cb.getSelectedIndex()))
 					JOptionPane.showMessageDialog(p, "Já existe um jogador dessa cor.", getTitle(), JOptionPane.ERROR_MESSAGE);
-				else
+				else {
 					mod.addPlayer(nomeJogador.getText(), cb.getSelectedIndex());
-				JOptionPane.showMessageDialog(p, "Jogador adicionado.", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+					JOptionPane.showMessageDialog(p, "Jogador adicionado.", getTitle(), JOptionPane.INFORMATION_MESSAGE);
+				}
 				nomeJogador.setText("");
 			}
 		});

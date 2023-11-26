@@ -82,7 +82,10 @@ public class TelaAtaque extends JFrame {
 		a.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaDados td = new TelaDados(cb1.getSelectedItem().toString(), cb2.getSelectedItem().toString());
+				String temp1 = cb1.getSelectedItem().toString();
+				String temp2 = cb2.getSelectedItem().toString();
+				
+				TelaDados td = new TelaDados(temp1, temp2);
 				td.setTitle(getTitle());
 				td.setVisible(true);
 				
@@ -90,6 +93,8 @@ public class TelaAtaque extends JFrame {
 				Arrays.sort(terrs, collator);
 				
 				update(cb1);
+				cb1.setSelectedItem(temp1);
+				cb2.setSelectedItem(temp2);
 			}
 		});
 		
