@@ -185,6 +185,10 @@ public class ModelAPI implements Subject{
 		listaJogadores.add(j);
 	}
 
+	public Image getObjectiveImage() { 
+		return listaJogadores.get(0).obj.toDisplay;
+	}
+	
 	public String[] getCurrPlayerTerr() {
 		ArrayList<Territorio> lista = listaJogadores.get(0).paisesDominados;
 		String[] terrs = new String[lista.size()];
@@ -257,7 +261,7 @@ public class ModelAPI implements Subject{
 			else {
 				for (Jogador j : listaJogadores) {
 					if (j != player && j.obj.id - 8 == morto.cor.ordinal()) {//verifica se outro player tinha que eliminar o morto
-						j.obj = new Objetivo14(null); //se sim, substitui seu objetivo
+						j.obj = new Objetivo14(j.obj.toDisplay); //se sim, substitui seu objetivo
 						if(j.obj.verificaObj(j, listaContinente)) {
 							ViewAPI.getViewAPI().showWinner(j.nome, j.obj.descricao);
 							return true;
