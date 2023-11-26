@@ -148,9 +148,7 @@ public class ModelAPI implements Subject{
 	public void giveBonuses() {
 		Jogador j = listaJogadores.get(0);
 		for (Continente c : listaContinente) {
-			if (hasAllTerrCont(c.tipo)){
-				j.numTropasContinentes[c.tipo.ordinal()] += c.bonusPiece(j);
-			}
+			j.numTropasContinentes[c.tipo.ordinal()] += c.bonusPiece(j);
 		}
 		
 		j.numTropasPosicionar += j.bonusPiece();
