@@ -1,5 +1,7 @@
 package view;
 
+import java.awt.BorderLayout;
+import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -28,6 +30,8 @@ class TelaDados extends JFrame {
 	public TelaDados(String orig, String dest) {
 		setSize(LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+		d.setLayout(new GridLayout(2, 3));
 		
 		atacar = new JButton("Finalizar ataque");
 		atacar.addActionListener(new ActionListener () {
@@ -117,9 +121,9 @@ class TelaDados extends JFrame {
 			i++;
 		}
 		
-		d.add(atacar);
+		add(atacar, BorderLayout.SOUTH);
 		
-		getContentPane().add(d);
+		add(d);
 	}
 
 }
