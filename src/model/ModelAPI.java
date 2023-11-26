@@ -226,6 +226,11 @@ public class ModelAPI implements Subject{
 		return terrs;
 	}
 	
+	public boolean performTrade(int[] cards) {
+		Jogador j = listaJogadores.get(0);
+		return trade(j, j.mao.get(cards[0]), j.mao.get(cards[1]), j.mao.get(cards[2]));
+	}
+	
 	public boolean verifyNextTurn() {
 		Jogador j = listaJogadores.get(0);
 		
@@ -324,7 +329,6 @@ public class ModelAPI implements Subject{
 	}
 	
  	public boolean updateTroops() {
-		
 		for (Continente c : listaContinente) {
 			for (Territorio t : c.paises) {
 				t.numTropasPodeMover = t.numTropas - 1;
@@ -587,7 +591,6 @@ public class ModelAPI implements Subject{
 			for (Troca c : temp) { //bonus de possuir o territorio da carta
 				if(id.paisesDominados.contains(c.representa)) {
 					c.representa.numTropas += 2;
-					c.representa.numTropasPodeMover += 2;
 				}
 			}
 			
