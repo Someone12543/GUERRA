@@ -47,15 +47,16 @@ public class TelaAtaque extends JFrame {
 		cb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				
-				terrs = mod.getCurrPlayerTerr();
-				Arrays.sort(terrs, collator);
 				
-				update(cb1);
-				
-				terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
-				Arrays.sort(terrs, collator);
-				
-				update(cb2);
+				try {
+					terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
+					Arrays.sort(terrs, collator);
+					
+					update(cb2);
+				}
+				catch (NullPointerException np){
+					return;
+				}
 			}
 		});
 		
