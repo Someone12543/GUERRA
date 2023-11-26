@@ -29,6 +29,7 @@ class TelaCartas extends JFrame {
 		setSize(LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
+		String[] names = ModelAPI.getModelAPI().getCardNames();
 		Image[] imgs = ModelAPI.getModelAPI().getCardImages();
 		c = new Cartas(imgs);
 
@@ -36,28 +37,34 @@ class TelaCartas extends JFrame {
 		ItemListener handler = new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
+				System.out.println(e.getStateChange());
+				
 				if (e.getStateChange() == ItemEvent.DESELECTED) {
 					qtd--;
-					if (qtd == 3) {
+					if (qtd < 3) {
 						trocar.setEnabled(false);
 					}
-					return;
+				}
+				else {
+					qtd++;
+					if (qtd == 3) {
+						trocar.setEnabled(true);
+					}
+					else if (qtd > 3){
+						qtd--;
+						JCheckBox selected = (JCheckBox) e.getSource();
+						selected.removeItemListener(this);
+						selected.setSelected(false);
+						selected.addItemListener(this);
+					}
 				}
 				
-				qtd++;
-				if (qtd == 3) {
-					trocar.setEnabled(true);
-				}
-				else if (qtd > 3){
-					qtd--;
-					JCheckBox selected = (JCheckBox) e.getSource();
-					selected.setSelected(false);
-				}
+				System.out.println(qtd);
 			}
 		};
 		
-		for (Image img : imgs) {
-			cards[i] = new JCheckBox();
+		for (String name : names) {
+			cards[i] = new JCheckBox(name);
 			cards[i].addItemListener(handler);		
 			c.add(cards[i]);
 			i++;
@@ -70,9 +77,13 @@ class TelaCartas extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				int i = 0, j = 0;
 				for (JCheckBox cb : cards) {
+					if (cb == null)
+						continue;
+					
 					if (cb.isSelected()) {
 						selectedIndex[i++] = j;
 					}
+					
 					j++;
 				}
 				

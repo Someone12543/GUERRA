@@ -201,6 +201,18 @@ public class ModelAPI implements Subject{
 		return images;
 	}
 	
+	public String[] getCardNames() {
+		Jogador j = listaJogadores.get(0);
+		String[] names = new String[j.mao.size()];
+		
+		int i = 0;
+		for (Troca t : j.mao) {
+			names[i++] = t.representa.nome;
+		}
+		
+		return names;
+	}
+	
  	public String[] getCurrPlayerTerr() {
 		ArrayList<Territorio> lista = listaJogadores.get(0).paisesDominados;
 		String[] terrs = new String[lista.size()];
@@ -591,6 +603,7 @@ public class ModelAPI implements Subject{
 			for (Troca c : temp) { //bonus de possuir o territorio da carta
 				if(id.paisesDominados.contains(c.representa)) {
 					c.representa.numTropas += 2;
+					prepareNotify(c.representa);
 				}
 			}
 			
