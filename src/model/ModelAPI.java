@@ -9,7 +9,6 @@ import java.util.Collections;
 import java.awt.Image;
 import java.io.*;
 import java.security.SecureRandom;
-import java.text.Collator;
 
 import javax.imageio.ImageIO;
 import javax.swing.Icon;

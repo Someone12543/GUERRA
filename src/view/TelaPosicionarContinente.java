@@ -5,7 +5,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.Collator;
 import java.util.Arrays;
-import java.util.stream.IntStream;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -13,7 +12,6 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JTextField;
-import javax.swing.border.Border;
 
 import model.ModelAPI;
 
@@ -32,7 +30,7 @@ public class TelaPosicionarContinente extends JFrame {
 	String[] terrs;
 	
 	public TelaPosicionarContinente(TelaPosicionar tp) {
-		String temp;
+		//String temp;
 		
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
