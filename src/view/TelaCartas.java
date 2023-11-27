@@ -17,7 +17,7 @@ class TelaCartas extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public final int LARG_DEFAULT = 650;
+	public final int LARG_DEFAULT = 900;
 	public final int ALT_DEFAULT = 400;
 	Cartas c;
 	JButton trocar;
@@ -37,8 +37,6 @@ class TelaCartas extends JFrame {
 		ItemListener handler = new ItemListener() {
 			@Override
 			public void itemStateChanged(ItemEvent e) {
-				System.out.println(e.getStateChange());
-				
 				if (e.getStateChange() == ItemEvent.DESELECTED) {
 					qtd--;
 					if (qtd < 3) {
@@ -58,8 +56,6 @@ class TelaCartas extends JFrame {
 						selected.addItemListener(this);
 					}
 				}
-				
-				System.out.println(qtd);
 			}
 		};
 		

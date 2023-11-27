@@ -39,8 +39,8 @@ class TelaDados extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				if (!mod.attackTerritory(orig, dest, atk, def)) {
 					JOptionPane.showMessageDialog(d, "Combinação de países incompatível.", getTitle(), JOptionPane.ERROR_MESSAGE);
-					return;
 				}
+				safeDispose();
 			}
 		});
 		
@@ -52,8 +52,8 @@ class TelaDados extends JFrame {
 		for (int q = 0; q <= atk.length; q++) {
 			if (q == atk.length) {
 				JOptionPane.showMessageDialog(d, "Não há tropas suficientes", getTitle(), JOptionPane.ERROR_MESSAGE);
-				super.dispose();
-				break;
+				safeDispose();
+				return;
 			}
 			if (atk[q] != 0)
 				break;
@@ -125,8 +125,12 @@ class TelaDados extends JFrame {
 	}
 	
 	@Override
-	public void dispose() {
+	public void dispose( ) {
 		atacar.doClick();
+		super.dispose();
+	}
+	
+	void safeDispose() {
 		super.dispose();
 	}
 
