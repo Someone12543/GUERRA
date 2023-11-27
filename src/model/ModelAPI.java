@@ -218,11 +218,14 @@ public class ModelAPI implements Subject{
 		j.dominouPaisTurno = false;
 	}
 	
-	//função para ir para o proximo jogador e colocar o atual no fim da lista
+	//função para ir para o proximo jogador e colocar o atual no fim da lista, se o jogador que for jogar agora não possui territórios
+	//chama a função novamente para chamar o próximo jogador
 	public void nextPlayerToPlay() {
 		Jogador j = listaJogadores.get(0);
 		listaJogadores.remove(j);
 		listaJogadores.add(j);
+		if (j.paisesDominados.size() == 0)
+			nextPlayerToPlay();
 	}
 
 	public Image getObjectiveImage() { 
@@ -337,7 +340,22 @@ public class ModelAPI implements Subject{
 		
 		return false;
 	}
-
+	
+	public Integer[] getTroopsPos() {
+		Jogador j = listaJogadores.get(0);
+		
+		// primeiro é tropas genéricas, o resto é por continente
+		Integer[] ints = {0,0,0,0,0,0,0};
+		
+		ints[0] = j.numTropasPosicionar;
+		
+		for (int i = 1; i < 7; i++) {
+			ints[i] = j.numTropasContinentes[i-1];
+		}
+		
+		return ints;
+		
+	}
 
 	//funcao para o jogador atual atacar o territorio de outro jogador com algum territorio proprio
 	public boolean attackTerritory(String orig, String dest, Integer[] atkDices, Integer[] defDices) {
@@ -345,6 +363,7 @@ public class ModelAPI implements Subject{
 		Territorio original = getTerrByName(orig);
 		Territorio destino = getTerrByName(dest);
 		
+		ViewAPI.reproduzirSomAsync("assets/sons/tiros.wav");
 		if(!original.atacarTerritorio(player.cor, destino, atkDices, defDices)) return false;
 		
 		//notificando os observadores sobre as mudanças após o atk
@@ -358,12 +377,10 @@ public class ModelAPI implements Subject{
 				morto = j;
 		}
 
-		//removendo o jogador eliminado da lista, checando se o objetivo do jogador atual era eliminar ele para mostrar o vencedor se for o caso e
+		//checando se o objetivo do jogador atual era eliminar ele para mostrar o vencedor se for o caso e
 		//testando se o objetivo de outro jogador era eliminar o jogador que fora eliminado, caso sim o objetivo deste outro jogador passa a ser 
 		//capturar 24 territorios (objetivo 14)
 		if(morto != null) {
-			listaJogadores.remove(morto);
-		
 			player.jogadoresEliminados.add(morto.cor);
 			if(player.obj.verificaObj(player, listaContinente)){
 				ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
@@ -392,6 +409,7 @@ public class ModelAPI implements Subject{
 		Territorio terr = getTerrByName(t);
 		Jogador j = listaJogadores.get(0);
 		
+		ViewAPI.reproduzirSomAsync("assets/sons/parachute.wav");
 		
 		if (cont) {
 			Continentes c = terr.continente.tipo;
@@ -409,6 +427,9 @@ public class ModelAPI implements Subject{
 	
 	//movimentando as tropas do jogador e notificando o observador que os territorios envolvidos na movimentação tiveram alterações
 	public boolean moveTroops(String orig, String dest, int qtd) {
+		
+		ViewAPI.reproduzirSomAsync("assets/sons/marcha.wav");
+		
 		Cores c = listaJogadores.get(0).cor;
 		Territorio original = getTerrByName(orig);
 		Territorio destino = getTerrByName(dest);
@@ -615,6 +636,7 @@ public class ModelAPI implements Subject{
 		default:
 			paramsForObserver.add(3, "xyz");
 		}
+		paramsForObserver.add(4, listaJogadores.get(0).nome);
 		
 		for (Observer obs: observadores) {
 			obs.notify(getModelAPI());
@@ -648,6 +670,7 @@ public class ModelAPI implements Subject{
 		default:
 			paramsForObserver.add(3, "xyz");
 		}
+		paramsForObserver.add(4, listaJogadores.get(0).nome);
 		
 		for (Observer obs: observadores) {
 			obs.notify(getModelAPI());
