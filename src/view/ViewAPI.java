@@ -28,7 +28,7 @@ public class ViewAPI implements Observer{
 		TelaTabuleiro tt = TelaTabuleiro.getTelaTabuleiro();
 		
 		//chamando o método do tabuleiro que é recuperado via a tela tabuleiro e realiza as alterações na tela e usa o repaint para exibir elas
-		tt.t.repaintExe((int)s.obsGet(0), (int)s.obsGet(1), (String)s.obsGet(2), (String)s.obsGet(3));
+		tt.t.repaintExe((int)s.obsGet(0), (int)s.obsGet(1), (String)s.obsGet(2), (String)s.obsGet(3), (String)s.obsGet(4));
 		tt.repaint();
 	}
 	

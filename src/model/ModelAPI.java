@@ -630,6 +630,7 @@ public class ModelAPI implements Subject{
 		default:
 			paramsForObserver.add(3, "xyz");
 		}
+		paramsForObserver.add(4, listaJogadores.get(0).nome);
 		
 		for (Observer obs: observadores) {
 			obs.notify(getModelAPI());
@@ -663,6 +664,7 @@ public class ModelAPI implements Subject{
 		default:
 			paramsForObserver.add(3, "xyz");
 		}
+		paramsForObserver.add(4, listaJogadores.get(0).nome);
 		
 		for (Observer obs: observadores) {
 			obs.notify(getModelAPI());

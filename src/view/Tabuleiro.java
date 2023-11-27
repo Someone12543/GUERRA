@@ -19,6 +19,7 @@ class Tabuleiro extends JPanel {
 	ArrayList<Exercito> listaExercitos;
 	String acao = "Posicionar";
 	String corPlayer = "Azul";
+	String jogName = "Moao";
 	
 	public Tabuleiro() {
 		try {
@@ -329,16 +330,16 @@ class Tabuleiro extends JPanel {
 		default:
 			g2d.setPaint(Color.GRAY);
 		} // Cor do retângulo
-	    int rectWidth = 100; // Largura do retângulo
+	    int rectWidth = Math.max(200, (int)jogName.length()*200/17); // Largura do retângulo
 	    int rectHeight = 35; // Altura do retângulo
-	    int rectX = (getWidth() - rectWidth) / 2 -10; // Posição X do retângulo (centralizado)
-	    int rectY = getHeight() - rectHeight - 120; // Posição Y do retângulo (20 pixels acima do fundo)
+	    int rectX = (int) ((getWidth() - rectWidth) / 2 -(8.5*(200/rectWidth)) - 2.5); // Posição X do retângulo (centralizado)
+	    int rectY = getHeight() - rectHeight - 130; // Posição Y do retângulo (30 pixels acima do fundo)
 
-	    g2d.fillRect(rectX, rectY, rectWidth, rectHeight);
+	    g2d.fillRect(rectX, rectY, rectWidth, rectHeight+20);
 	    
 	    // Adiciona borda cinza ao retângulo
 	    g2d.setPaint(Color.GRAY); // Cor da borda
-	    g2d.drawRect(rectX, rectY, rectWidth, rectHeight);
+	    g2d.drawRect(rectX, rectY, rectWidth, rectHeight+20);
 
 	    // Adiciona texto no retângulo
 	    if (corPlayer != "Preto") {
@@ -347,15 +348,17 @@ class Tabuleiro extends JPanel {
 	    	g2d.setPaint(Color.WHITE);
 	    }
 	    g2d.setFont(new Font("Arial", Font.BOLD, 18)); // Fonte do texto
-	    String texto = acao;
+	    String texto = "Turno: " + acao;
 	    int textX = rectX + rectWidth / 2 - g2d.getFontMetrics().stringWidth(texto) / 2; // Posição X do texto (centralizado no retângulo)
 	    int textY = rectY + rectHeight / 2 + g2d.getFontMetrics().getHeight() / 4; // Posição Y do texto (centralizado verticalmente no retângulo)
 
 	    g2d.drawString(texto, textX, textY);
+	    textX = rectX + rectWidth / 2 - g2d.getFontMetrics().stringWidth(jogName) / 2;
+	    g2d.drawString(jogName, textX, textY+20);
 	}
 	
 	//métodos que sao chamados pela viewAPI para atualizar as infos do mapa com as infos do observer
-	public void repaintExe(int color, int number, String nome, String colorJog) {
+	public void repaintExe(int color, int number, String nome, String colorJog, String jogName) {
 		for (Exercito e: listaExercitos) {
 			if (nome.equals(e.nome)) {
 				e.color = color;
@@ -364,6 +367,7 @@ class Tabuleiro extends JPanel {
 			}
 		}
 		corPlayer = colorJog;
+		this.jogName = jogName;
 	}
 	
 	void repaintAction(String action) {
