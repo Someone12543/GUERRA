@@ -218,11 +218,14 @@ public class ModelAPI implements Subject{
 		j.dominouPaisTurno = false;
 	}
 	
-	//função para ir para o proximo jogador e colocar o atual no fim da lista
+	//função para ir para o proximo jogador e colocar o atual no fim da lista, se o jogador que for jogar agora não possui territórios
+	//chama a função novamente para chamar o próximo jogador
 	public void nextPlayerToPlay() {
 		Jogador j = listaJogadores.get(0);
 		listaJogadores.remove(j);
 		listaJogadores.add(j);
+		if (j.paisesDominados == 0)
+			nextPlayerToPlay();
 	}
 
 	public Image getObjectiveImage() { 
@@ -373,12 +376,10 @@ public class ModelAPI implements Subject{
 				morto = j;
 		}
 
-		//removendo o jogador eliminado da lista, checando se o objetivo do jogador atual era eliminar ele para mostrar o vencedor se for o caso e
+		//checando se o objetivo do jogador atual era eliminar ele para mostrar o vencedor se for o caso e
 		//testando se o objetivo de outro jogador era eliminar o jogador que fora eliminado, caso sim o objetivo deste outro jogador passa a ser 
 		//capturar 24 territorios (objetivo 14)
 		if(morto != null) {
-			listaJogadores.remove(morto);
-		
 			player.jogadoresEliminados.add(morto.cor);
 			if(player.obj.verificaObj(player, listaContinente)){
 				ViewAPI.getViewAPI().showWinner(player.nome, player.obj.descricao);
