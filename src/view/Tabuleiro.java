@@ -332,8 +332,8 @@ class Tabuleiro extends JPanel {
 		} // Cor do retângulo
 	    int rectWidth = Math.max(200, (int)jogName.length()*200/17); // Largura do retângulo
 	    int rectHeight = 35; // Altura do retângulo
-	    int rectX = (int) ((getWidth() - rectWidth) / 2 -(8.5*(200/rectWidth)) - 2.5); // Posição X do retângulo (centralizado)
-	    int rectY = getHeight() - rectHeight - 130; // Posição Y do retângulo (30 pixels acima do fundo)
+	    int rectX = (int) ((getWidth() - rectWidth) / 2 -(8.5*(200/rectWidth)) - 2.5 + 11); // Posição X do retângulo (centralizado)
+	    int rectY = getHeight() - rectHeight - 100; // Posição Y do retângulo (30 pixels acima do fundo)
 
 	    g2d.fillRect(rectX, rectY, rectWidth, rectHeight+20);
 	    
