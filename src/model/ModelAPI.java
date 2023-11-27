@@ -224,7 +224,7 @@ public class ModelAPI implements Subject{
 		Jogador j = listaJogadores.get(0);
 		listaJogadores.remove(j);
 		listaJogadores.add(j);
-		if (j.paisesDominados == 0)
+		if (j.paisesDominados.size() == 0)
 			nextPlayerToPlay();
 	}
 
@@ -363,6 +363,7 @@ public class ModelAPI implements Subject{
 		Territorio original = getTerrByName(orig);
 		Territorio destino = getTerrByName(dest);
 		
+		ViewAPI.reproduzirSomAsync("assets/sons/tiros.wav");
 		if(!original.atacarTerritorio(player.cor, destino, atkDices, defDices)) return false;
 		
 		//notificando os observadores sobre as mudanças após o atk
@@ -408,6 +409,7 @@ public class ModelAPI implements Subject{
 		Territorio terr = getTerrByName(t);
 		Jogador j = listaJogadores.get(0);
 		
+		ViewAPI.reproduzirSomAsync("assets/sons/parachute.wav");
 		
 		if (cont) {
 			Continentes c = terr.continente.tipo;
@@ -425,6 +427,9 @@ public class ModelAPI implements Subject{
 	
 	//movimentando as tropas do jogador e notificando o observador que os territorios envolvidos na movimentação tiveram alterações
 	public boolean moveTroops(String orig, String dest, int qtd) {
+		
+		ViewAPI.reproduzirSomAsync("assets/sons/marcha.wav");
+		
 		Cores c = listaJogadores.get(0).cor;
 		Territorio original = getTerrByName(orig);
 		Territorio destino = getTerrByName(dest);
