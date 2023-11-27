@@ -60,7 +60,8 @@ public class TelaPosicionarContinente extends JFrame {
 			+ (troops[3] != 0? "<br>América do Sul: " + troops[3].toString() : "")
 			+ (troops[4] != 0? "<br>Ásia: " + troops[4].toString() : "")
 			+ (troops[5] != 0? "<br>Europa: " + troops[5].toString() : "")
-			+ (troops[6] != 0? "<br>Oceania: </html>" + troops[6].toString() : ""));
+			+ (troops[6] != 0? "<br>Oceania: " + troops[6].toString() : "")
+			+ "</html>");
 		
 		posicionar.setMinimumSize(new Dimension(100, 200));
 		
@@ -98,7 +99,8 @@ public class TelaPosicionarContinente extends JFrame {
 							+ (troops[3] != 0? "<br>América do Sul: " + troops[3].toString() : "")
 							+ (troops[4] != 0? "<br>Ásia: " + troops[4].toString() : "")
 							+ (troops[5] != 0? "<br>Europa: " + troops[5].toString() : "")
-							+ (troops[6] != 0? "<br>Oceania: </html>" + troops[6].toString() : ""));
+							+ (troops[6] != 0? "<br>Oceania: " + troops[6].toString() : "")
+							+ "</html>");
 					
 				}
 				catch (NumberFormatException ex){
