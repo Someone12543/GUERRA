@@ -250,7 +250,8 @@ public class ModelAPI implements Subject{
 		
 		int i = 0;
 		for (Troca t : j.mao) {
-			names[i++] = t.representa.nome;
+			if (t.representa == null) names[i++] = "Coringa";
+			else names[i++] = t.representa.nome;
 		}
 		
 		return names;
