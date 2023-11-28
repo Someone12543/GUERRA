@@ -261,28 +261,26 @@ public class ModelAPI implements Subject{
 	
 	
 	//função que retorna a lista de nomes dos territorios do jogador atual
- 	public String[] getCurrPlayerTerr() {
+	//além disso ela recebe um booleano que define se ela deverá filtrar os paises conquistados
+ 	public ArrayList<String> getCurrPlayerTerr(boolean filterConquered) {
 		ArrayList<Territorio> lista = listaJogadores.get(0).paisesDominados;
-		String[] terrs = new String[lista.size()];
-	
-		int i = 0;
+		ArrayList<String> terrs = new ArrayList<String>();
 		
 		for (Territorio t : lista) {
-			if (!t.conquistadoNesseTurno)
-				terrs[i++] = t.nome;
+			if (!(filterConquered && t.conquistadoNesseTurno))
+				terrs.add(t.nome);
 		}
 	
 		return terrs;
 	}
  	
  	//retorna lista de territorios que fazem fronteira com o territorio x, recebe como parametro a string do nome desse territorio
-	public String[] getFrontierNames(String name) {
+	public ArrayList<String> getFrontierNames(String name) {
 		Territorio t = getTerrByName(name);
-		String[] terrs = new String[t.paisesLigados.size()];
-		int i = 0;
+		ArrayList<String> terrs = new ArrayList<String>();
 		
 		for (Territorio ter : t.paisesLigados) {
-			terrs[i++] = ter.nome;
+			terrs.add(ter.nome);
 		}
 		
 		return terrs;

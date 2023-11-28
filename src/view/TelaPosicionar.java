@@ -2,8 +2,10 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.Collator;
-import java.util.Arrays;
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,25 +29,33 @@ class TelaPosicionar extends JFrame {
 	JLabel posicionar;
 	Posicionar p = new Posicionar();
 	ModelAPI mod;
-	String[] terrs;
+	ArrayList<String> terrs;
 	TelaPosicionar self;
+	TelaPosicionarContinente tpc;
 	
 	public TelaPosicionar() {
 		self = this;
+		tpc = new TelaPosicionarContinente(self);
 		
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
 		mod = ModelAPI.getModelAPI();
 		
-		terrs = mod.getCurrPlayerTerr();
+		terrs = mod.getCurrPlayerTerr(false);
 		
-		Collator collator = Collator.getInstance();
+		Collections.sort(terrs, new Comparator<String>() {
+		    @Override
+		    public int compare(String o1, String o2) {
+		        o1 = Normalizer.normalize(o1, Normalizer.Form.NFD);
+		        o2 = Normalizer.normalize(o2, Normalizer.Form.NFD);
+		        return o1.compareTo(o2);
+		    }
+		});
 		
-		collator.setStrength(Collator.PRIMARY);
-		Arrays.sort(terrs, collator);
-		
-		cb1 = new JComboBox<String>(terrs);
+		String[] temp = new String[terrs.size()];
+		terrs.toArray(temp);
+		cb1 = new JComboBox<String>(temp);
 	
 		p.add(new JLabel("País a posicionar:"));
 		p.add(cb1);
@@ -59,10 +69,12 @@ class TelaPosicionar extends JFrame {
 		p.add(b0);
 		b0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaPosicionarContinente tpc = new TelaPosicionarContinente(self);
-				tpc.setTitle("POSICIONAR EM CONTINENTE!");
-				tpc.setVisible(true);
-				setVisible(false);
+				if (!tpc.isDisplayable()) {
+					tpc = new TelaPosicionarContinente(self);
+					tpc.setTitle("POSICIONAR EM CONTINENTE!");
+					tpc.setVisible(true);
+					setVisible(false);
+				}
 			}
 		});
 		
@@ -97,4 +109,11 @@ class TelaPosicionar extends JFrame {
 		getContentPane().add(p);
 	}
 	
+	@Override
+	public void dispose() {
+		if (tpc.isActive()) {
+			tpc.dispose();
+		}
+		super.dispose();
+	}
 }

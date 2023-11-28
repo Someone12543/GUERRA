@@ -5,23 +5,20 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.Collator;
-import java.util.Arrays;
 
 import javax.swing.JButton;
-import javax.swing.JComboBox;
+import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
 import model.ModelAPI;
 
-class TelaDados extends TelaAtaque {
+class TelaDados extends JFrame {
 	/**
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
 	public final int LARG_DEFAULT = 400;
 	public final int ALT_DEFAULT = 300;
-	String orig, dest;
 	Integer[] atk, def;
 	Dados d = new Dados();
 	JButton[] dadoAtq = new JButton[3];
@@ -29,14 +26,9 @@ class TelaDados extends TelaAtaque {
 	JButton atacar;
 	ModelAPI mod = ModelAPI.getModelAPI();
 	
-	public TelaDados(String orig, String dest, JComboBox<String> cb1, JComboBox<String> cb2) {
+	public TelaDados(String orig, String dest) {
 		setSize(LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
-		
-		this.cb1 = cb1;
-		this.cb2 = cb2;
-		this.orig = orig;
-		this.dest = dest;
 		
 		d.setLayout(new GridLayout(2, 3));
 		
@@ -134,18 +126,18 @@ class TelaDados extends TelaAtaque {
 		setVisible(true);
 	}
 	
-	@Override
-	public void dispose() {
-		Collator collator = Collator.getInstance();
-		
-		terrs = mod.getCurrPlayerTerr();
-		Arrays.sort(terrs, collator);
-		
-		update(cb1, terrs);
-		
-		cb1.setSelectedItem(orig);
-		cb2.setSelectedItem(dest);
-		super.dispose();
-	}
+//	@Override
+//	public void dispose() {
+//		Collator collator = Collator.getInstance();
+//		
+//		String[] terrs = mod.getCurrPlayerTerr();
+//		Arrays.sort(terrs, collator);
+//		
+//		update(cb1, terrs);
+//		
+//		cb1.setSelectedItem(orig);
+//		cb2.setSelectedItem(dest);
+//		super.dispose();
+//	}
 
 }

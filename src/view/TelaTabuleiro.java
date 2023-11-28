@@ -29,6 +29,10 @@ class TelaTabuleiro extends JFrame {
 	ImageIcon nextAction, rollDices, objCard, tradeCards;
 	Tabuleiro t = new Tabuleiro();
 	ControllerAPI controller = ControllerAPI.getControllerAPI();
+	TelaPosicionar tp;
+	TelaAtaque ta;
+	TelaMovimentar tm;
+	
 	
 	private TelaTabuleiro() {
 		try {
@@ -59,17 +63,23 @@ class TelaTabuleiro extends JFrame {
 				b3.setEnabled(false);
 				switch (controller.getTurno()) {
 					case 0:
-						TelaPosicionar tp = new TelaPosicionar();
+						if (tp == null || !tp.isDisplayable()) {
+							tp = new TelaPosicionar();
+						}
 						tp.setTitle("POSICIONAR!");
 						tp.setVisible(true);
 						break;
 					case 1:
-						TelaAtaque ta = new TelaAtaque();
+						if (ta == null || !ta.isDisplayable()) {
+							ta = new TelaAtaque();
+						}
 						ta.setTitle("ATAQUE!");
 						ta.setVisible(true);
 						break;
 					case 2:
-						TelaMovimentar tm = new TelaMovimentar();
+						if (tm == null || !tm.isDisplayable()) {
+							tm = new TelaMovimentar();
+						}
 						tm.setTitle("MOVIMENTAR!");
 						tm.setVisible(true);
 						break;
@@ -84,11 +94,25 @@ class TelaTabuleiro extends JFrame {
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				controller.nextAction();
+				
+				if (tp != null && !tp.isActive()) {
+					tp.dispose();
+				}
+				
+				if (ta != null && !ta.isActive()) {
+					ta.dispose();
+				}
+				
+				if (tm != null && !tm.isActive()) {
+					tm.dispose();
+				}
+				
 				String acao = controller.getAcaoStr();
 				if (acao.equals("Posicionar"))
 					b5.setEnabled(true);
 				else
 					b5.setEnabled(false);
+				
 				t.repaintAction(acao);
 				TelaTabuleiro.getTelaTabuleiro().repaint();
 			}
@@ -154,6 +178,19 @@ class TelaTabuleiro extends JFrame {
 
 	@Override
 	public void dispose() {
+		
+		if (tp.isDisplayable()) {
+			tp.dispose();
+		}
+		
+		if (ta.isDisplayable()) {
+			ta.dispose();
+		}
+		
+		if (tm.isDisplayable()) {
+			tm.dispose();
+		}
+		
 		controller.endGame();
 		super.dispose();
 	}

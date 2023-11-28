@@ -2,8 +2,10 @@ package view;
 
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.Collator;
-import java.util.Arrays;
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -23,7 +25,15 @@ class TelaAtaque extends JFrame {
 	private JButton b2 = new JButton("Confirmar ataque");
 	private Ataque a = new Ataque();
 	private ModelAPI mod;
-	protected String[] terrs;
+	protected ArrayList<String> terrs;
+	private Comparator<String> comp = new Comparator<String>() {
+	    @Override
+	    public int compare(String o1, String o2) {
+	        o1 = Normalizer.normalize(o1, Normalizer.Form.NFD);
+	        o2 = Normalizer.normalize(o2, Normalizer.Form.NFD);
+	        return o1.compareTo(o2);
+	    }
+	};
 	
 	public TelaAtaque() {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
@@ -31,20 +41,19 @@ class TelaAtaque extends JFrame {
 		
 		mod = ModelAPI.getModelAPI();
 		
-		terrs = mod.getCurrPlayerTerr();
+		terrs = mod.getCurrPlayerTerr(true);
 		
-		Collator collator = Collator.getInstance();
+		Collections.sort(terrs, comp);
 		
-		collator.setStrength(Collator.PRIMARY);
-		Arrays.sort(terrs, collator);
-		
-		cb1 = new JComboBox<String>(terrs);
+		String[] temp = new String[terrs.size()];
+		terrs.toArray(temp);
+		cb1 = new JComboBox<String>(temp);
 
 		cb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
 					terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
-					Arrays.sort(terrs, collator);
+					Collections.sort(terrs, comp);
 					
 					update(cb2, terrs);
 				}
@@ -56,7 +65,7 @@ class TelaAtaque extends JFrame {
 		
 		terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
 		
-		Arrays.sort(terrs, collator);
+		Collections.sort(terrs, comp);
 		
 		for (String s : terrs) {
 			cb2.addItem(s);
@@ -81,7 +90,7 @@ class TelaAtaque extends JFrame {
 				String temp1 = cb1.getSelectedItem().toString();
 				String temp2 = cb2.getSelectedItem().toString();
 				
-				TelaDados td = new TelaDados(temp1, temp2, cb1, cb2);
+				TelaDados td = new TelaDados(temp1, temp2);
 				td.setTitle(getTitle());
 			}
 		});
@@ -89,7 +98,7 @@ class TelaAtaque extends JFrame {
 		getContentPane().add(a);
 	}
 	
-	void update(JComboBox<String> c, String[] names) {
+	void update(JComboBox<String> c, ArrayList<String> names) {
 		
 		c.removeAllItems();
 		

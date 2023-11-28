@@ -3,8 +3,10 @@ package view;
 import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.text.Collator;
-import java.util.Arrays;
+import java.text.Normalizer;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.Comparator;
 
 import javax.swing.JButton;
 import javax.swing.JComboBox;
@@ -27,7 +29,7 @@ class TelaPosicionarContinente extends JFrame {
 	JLabel posicionar;
 	Posicionar p = new Posicionar();
 	ModelAPI mod;
-	String[] terrs;
+	ArrayList<String> terrs;
 	
 	public TelaPosicionarContinente(TelaPosicionar tp) {
 		//String temp;
@@ -37,14 +39,20 @@ class TelaPosicionarContinente extends JFrame {
 		
 		mod = ModelAPI.getModelAPI();
 		
-		terrs = mod.getCurrPlayerTerr();
+		terrs = mod.getCurrPlayerTerr(false);
 		
-		Collator collator = Collator.getInstance();
+		Collections.sort(terrs, new Comparator<String>() {
+		    @Override
+		    public int compare(String o1, String o2) {
+		        o1 = Normalizer.normalize(o1, Normalizer.Form.NFD);
+		        o2 = Normalizer.normalize(o2, Normalizer.Form.NFD);
+		        return o1.compareTo(o2);
+		    }
+		});
 		
-		collator.setStrength(Collator.PRIMARY);
-		Arrays.sort(terrs, collator);
-		
-		cb1 = new JComboBox<String>(terrs);
+		String[] temp = new String[terrs.size()];
+		terrs.toArray(temp);
+		cb1 = new JComboBox<String>(temp);
 		
 		p.add(new JLabel("País a posicionar:"));
 		p.add(cb1);
@@ -65,8 +73,6 @@ class TelaPosicionarContinente extends JFrame {
 		
 		p.add(posicionar);
 		p.add(quantidade);
-		
-		
 		
 		p.add(b1);
 		b1.addActionListener(new ActionListener() {
