@@ -713,7 +713,7 @@ public class ModelAPI implements Subject{
 			{
 				if (obj.id - 8 == j.cor.ordinal()) // se voce mesmo
 				{
-					obj = new Objetivo14(ModelAPI.objectiveImages.get(13)); // entao troca objetivo
+					obj = new Objetivo14(obj.toDisplay); // entao troca objetivo
 				}
 			}
 			
