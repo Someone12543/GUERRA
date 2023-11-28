@@ -14,7 +14,14 @@ class ModelAPITests {
 		game = ModelAPI.getModelAPI();
 		game.addPlayer("Jorge", Cores.Amarelo.ordinal());
 		game.addPlayer("Jefferson", Cores.Azul.ordinal());
-		game.setupGame();
+		
+		try {
+		ModelAPI.setupImages();
+		} catch (Exception e) {
+			System.exit(2);
+		}
+		game.setupContinents(game.listaContinente);
+		game.setupCards();
 		
 		card1 = new Troca(null, Simbolo.Circulo, null);
 		card2 = new Troca(null, Simbolo.Circulo, null);
