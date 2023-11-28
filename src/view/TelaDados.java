@@ -5,14 +5,16 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.Collator;
+import java.util.Arrays;
 
 import javax.swing.JButton;
-import javax.swing.JFrame;
+import javax.swing.JComboBox;
 import javax.swing.JOptionPane;
 
 import model.ModelAPI;
 
-class TelaDados extends JFrame {
+class TelaDados extends TelaAtaque {
 	/**
 	 * 
 	 */
@@ -27,9 +29,14 @@ class TelaDados extends JFrame {
 	JButton atacar;
 	ModelAPI mod = ModelAPI.getModelAPI();
 	
-	public TelaDados(String orig, String dest) {
+	public TelaDados(String orig, String dest, JComboBox<String> cb1, JComboBox<String> cb2) {
 		setSize(LARG_DEFAULT, ALT_DEFAULT);
-		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
+		
+		this.cb1 = cb1;
+		this.cb2 = cb2;
+		this.orig = orig;
+		this.dest = dest;
 		
 		d.setLayout(new GridLayout(2, 3));
 		
@@ -40,7 +47,7 @@ class TelaDados extends JFrame {
 				if (!mod.attackTerritory(orig, dest, atk, def)) {
 					JOptionPane.showMessageDialog(d, "Combinação de países incompatível.", getTitle(), JOptionPane.ERROR_MESSAGE);
 				}
-				safeDispose();
+				dispose();
 			}
 		});
 		
@@ -52,7 +59,8 @@ class TelaDados extends JFrame {
 		for (int q = 0; q <= atk.length; q++) {
 			if (q == atk.length) {
 				JOptionPane.showMessageDialog(d, "Não há tropas suficientes", getTitle(), JOptionPane.ERROR_MESSAGE);
-				safeDispose();
+				setVisible(false);
+				dispose();
 				return;
 			}
 			if (atk[q] != 0)
@@ -122,15 +130,21 @@ class TelaDados extends JFrame {
 		add(atacar, BorderLayout.SOUTH);
 		
 		add(d);
+		
+		setVisible(true);
 	}
 	
 	@Override
-	public void dispose( ) {
-		atacar.doClick();
-		super.dispose();
-	}
-	
-	void safeDispose() {
+	public void dispose() {
+		Collator collator = Collator.getInstance();
+		
+		terrs = mod.getCurrPlayerTerr();
+		Arrays.sort(terrs, collator);
+		
+		update(cb1, terrs);
+		
+		cb1.setSelectedItem(orig);
+		cb2.setSelectedItem(dest);
 		super.dispose();
 	}
 

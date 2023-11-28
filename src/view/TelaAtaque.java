@@ -15,17 +15,15 @@ import model.ModelAPI;
 public class TelaAtaque extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
-	public final int LARG_DEFAULT = 395;
-	public final int ALT_DEFAULT = 650;
-	JComboBox<String> cb1;
-	JComboBox<String> cb2 = new JComboBox<String>();
-	JButton b1 = new JButton("Cancelar ataque");
-	JButton b2 = new JButton("Confirmar ataque");
-	JButton temp;
-	Ataque a = new Ataque();
-	Dados d = new Dados();
-	ModelAPI mod;
-	String[] terrs;
+	public int LARG_DEFAULT = 395;
+	public int ALT_DEFAULT = 650;
+	protected JComboBox<String> cb1;
+	protected JComboBox<String> cb2 = new JComboBox<String>();
+	private JButton b1 = new JButton("Cancelar ataque");
+	private JButton b2 = new JButton("Confirmar ataque");
+	private Ataque a = new Ataque();
+	private ModelAPI mod;
+	protected String[] terrs;
 	
 	public TelaAtaque() {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
@@ -48,7 +46,7 @@ public class TelaAtaque extends JFrame {
 					terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
 					Arrays.sort(terrs, collator);
 					
-					update(cb2);
+					update(cb2, terrs);
 				}
 				catch (NullPointerException np){
 					return;
@@ -83,27 +81,19 @@ public class TelaAtaque extends JFrame {
 				String temp1 = cb1.getSelectedItem().toString();
 				String temp2 = cb2.getSelectedItem().toString();
 				
-				TelaDados td = new TelaDados(temp1, temp2);
+				TelaDados td = new TelaDados(temp1, temp2, cb1, cb2);
 				td.setTitle(getTitle());
-				td.setVisible(true);
-				
-				terrs = mod.getCurrPlayerTerr();
-				Arrays.sort(terrs, collator);
-				
-				update(cb1);
-				cb1.setSelectedItem(temp1);
-				cb2.setSelectedItem(temp2);
 			}
 		});
 		
 		getContentPane().add(a);
 	}
 	
-	private void update(JComboBox<String> c) {
+	void update(JComboBox<String> c, String[] names) {
 		
 		c.removeAllItems();
 		
-		for (String s : terrs) {
+		for (String s : names) {
 			c.addItem(s);
 		}
 		
