@@ -187,23 +187,23 @@ class TelaTabuleiro extends JFrame {
 	@Override
 	public void dispose() {
 		
-		if (tp.isDisplayable()) {
+		if (tp != null && tp.isDisplayable()) {
 			tp.dispose();
 		}
 		
-		if (ta.isDisplayable()) {
+		if (ta != null && ta.isDisplayable()) {
 			ta.dispose();
 		}
 		
-		if (tm.isDisplayable()) {
+		if (tm != null && tm.isDisplayable()) {
 			tm.dispose();
 		}
 		
-		if (to.isDisplayable()) {
+		if (to != null && to.isDisplayable()) {
 			to.dispose();
 		}
 		
-		if (tc.isDisplayable()) {
+		if (tc != null && tc.isDisplayable()) {
 			tc.dispose();
 		}
 		
