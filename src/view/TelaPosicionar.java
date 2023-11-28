@@ -1,5 +1,6 @@
 package view;
 
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.text.Normalizer;
@@ -26,7 +27,7 @@ class TelaPosicionar extends JFrame {
 	JButton b0 = new JButton("Posicionar exércitos de continentes");
 	JButton b1 = new JButton("Cancelar posicionamento");
 	JButton b2 = new JButton("Confirmar posicionamento");
-	JLabel posicionar;
+	JLabel posicionar, posicionarCont;
 	Posicionar p = new Posicionar();
 	ModelAPI mod;
 	ArrayList<String> terrs;
@@ -60,10 +61,25 @@ class TelaPosicionar extends JFrame {
 		p.add(new JLabel("País a posicionar:"));
 		p.add(cb1);
 		
+		Integer[] troops = mod.getTroopsPos();
+		
+		posicionarCont = new JLabel("<html>Tropas de continentes a posicionar: "
+			+ sumInteger(troops).toString()
+			+ (troops[1] != 0? "<br>África: " + troops[1].toString() : "")
+			+ (troops[2] != 0? "<br>América do Norte: " + troops[2].toString() : "")
+			+ (troops[3] != 0? "<br>América do Sul: " + troops[3].toString() : "")
+			+ (troops[4] != 0? "<br>Ásia: " + troops[4].toString() : "")
+			+ (troops[5] != 0? "<br>Europa: " + troops[5].toString() : "")
+			+ (troops[6] != 0? "<br>Oceania: " + troops[6].toString() : "")
+			+ "</html>");
+		
+		posicionarCont.setMinimumSize(new Dimension(100, 200));
+		
+		p.add(posicionarCont);
+		
 		posicionar = new JLabel("Tropas a posicionar: " + mod.getTroopsPos()[0].toString());
 		
 		p.add(posicionar);
-		
 		p.add(quantidade);
 		
 		p.add(b0);
@@ -115,5 +131,31 @@ class TelaPosicionar extends JFrame {
 			tpc.dispose();
 		}
 		super.dispose();
+	}
+	
+	@Override
+	public void setVisible(boolean b) {
+		super.setVisible(b);
+		if (!b) return;
+		Integer[] troops = mod.getTroopsPos();
+		posicionarCont.setText("<html>Tropas de continentes a posicionar: "
+				+ sumInteger(troops).toString()
+				+ (troops[1] != 0? "<br>África: " + troops[1].toString() : "")
+				+ (troops[2] != 0? "<br>América do Norte: " + troops[2].toString() : "")
+				+ (troops[3] != 0? "<br>América do Sul: " + troops[3].toString() : "")
+				+ (troops[4] != 0? "<br>Ásia: " + troops[4].toString() : "")
+				+ (troops[5] != 0? "<br>Europa: " + troops[5].toString() : "")
+				+ (troops[6] != 0? "<br>Oceania: " + troops[6].toString() : "")
+				+ "</html>");
+	}
+	
+	private Integer sumInteger(Integer[] ints) {
+		Integer temp = 0;
+		
+		for (int i = 1; i < 7; i++) {
+			temp += ints[i];
+		}
+		
+		return temp;
 	}
 }
