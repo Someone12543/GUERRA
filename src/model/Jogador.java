@@ -1,12 +1,6 @@
 package model;
-import java.io.File;
-import java.io.IOException;
-import java.security.SecureRandom;
-import java.util.ArrayList;
-import java.util.Collections;
 
-import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
+import java.util.ArrayList;
 
 class Jogador {
 	String nome;
