@@ -64,7 +64,10 @@ public class ControllerAPI {
 	public void nextAction() {
 		//check para saber se o jogador add todas as tropas que precisava
 		if (this.acao_atual == Turno.PosTropa) {
-			if (!game.verifyNextTurn()) return;
+			if (!game.verifyNextTurn()) {
+				view.showErrorTroopsLeft();
+				return;
+			}
 		}
 		
 		//dando as cartas pro jogador e habilitando o save

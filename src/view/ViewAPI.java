@@ -99,4 +99,8 @@ public class ViewAPI implements Observer{
 	public void enableSave() {
 		tt.b3.setEnabled(true);
 	}
+
+	public void showErrorTroopsLeft() {
+		JOptionPane.showMessageDialog(null, "Ainda há tropas para posicionar!!!", "Error", JOptionPane.ERROR_MESSAGE);
+	}
 }
