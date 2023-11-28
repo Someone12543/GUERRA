@@ -7,7 +7,7 @@ import java.awt.GridLayout;
 import javax.swing.BorderFactory;
 import javax.swing.JPanel;
 
-public class Dados extends JPanel{
+class Dados extends JPanel{
 	
 	private static final long serialVersionUID = 1L;
 	

@@ -12,7 +12,7 @@ import javax.swing.JLabel;
 
 import model.ModelAPI;
 
-public class TelaAtaque extends JFrame {
+class TelaAtaque extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	public int LARG_DEFAULT = 395;

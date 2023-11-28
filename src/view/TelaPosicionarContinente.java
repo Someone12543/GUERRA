@@ -15,7 +15,7 @@ import javax.swing.JTextField;
 
 import model.ModelAPI;
 
-public class TelaPosicionarContinente extends JFrame {
+class TelaPosicionarContinente extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	public final int LARG_DEFAULT = 395;
