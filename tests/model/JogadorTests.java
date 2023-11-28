@@ -2,9 +2,6 @@ package model;
 
 import org.junit.jupiter.api.*;
 
-import observer.Observer;
-import observer.Subject;
-
 import static org.junit.jupiter.api.Assertions.*;
 
 class JogadorTests {
