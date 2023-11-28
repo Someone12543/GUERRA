@@ -808,7 +808,7 @@ public class ModelAPI implements Subject{
 			int x;
 			int n = ControllerAPI.getControllerAPI().troca_atual++;
 			
-			if (n < 6) x = 2 + n;
+			if (n < 6) x = 2 + 2 * n;
 			else x = 5 * (n - 3);
 			
 			

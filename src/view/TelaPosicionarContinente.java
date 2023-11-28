@@ -102,7 +102,7 @@ public class TelaPosicionarContinente extends JFrame {
 					
 				}
 				catch (NumberFormatException ex){
-					JOptionPane.showMessageDialog(p, "Somente números interios são aceitos.", getTitle(), JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(p, "Somente números inteiros são aceitos.", getTitle(), JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
