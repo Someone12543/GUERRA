@@ -32,6 +32,8 @@ class TelaTabuleiro extends JFrame {
 	TelaPosicionar tp;
 	TelaAtaque ta;
 	TelaMovimentar tm;
+	TelaObjetivo to;
+	TelaCartas tc;
 	
 	
 	private TelaTabuleiro() {
@@ -107,6 +109,10 @@ class TelaTabuleiro extends JFrame {
 					tm.dispose();
 				}
 				
+				if (tc != null && !tc.isActive()) {
+					tc.dispose();
+				}
+				
 				String acao = controller.getAcaoStr();
 				if (acao.equals("Posicionar"))
 					b5.setEnabled(true);
@@ -143,7 +149,8 @@ class TelaTabuleiro extends JFrame {
 		//b4.setBorder(null);
 		b4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaObjetivo to = new TelaObjetivo();
+				if (to == null || !to.isDisplayable())
+					to = new TelaObjetivo();
 				to.setTitle("Seu objetivo");
 				to.setVisible(true);
 			}
@@ -154,7 +161,8 @@ class TelaTabuleiro extends JFrame {
 		b5.setBorder(null);
 		b5.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				TelaCartas tc = new TelaCartas();
+				if (tc == null || !tc.isDisplayable()) 
+					tc = new TelaCartas();
 				tc.setTitle("Suas cartas");
 				tc.setVisible(true);
 			}
@@ -189,6 +197,14 @@ class TelaTabuleiro extends JFrame {
 		
 		if (tm.isDisplayable()) {
 			tm.dispose();
+		}
+		
+		if (to.isDisplayable()) {
+			to.dispose();
+		}
+		
+		if (tc.isDisplayable()) {
+			tc.dispose();
 		}
 		
 		controller.endGame();
