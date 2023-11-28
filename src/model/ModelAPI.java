@@ -225,6 +225,8 @@ public class ModelAPI implements Subject{
 		listaJogadores.add(j);
 		if (j.paisesDominados.size() == 0)
 			nextPlayerToPlay();
+		for (Territorio terr : j.paisesDominados)
+			terr.conquistadoNesseTurno = false;
 	}
 
 	public Image getObjectiveImage() { 
@@ -266,7 +268,8 @@ public class ModelAPI implements Subject{
 		int i = 0;
 		
 		for (Territorio t : lista) {
-			terrs[i++] = t.nome;
+			if (!t.conquistadoNesseTurno)
+				terrs[i++] = t.nome;
 		}
 	
 		return terrs;

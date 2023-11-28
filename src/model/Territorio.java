@@ -8,6 +8,7 @@ class Territorio {
 	int numTropasPodeMover; //num de tropas que podem ser movidas do territorio
 	Cores corDominando;
 	ArrayList<Territorio> paisesLigados; //paises que o territorio está ligado com
+	boolean conquistadoNesseTurno;
 	
 	public Territorio(String nome, Continente continente) {
 		this.nome = nome;
@@ -15,6 +16,7 @@ class Territorio {
 		this.numTropas = 0;
 		this.numTropasPodeMover = 0;
 		this.paisesLigados = new ArrayList<Territorio>();
+		this.conquistadoNesseTurno = false;
 	}
 	
 	boolean moverTropas(Cores cor, Territorio paisDestino, int qtd) {
@@ -86,6 +88,7 @@ class Territorio {
 			}
 			
 			inimigo.corDominando = cor;
+			inimigo.conquistadoNesseTurno = true;
 			
 			int temp = this.numTropas - 1 > 2? 3 : this.numTropas - 1;
 			inimigo.numTropas = temp;
