@@ -573,7 +573,7 @@ public class ModelAPI implements Subject{
 	
 	public ImageIcon getAtkImage(Icon icone) {
 		int ind = atkImages.indexOf(icone) + 1;
-		return atkImages.get(ind > 6 ? 0 : ind);
+		return atkImages.get(ind > 6 ? 1 : ind);
 	}
 	
 	public ImageIcon getDefImage(int ind) {
@@ -582,7 +582,7 @@ public class ModelAPI implements Subject{
 	
 	public ImageIcon getDefImage(Icon icone) {
 		int ind = defImages.indexOf(icone) + 1;
-		return defImages.get(ind > 6 ? 0 : ind);
+		return defImages.get(ind > 6 ? 1 : ind);
 	}
 	
 	//Debug
@@ -714,7 +714,7 @@ public class ModelAPI implements Subject{
 			{
 				if (obj.id - 8 == j.cor.ordinal()) // se voce mesmo
 				{
-					obj = new Objetivo14(ModelAPI.objectiveImages.get(13)); // entao troca objetivo
+					obj = new Objetivo14(obj.toDisplay); // entao troca objetivo
 				}
 			}
 			

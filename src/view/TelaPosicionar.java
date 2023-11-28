@@ -14,7 +14,7 @@ import javax.swing.JTextField;
 
 import model.ModelAPI;
 
-public class TelaPosicionar extends JFrame {
+class TelaPosicionar extends JFrame {
 	
 	private static final long serialVersionUID = 1L;
 	public final int LARG_DEFAULT = 395;

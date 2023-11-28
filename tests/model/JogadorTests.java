@@ -1,12 +1,17 @@
 package model;
 
 import org.junit.jupiter.api.*;
+
+import observer.Observer;
+import observer.Subject;
+
 import static org.junit.jupiter.api.Assertions.*;
 
 class JogadorTests {
 	static Jogador p1;
 	static Jogador p2;
 	static Territorio t1, t2, t3, t4;
+	static ModelAPI game;
 	
 	@BeforeAll
 	static void setup() 
@@ -17,6 +22,10 @@ class JogadorTests {
 		t2 = new Territorio("B", null);
 		t3 = new Territorio("C", null);
 		t4 = new Territorio("D", null);
+		
+		game = ModelAPI.getModelAPI();
+		game.listaJogadores.add(p1);
+		game.listaJogadores.add(p2);
 		
 		p1.numTropasPosicionar = 5;
 		
@@ -31,21 +40,6 @@ class JogadorTests {
 		
 		t4.corDominando = p2.cor;
 		p2.paisesDominados.add(t4);
-		
-		t1.numTropas = 3; t1.numTropasPodeMover = 1;
-		t2.numTropas = 3; t2.numTropasPodeMover = 1;
-
-		t1.paisesLigados.add(t2);
-		t1.paisesLigados.add(t4);
-		
-		t2.paisesLigados.add(t1);
-		t2.paisesLigados.add(t3);
-		
-		t3.paisesLigados.add(t2);
-		t3.paisesLigados.add(t4);
-		
-		t4.paisesLigados.add(t1);
-		t4.paisesLigados.add(t3);
 	}
 	
 	@Test
