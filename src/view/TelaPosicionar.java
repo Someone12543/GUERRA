@@ -88,7 +88,7 @@ class TelaPosicionar extends JFrame {
 					posicionar.setText("Tropas a posicionar: " + mod.getTroopsPos()[0].toString());
 				}
 				catch (NumberFormatException ex){
-					JOptionPane.showMessageDialog(p, "Somente números interios são aceitos.", getTitle(), JOptionPane.ERROR_MESSAGE);
+					JOptionPane.showMessageDialog(p, "Somente números inteiros são aceitos.", getTitle(), JOptionPane.ERROR_MESSAGE);
 				}
 
 			}
