@@ -86,7 +86,7 @@ class TelaDados extends TelaAtaque {
 						ind++;
 					}
 					
-					atk[ind] = atk[ind] == 6 ? 0 : atk[ind] + 1;
+					atk[ind] = atk[ind] == 6 ? 1 : atk[ind] + 1;
 				}
 			});
 			
@@ -116,7 +116,7 @@ class TelaDados extends TelaAtaque {
 						ind++;
 					}
 					
-					def[ind] = def[ind] == 6 ? 0 : def[ind] + 1;
+					def[ind] = def[ind] == 6 ? 1 : def[ind] + 1;
 				}
 			});
 			
