@@ -5,9 +5,7 @@ Jayme Paiva - 2210289
 
 Arthur Sardella - 2212763
 
+O método main está dentro de ControllerAPI.java
 
-Iteração 1:
-
-(Se estiver muito baixo, colocar volume no máximo com um fone de ouvido)
-
-https://www.youtube.com/watch?v=n0xi2v5Sq6A
+Apresentação final:
+https://drive.google.com/file/d/1xvuRKPIHNXGWIP0-PlIz54F1FjkOJG4K/view?usp=sharing
