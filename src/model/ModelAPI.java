@@ -429,6 +429,10 @@ public class ModelAPI implements Subject{
 			if (!j.posicionarTropas(terr, qtd, null)) return false;
 		}
 		
+		//Checa se ganhou por posicionar tropas suficientes (Objetivo 7)
+		if(j.obj.verificaObj(j, listaContinente))
+			ViewAPI.getViewAPI().showWinner(j.nome, j.obj.descricao);
+		
 		prepareNotify(terr);
 		
 		return true;
@@ -440,7 +444,8 @@ public class ModelAPI implements Subject{
 		
 		ViewAPI.reproduzirSomAsync("assets/sons/marcha.wav");
 		
-		Cores c = listaJogadores.get(0).cor;
+		Jogador j = listaJogadores.get(0);
+		Cores c = j.cor;
 		Territorio original = getTerrByName(orig);
 		Territorio destino = getTerrByName(dest);
 		
@@ -450,6 +455,11 @@ public class ModelAPI implements Subject{
 		ModelAPI.getModelAPI().prepareNotify(destino);
 		prepareNotify(original);
 		prepareNotify(destino);
+		
+		//Checa se ganhou por posicionar tropas suficientes (Objetivo 7)
+				if(j.obj.verificaObj(j, listaContinente))
+					ViewAPI.getViewAPI().showWinner(j.nome, j.obj.descricao);
+				
 		return true;
 	}
 	
