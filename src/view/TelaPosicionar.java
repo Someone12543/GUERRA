@@ -34,6 +34,7 @@ class TelaPosicionar extends JFrame {
 	TelaPosicionar self;
 	TelaPosicionarContinente tpc;
 	
+	//construtor
 	public TelaPosicionar() {
 		self = this;
 		tpc = new TelaPosicionarContinente(self);
@@ -54,6 +55,7 @@ class TelaPosicionar extends JFrame {
 		    }
 		});
 		
+		//lista inicial de territórios para posicionar tropas
 		String[] temp = new String[terrs.size()];
 		terrs.toArray(temp);
 		cb1 = new JComboBox<String>(temp);
@@ -63,6 +65,7 @@ class TelaPosicionar extends JFrame {
 		
 		Integer[] troops = mod.getTroopsPos();
 		
+		//instancia a label de posicionar tropas de continentes em seu estado inicial
 		posicionarCont = new JLabel("<html>Tropas de continentes a posicionar: "
 			+ sumInteger(troops).toString()
 			+ (troops[1] != 0? "<br>África: " + troops[1].toString() : "")
@@ -77,11 +80,13 @@ class TelaPosicionar extends JFrame {
 		
 		p.add(posicionarCont);
 		
+		//instancia a label de posicionar tropas genéricas em seu estado inicial
 		posicionar = new JLabel("Tropas a posicionar: " + mod.getTroopsPos()[0].toString());
 		
 		p.add(posicionar);
 		p.add(quantidade);
 		
+		//abre a tela de posicionar tropas por continente e torna essa tela invisível
 		p.add(b0);
 		b0.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -94,6 +99,7 @@ class TelaPosicionar extends JFrame {
 			}
 		});
 		
+		//fecha a tela
 		p.add(b1);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -101,6 +107,8 @@ class TelaPosicionar extends JFrame {
 			}
 		});
 		
+		//tenta realizar um posicionamento no território selecionado e atualizar a label,
+		//tratando NumberFormatException
 		p.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -125,6 +133,7 @@ class TelaPosicionar extends JFrame {
 		getContentPane().add(p);
 	}
 	
+	//override feito para fechar telas extras
 	@Override
 	public void dispose() {
 		if (tpc.isActive()) {
@@ -133,6 +142,7 @@ class TelaPosicionar extends JFrame {
 		super.dispose();
 	}
 	
+	//override feito por conta de problemas com a atualização do label de tropas a posicionar em continentes
 	@Override
 	public void setVisible(boolean b) {
 		super.setVisible(b);
@@ -149,6 +159,7 @@ class TelaPosicionar extends JFrame {
 				+ "</html>");
 	}
 	
+	//método auxiliar que retorna a soma de um array de inteiros
 	private Integer sumInteger(Integer[] ints) {
 		Integer temp = 0;
 		

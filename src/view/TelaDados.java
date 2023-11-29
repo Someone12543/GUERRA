@@ -13,9 +13,7 @@ import javax.swing.JOptionPane;
 import model.ModelAPI;
 
 class TelaDados extends JFrame {
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	public final int LARG_DEFAULT = 400;
 	public final int ALT_DEFAULT = 300;
@@ -26,12 +24,14 @@ class TelaDados extends JFrame {
 	JButton atacar;
 	ModelAPI mod = ModelAPI.getModelAPI();
 	
+	//construtor
 	public TelaDados(String orig, String dest) {
 		setSize(LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation(DO_NOTHING_ON_CLOSE);
 		
 		d.setLayout(new GridLayout(2, 3));
 		
+		//finaliza o ataque com os dados mostrados atuais
 		atacar = new JButton("Finalizar ataque");
 		atacar.addActionListener(new ActionListener () {
 			@Override
@@ -43,11 +43,14 @@ class TelaDados extends JFrame {
 			}
 		});
 		
+		//determina quantas tropas irão participar do ataque
 		int[] troopQtd = mod.getTroopQtds(orig, dest);
 		
+		//rola os dados
 		atk = mod.throwDices(troopQtd[0]);
 		def = mod.throwDices(troopQtd[1]);
 		
+		//caso de erro de tropas insuficientes
 		for (int q = 0; q <= atk.length; q++) {
 			if (q == atk.length) {
 				JOptionPane.showMessageDialog(d, "Não há tropas suficientes", getTitle(), JOptionPane.ERROR_MESSAGE);
@@ -59,6 +62,7 @@ class TelaDados extends JFrame {
 				break;
 		}
 		
+		//transformar os dados de ataque em botões que incrementam o valor do dados
 		int i = 0;
 		for (Integer j : atk) {
 			dadoAtq[i] = new JButton(mod.getAtkImage(j));
@@ -89,6 +93,7 @@ class TelaDados extends JFrame {
 			i++;
 		}
 		
+		//transformar os dados de defesa em botões que incrementam o valor do dados
 		i = 0;
 		for (Integer j : def) {
 			dadoDef[i] = new JButton(mod.getDefImage(j));
@@ -125,19 +130,5 @@ class TelaDados extends JFrame {
 		
 		setVisible(true);
 	}
-	
-//	@Override
-//	public void dispose() {
-//		Collator collator = Collator.getInstance();
-//		
-//		String[] terrs = mod.getCurrPlayerTerr();
-//		Arrays.sort(terrs, collator);
-//		
-//		update(cb1, terrs);
-//		
-//		cb1.setSelectedItem(orig);
-//		cb2.setSelectedItem(dest);
-//		super.dispose();
-//	}
 
 }

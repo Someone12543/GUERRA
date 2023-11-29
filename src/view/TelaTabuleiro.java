@@ -35,8 +35,9 @@ class TelaTabuleiro extends JFrame {
 	TelaObjetivo to;
 	TelaCartas tc;
 	
-	
+	//construtor
 	private TelaTabuleiro() {
+		//tenta instanciar imagens relevantes
 		try {
 			nextAction = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnProxJogada.png")));
 			rollDices = new ImageIcon(ImageIO.read(new File("assets/botoes/war_btnJogarDados.png")));
@@ -48,6 +49,7 @@ class TelaTabuleiro extends JFrame {
 			System.exit(1);
 		}
 		
+		//instancia botões
 		b1 = new JButton(rollDices);
 		b2 = new JButton(nextAction);
 		b3 = new JButton("Salvar Jogo");
@@ -57,6 +59,7 @@ class TelaTabuleiro extends JFrame {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
+		//abre uma tela diferente dependendo da fase do jogo
 		b1.setMargin(new Insets(0,0,0,0));
 		b1.setContentAreaFilled(false);
 		b1.setBorder(null);
@@ -89,7 +92,7 @@ class TelaTabuleiro extends JFrame {
 			}
 		});
 		
-		
+		//passa para a próxima fase do jogo
 		b2.setMargin(new Insets(0,0,0,0));
 		b2.setContentAreaFilled(false);
 		b2.setBorder(null);
@@ -124,7 +127,7 @@ class TelaTabuleiro extends JFrame {
 			}
 		});
 		
-		
+		//salva o jogo, somente no início da fase de posicionamento
 		b3.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -144,9 +147,7 @@ class TelaTabuleiro extends JFrame {
 			}
 		});
 		
-		//b4.setMargin(new Insets(0,0,0,0));
-		//b4.setContentAreaFilled(false);
-		//b4.setBorder(null);
+		//instancia uma tela que mostra o objetivo do jogador
 		b4.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if (to == null || !to.isDisplayable())
@@ -156,6 +157,7 @@ class TelaTabuleiro extends JFrame {
 			}
 		});
 		
+		//instancia uma tela que mostra as cartas de um jogador
 		b5.setMargin(new Insets(0,0,0,0));
 		b5.setContentAreaFilled(false);
 		b5.setBorder(null);
@@ -183,7 +185,8 @@ class TelaTabuleiro extends JFrame {
 			instance = new TelaTabuleiro();
 		return instance;
 	}
-
+	
+	//override necessário para fechar todas as telas abertas
 	@Override
 	public void dispose() {
 		

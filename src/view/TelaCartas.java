@@ -25,14 +25,17 @@ class TelaCartas extends JFrame {
 	int[] selectedIndex = new int[3];
 	int qtd = 0;
 	
+	//consttrutor
 	public TelaCartas() {
 		setSize(LARG_DEFAULT, ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
 		
+		//recupera as cartas de ModelAPI
 		String[] names = ModelAPI.getModelAPI().getCardNames();
 		Image[] imgs = ModelAPI.getModelAPI().getCardImages();
 		c = new Cartas(imgs);
-
+		
+		//checkbox de seleção
 		int i = 0;
 		ItemListener handler = new ItemListener() {
 			@Override
@@ -59,6 +62,7 @@ class TelaCartas extends JFrame {
 			}
 		};
 		
+		//adiciona um checkbox para cada carta
 		for (String name : names) {
 			cards[i] = new JCheckBox(name);
 			cards[i].addItemListener(handler);		
@@ -66,6 +70,8 @@ class TelaCartas extends JFrame {
 			i++;
 		}
 		
+		//valida e confirma a troca
+		c.add(trocar);
 		trocar = new JButton("Trocar");
 		trocar.setEnabled(false);
 		trocar.addActionListener(new ActionListener() {
@@ -87,9 +93,7 @@ class TelaCartas extends JFrame {
 					dispose();
 			}
 		});
-		
-		c.add(trocar);
-		
+
 		getContentPane().add(c);
 	}
 }

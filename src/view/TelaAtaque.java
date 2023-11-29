@@ -35,6 +35,7 @@ class TelaAtaque extends JFrame {
 	    }
 	};
 	
+	//construtor
 	public TelaAtaque() {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -45,10 +46,13 @@ class TelaAtaque extends JFrame {
 		
 		Collections.sort(terrs, comp);
 		
+		//lista inicial de territórios de onde partir o ataque
 		String[] temp = new String[terrs.size()];
 		terrs.toArray(temp);
 		cb1 = new JComboBox<String>(temp);
-
+		
+		
+		//atualiza combobox2 com uma lista de territorios adjacentes ao selecionado
 		cb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				try {
@@ -63,6 +67,7 @@ class TelaAtaque extends JFrame {
 			}
 		});
 		
+		//lista inicial de territórios adjacentes ao território automaticamente selecionado
 		terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
 		
 		Collections.sort(terrs, comp);
@@ -77,6 +82,7 @@ class TelaAtaque extends JFrame {
 		a.add(new JLabel("País de destino:"));
 		a.add(cb2);
 		
+		//fecha a tela
 		a.add(b1);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -84,6 +90,7 @@ class TelaAtaque extends JFrame {
 			}
 		});
 		
+		//realiza o ataque entre os territórios selecionados ao abrir a tela de dados
 		a.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -98,6 +105,7 @@ class TelaAtaque extends JFrame {
 		getContentPane().add(a);
 	}
 	
+	// método auxiliar para atualizar combobox facilmente
 	void update(JComboBox<String> c, ArrayList<String> names) {
 		
 		c.removeAllItems();
