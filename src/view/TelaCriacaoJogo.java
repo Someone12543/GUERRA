@@ -27,6 +27,7 @@ class TelaCriacaoJogo extends JFrame {
 	JComboBox<String> cb = new JComboBox<String>(cores);
 	CriacaoJogo p = new CriacaoJogo();
 	
+	//construtor
 	public TelaCriacaoJogo() {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -36,6 +37,7 @@ class TelaCriacaoJogo extends JFrame {
 		
 		p.add(cb);
 		
+		//adiciona jogador, verificando se as condições são válidas
 		p.add(b1);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -50,7 +52,7 @@ class TelaCriacaoJogo extends JFrame {
 			}
 		});
 		
-		
+		//inicia um jogo, abrinndo a tela de tabuleiro
 		p.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

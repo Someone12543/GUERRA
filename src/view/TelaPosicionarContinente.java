@@ -32,7 +32,6 @@ class TelaPosicionarContinente extends JFrame {
 	ArrayList<String> terrs;
 	
 	public TelaPosicionarContinente(TelaPosicionar tp) {
-		//String temp;
 		
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -50,6 +49,7 @@ class TelaPosicionarContinente extends JFrame {
 		    }
 		});
 		
+		//lista inicial de territórios de onde posicionar tropas
 		String[] temp = new String[terrs.size()];
 		terrs.toArray(temp);
 		cb1 = new JComboBox<String>(temp);
@@ -59,6 +59,7 @@ class TelaPosicionarContinente extends JFrame {
 		
 		Integer[] troops = mod.getTroopsPos();
 		
+		//instancia a label de posicionar tropas de continentes em seu estado inicial
 		posicionar = new JLabel("<html>Tropas de continentes a posicionar: "
 			+ sumInteger(troops).toString()
 			+ (troops[1] != 0? "<br>África: " + troops[1].toString() : "")
@@ -74,6 +75,7 @@ class TelaPosicionarContinente extends JFrame {
 		p.add(posicionar);
 		p.add(quantidade);
 		
+		//fecha a tela
 		p.add(b1);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -82,6 +84,8 @@ class TelaPosicionarContinente extends JFrame {
 			}
 		});
 		
+		//tenta realizar um posicionamento no território selecionado e atualizar a label,
+		//tratando NumberFormatException
 		p.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -117,6 +121,7 @@ class TelaPosicionarContinente extends JFrame {
 		getContentPane().add(p);
 	}
 	
+	//método auxiliar que retorna a soma de um array de inteiros
 	private Integer sumInteger(Integer[] ints) {
 		Integer temp = 0;
 		

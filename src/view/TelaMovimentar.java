@@ -38,6 +38,7 @@ class TelaMovimentar extends JFrame {
 	    }
 	};
 	
+	//construtor
 	public TelaMovimentar() {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
@@ -48,10 +49,12 @@ class TelaMovimentar extends JFrame {
 		
 		Collections.sort(terrs, comp);
 		
+		//lista inicial de territorios de origem para mover
 		String[] temp = new String[terrs.size()];
 		terrs.toArray(temp);
 		cb1 = new JComboBox<String>(temp);
 		
+		//atualiza combobox2 com uma lista de territorios adjacentes ao selecionado
 		cb1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
@@ -66,6 +69,7 @@ class TelaMovimentar extends JFrame {
 			}
 		});
 		
+		//lista inicial de territórios adjacentes ao território automaticamente selecionado
 		terrs = mod.getFrontierNames(cb1.getSelectedItem().toString());
 		
 		Collections.sort(terrs, comp);
@@ -83,6 +87,7 @@ class TelaMovimentar extends JFrame {
 		m.add(new JLabel("Tropas a movimentar:"));
 		m.add(quantidade);
 		
+		//fecha a tela
 		m.add(b1);
 		b1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -90,6 +95,7 @@ class TelaMovimentar extends JFrame {
 			}
 		});
 		
+		//tenta realizar um movimento entre os territórios selecionados, tratando NumberFormatException
 		m.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {

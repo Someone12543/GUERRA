@@ -21,21 +21,23 @@ class TelaPrincipal extends JFrame {
 	JFileChooser chooser = new JFileChooser();
     FileNameExtensionFilter filter = new FileNameExtensionFilter("War saved game", "war");
     
-	
+	//construtor
 	public TelaPrincipal() {
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(EXIT_ON_CLOSE);
 		chooser.setFileFilter(filter);
 		
+		//inicia um jogo novo, instanciando uma nova tela de criação de jogo
 		p.add(b1);
 		b1.addActionListener(new ActionListener() {
-				public void actionPerformed(ActionEvent e) {
-					TelaCriacaoJogo tcj = new TelaCriacaoJogo();
-					tcj.setTitle("WAR");
-					tcj.setVisible(true);
-				}
+			public void actionPerformed(ActionEvent e) {
+				TelaCriacaoJogo tcj = new TelaCriacaoJogo();
+				tcj.setTitle("WAR");
+				tcj.setVisible(true);
+			}
 		});
 		
+		//carrega um jogo, produrando um arquivo com o formato correto
 		p.add(b2);
 		b2.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
