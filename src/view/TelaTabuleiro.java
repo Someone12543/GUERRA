@@ -23,8 +23,8 @@ class TelaTabuleiro extends JFrame {
 	
 	static TelaTabuleiro instance; //singleton
 	private static final long serialVersionUID = 1L;
-	public final int LARG_DEFAULT = 953;
-	public final int ALT_DEFAULT = 735;
+	public final int LARG_DEFAULT = 953 - (System.getProperty("os.name") != "win" ? 16 : 0);
+	public final int ALT_DEFAULT = 735 - (System.getProperty("os.name") != "win" ? 35 : 0);
 	JButton b1, b2, b3, b4, b5;
 	ImageIcon nextAction, rollDices, objCard, tradeCards;
 	Tabuleiro t = new Tabuleiro();

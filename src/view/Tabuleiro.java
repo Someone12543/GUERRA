@@ -256,8 +256,8 @@ class Tabuleiro extends JPanel {
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
-		g2d.drawImage(bg, 0, 0, 937, 700, null);
-		g2d.drawImage(source, 0, 0, 937, 700,null);
+		g2d.drawImage(bg, 0, 0, 937, 703, null);
+		g2d.drawImage(source, 0, 0, 937, 703,null);
 		
 		g2d.setFont(new Font("TimesRoman", Font.PLAIN, 20));
 		
