@@ -453,8 +453,6 @@ public class ModelAPI implements Subject{
 		
 		ModelAPI.getModelAPI().prepareNotify(original);
 		ModelAPI.getModelAPI().prepareNotify(destino);
-		prepareNotify(original);
-		prepareNotify(destino);
 		
 		//Checa se ganhou por posicionar tropas suficientes (Objetivo 7)
 				if(j.obj.verificaObj(j, listaContinente))
