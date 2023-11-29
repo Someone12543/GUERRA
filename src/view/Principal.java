@@ -17,6 +17,8 @@ class Principal extends JPanel {
 	private static final long serialVersionUID = 1L;
 	Image bg;
 	
+	//Criação do painel da tela principal
+	//Carrega a imagem de fundo
 	public Principal() {
 		try {
 			bg = ImageIO.read(new File("assets/bgconfiguracao.png"));
@@ -27,6 +29,8 @@ class Principal extends JPanel {
 		}
 	}
 	
+	//Re-implementação do método paintComponent
+	//Desenha a imagem de fundo
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;
 		super.paintComponent(g);

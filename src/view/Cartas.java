@@ -13,10 +13,13 @@ class Cartas extends JPanel {
 	private static final long serialVersionUID = 1L;
 	Image[] imgs;
 	
+	//Cria um painel contendo um array de imagens
 	public Cartas(Image[] imgs) {
 		this.imgs = imgs;
 	}
 	
+	//Re-implementação do método de paintComponent
+	//Desenha todas as imagens com espaço entre elas
 	@Override
 	public void paintComponent(Graphics g) {
 		Graphics2D g2d = (Graphics2D) g;

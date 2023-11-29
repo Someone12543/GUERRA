@@ -21,6 +21,8 @@ class Tabuleiro extends JPanel {
 	String corPlayer = "Azul";
 	String jogName = "Moao";
 	
+	//Criação do painel do tabuleiro
+	//criamos todos os exércitos a serem desenhados na tela
 	public Tabuleiro() {
 		try {
 			bg = ImageIO.read(new File("assets/tabuleiro/war_tabuleiro_fundo.png"));
@@ -247,7 +249,10 @@ class Tabuleiro extends JPanel {
         }
 	}
 	
-	
+	//Re-implementação do método painComponent
+	//desenha todos os exércitos na tela,
+	//o indicador de fase/jogador da vez
+	@Override
 	public void paintComponent(Graphics g) {
 		super.paintComponent(g);
 		Graphics2D g2d = (Graphics2D) g;
@@ -358,7 +363,7 @@ class Tabuleiro extends JPanel {
 	}
 	
 	//métodos que sao chamados pela viewAPI para atualizar as infos do mapa com as infos do observer
-	public void repaintExe(int color, int number, String nome, String colorJog, String jogName) {
+	public void updateExe(int color, int number, String nome, String colorJog, String jogName) {
 		for (Exercito e: listaExercitos) {
 			if (nome.equals(e.nome)) {
 				e.color = color;
