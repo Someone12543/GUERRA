@@ -27,7 +27,7 @@ class Cartas extends JPanel {
 
 		int i = 0;
 		for (Image img : imgs) {
-			g2d.drawImage(img, 0 + (i * 150), 100, 130, 200, null);
+			g2d.drawImage(img, 50 + (i * 150), 100, 130, 200, null);
 			i++;
 		}
 	}

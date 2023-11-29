@@ -17,7 +17,7 @@ class TelaCartas extends JFrame {
 	 * 
 	 */
 	private static final long serialVersionUID = 1L;
-	public final int LARG_DEFAULT = 900;
+	public final int LARG_DEFAULT = 850;
 	public final int ALT_DEFAULT = 400;
 	Cartas c;
 	JButton trocar;
