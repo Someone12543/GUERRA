@@ -23,8 +23,8 @@ class TelaTabuleiro extends JFrame {
 	
 	static TelaTabuleiro instance; //singleton
 	private static final long serialVersionUID = 1L;
-	public final int LARG_DEFAULT = 953 - (System.getProperty("os.name") != "win" ? 16 : 0);
-	public final int ALT_DEFAULT = 735 - (System.getProperty("os.name") != "win" ? 35 : 0);
+	public final int LARG_DEFAULT = 953 - (!System.getProperty("os.name").equals("Windows 10")? 16 : 0);
+	public final int ALT_DEFAULT = 735 - (!System.getProperty("os.name").equals("Windows 10")? 35 : 0);
 	JButton b1, b2, b3, b4, b5;
 	ImageIcon nextAction, rollDices, objCard, tradeCards;
 	Tabuleiro t = new Tabuleiro();
@@ -58,6 +58,8 @@ class TelaTabuleiro extends JFrame {
 		
 		setSize(LARG_DEFAULT,ALT_DEFAULT);
 		setDefaultCloseOperation(DISPOSE_ON_CLOSE);
+		
+	
 		
 		//abre uma tela diferente dependendo da fase do jogo
 		b1.setMargin(new Insets(0,0,0,0));
